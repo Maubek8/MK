@@ -19,8 +19,16 @@ function generateResults() {
         { id: 'panturrilha', label: 'Circunferência da Panturrilha' },
         { id: 'quadriceps', label: 'Circunferência do Quadríceps' },
         { id: 'tenil', label: 'Comprimento do Tênsil do Quadril (Teste de Thomas)' },
-        { id: 'dedos', label: 'Distância dos Dedos ao Solo' }
-        // Adicione outros testes e avaliações aqui
+        { id: 'dedos', label: 'Distância dos Dedos ao Solo' },
+        { id: 'fascia', label: 'Circunferência da Fáscia Plantar' },
+        { id: 'marcha', label: 'Análise de Marcha e Corrida em Esteira' },
+        { id: 'baropodometria', label: 'Baropodometria Estática e Dinâmica' },
+        { id: 'dorsiflexao', label: 'Dorsiflexão do Tornozelo' },
+        { id: 'controle-motor', label: 'Teste de Controle Motor e Estabilidade do Core' },
+        { id: 'isometrica', label: 'Dinâmica de Força Isométrica (Rotadores de Quadril)' },
+        { id: 'footcore', label: 'Footcore' },
+        { id: 'fascia-plantar', label: 'Flexibilidade da Fáscia Plantar' },
+        { id: 'tendao', label: 'Flexibilidade do Tendão Calcâneo (Aquiles)' }
     ];
 
     let results = '';
