@@ -45,8 +45,9 @@
         .dropdown-content {
             display: none;
             overflow-y: auto;
-            max-height: 200px;
+            max-height: 400px;
             margin-top: 10px;
+            padding-right: 10px;
         }
         .dropdown-content div {
             margin-bottom: 15px;
@@ -59,7 +60,7 @@
             display: block;
             margin: 8px 0 4px;
         }
-        input[type="text"], input[type="number"] {
+        input[type="number"] {
             width: 100%;
             padding: 8px;
             margin: 4px 0;
@@ -91,23 +92,79 @@
     <div class="dropdown-content">
         <div>
             <label for="membros">Comprimento dos Membros Inferiores</label>
-            <p>Meça o comprimento de cada perna da crista ilíaca até o maléolo medial.</p>
+            <p>Meça o comprimento total de cada perna, da crista ilíaca até o maléolo medial.</p>
             <input type="number" id="membros" placeholder="Insira a medida em cm">
         </div>
         <div>
             <label for="panturrilha">Circunferência da Panturrilha</label>
-            <p>Meça o ponto mais largo da panturrilha.</p>
+            <p>Envolva a fita ao redor da panturrilha, no ponto mais largo, para medir o diâmetro.</p>
             <input type="number" id="panturrilha" placeholder="Insira a medida em cm">
         </div>
         <div>
             <label for="quadriceps">Circunferência do Quadríceps</label>
-            <p>Meça a circunferência da coxa cerca de 10-15 cm acima da patela.</p>
+            <p>Meça a coxa no ponto mais largo, cerca de 10-15 cm acima da patela.</p>
             <input type="number" id="quadriceps" placeholder="Insira a medida em cm">
         </div>
         <div>
-            <label for="flexibilidade">Distância dos Dedos ao Solo</label>
-            <p>Com a paciente em pé, peça para ela tentar tocar o solo e meça a distância dos dedos ao chão.</p>
-            <input type="number" id="flexibilidade" placeholder="Insira a distância em cm">
+            <label for="tenil">Comprimento do Tênsil do Quadril (Teste de Thomas)</label>
+            <p>Com a paciente deitada, segure uma perna contra o peito e meça a distância entre o joelho da outra perna e a maca.</p>
+            <input type="number" id="tenil" placeholder="Insira a medida em cm">
+        </div>
+    </div>
+    <div class="dropdown-content">
+        <div>
+            <label for="dedos">Distância dos Dedos ao Solo</label>
+            <p>Com a paciente em pé, peça para tocar o solo e meça a distância dos dedos ao chão.</p>
+            <input type="number" id="dedos" placeholder="Insira a medida em cm">
+        </div>
+        <div>
+            <label for="fascia">Circunferência da Fáscia Plantar</label>
+            <p>Meça a circunferência do pé na região do arco plantar para comparar a estabilidade.</p>
+            <input type="number" id="fascia" placeholder="Insira a medida em cm">
+        </div>
+        <div>
+            <label for="marcha">Análise de Marcha e Corrida em Esteira</label>
+            <p>Grave a marcha e corrida na esteira para avaliar o ângulo do pé, cadência e alinhamento.</p>
+            <input type="number" id="marcha" placeholder="Insira a cadência em passos/min">
+        </div>
+        <div>
+            <label for="baropodometria">Baropodometria Estática e Dinâmica</label>
+            <p>Meça a distribuição da pressão plantar em repouso e movimento para avaliar sobrecargas.</p>
+            <input type="text" id="baropodometria" placeholder="Descreva as áreas de sobrecarga">
+        </div>
+    </div>
+    <div class="dropdown-content">
+        <div>
+            <label for="dorsiflexao">Dorsiflexão do Tornozelo</label>
+            <p>A paciente tenta tocar a parede com o joelho sem levantar o calcanhar para avaliar flexibilidade.</p>
+            <input type="number" id="dorsiflexao" placeholder="Insira a distância em cm">
+        </div>
+        <div>
+            <label for="controle-motor">Teste de Controle Motor e Estabilidade do Core</label>
+            <p>Observe a estabilidade da pelve e do tronco durante a ponte unilateral e agachamento em uma perna.</p>
+            <input type="text" id="controle-motor" placeholder="Descreva a estabilidade observada">
+        </div>
+        <div>
+            <label for="isometrica">Dinâmica de Força Isométrica (Rotadores de Quadril)</label>
+            <p>Aplique resistência enquanto a paciente tenta abrir a perna para avaliar força dos rotadores de quadril.</p>
+            <input type="text" id="isometrica" placeholder="Descreva a força observada">
+        </div>
+        <div>
+            <label for="footcore">Footcore</label>
+            <p>Teste a habilidade de elevar o arco do pé sem ativar os dedos, avaliando o controle do arco plantar.</p>
+            <input type="text" id="footcore" placeholder="Descreva o controle do arco">
+        </div>
+    </div>
+    <div class="dropdown-content">
+        <div>
+            <label for="fascia-plantar">Flexibilidade da Fáscia Plantar</label>
+            <p>A paciente puxa os dedos do pé em direção ao corpo para avaliar rigidez na região plantar.</p>
+            <input type="text" id="fascia-plantar" placeholder="Descreva a rigidez observada">
+        </div>
+        <div>
+            <label for="tendao">Flexibilidade do Tendão Calcâneo (Aquiles)</label>
+            <p>Com o calcanhar no chão, a paciente inclina o corpo para frente para alongar o tendão.</p>
+            <input type="number" id="tendao" placeholder="Insira a flexibilidade observada em cm">
         </div>
     </div>
     <button class="generate-btn" onclick="generateResults()">Gerar Resultados</button>
@@ -126,18 +183,29 @@
     });
 
     function generateResults() {
-        const membros = document.getElementById('membros').value;
-        const panturrilha = document.getElementById('panturrilha').value;
-        const quadriceps = document.getElementById('quadriceps').value;
-        const flexibilidade = document.getElementById('flexibilidade').value;
-
         const resultDisplay = document.getElementById('result-display');
-        const results = `
-            Comprimento dos Membros Inferiores: ${membros} cm<br>
-            Circunferência da Panturrilha: ${panturrilha} cm<br>
-            Circunferência do Quadríceps: ${quadriceps} cm<br>
-            Distância dos Dedos ao Solo: ${flexibilidade} cm
-        `;
+        const tests = [
+            { id: 'membros', label: 'Comprimento dos Membros Inferiores' },
+            { id: 'panturrilha', label: 'Circunferência da Panturrilha' },
+            { id: 'quadriceps', label: 'Circunferência do Quadríceps' },
+            { id: 'tenil', label: 'Comprimento do Tênsil do Quadril (Teste de Thomas)' },
+            { id: 'dedos', label: 'Distância dos Dedos ao Solo' },
+            { id: 'fascia', label: 'Circunferência da Fáscia Plantar' },
+            { id: 'marcha', label: 'Análise de Marcha e Corrida em Esteira' },
+            { id: 'baropodometria', label: 'Baropodometria Estática e Dinâmica' },
+            { id: 'dorsiflexao', label: 'Dorsiflexão do Tornozelo' },
+            { id: 'controle-motor', label: 'Teste de Controle Motor e Estabilidade do Core' },
+            { id: 'isometrica', label: 'Dinâmica de Força Isométrica (Rotadores de Quadril)' },
+            { id: 'footcore', label: 'Footcore' },
+            { id: 'fascia-plantar', label: 'Flexibilidade da Fáscia Plantar' },
+            { id: 'tendao', label: 'Flexibilidade do Tendão Calcâneo (Aquiles)' }
+        ];
+
+        let results = '';
+        tests.forEach(test => {
+            const value = document.getElementById(test.id).value;
+            results += `<strong>${test.label}:</strong> ${value ? value : 'Não informado'}<br>`;
+        });
 
         document.getElementById('results').innerHTML = results;
         resultDisplay.style.display = 'block';
