@@ -175,23 +175,21 @@
 </div>
    <script>
     document.querySelectorAll('.dropdown-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            const dropdownContent = this.nextElementSibling;
-            
-            // Alternar a exibição entre "block" e "none" corretamente
-            if (dropdownContent.style.display === 'block') {
-                dropdownContent.style.display = 'none';
-            } else {
-                // Fechar outras seções antes de abrir a atual
-                document.querySelectorAll('.dropdown-content').forEach(content => {
-                    content.style.display = 'none';
-                });
-                dropdownContent.style.display = 'block';
-            }
-        });
-    });
+    button.addEventListener('click', function() {
+        const dropdownContent = this.nextElementSibling;
 
-    function generateResults() {
+        // Alternar a exibição entre "block" e "none" corretamente
+        if (dropdownContent.style.display === 'block') {
+            dropdownContent.style.display = 'none';
+        } else {
+            // Fechar outras seções antes de abrir a atual
+            document.querySelectorAll('.dropdown-content').forEach(content => {
+                content.style.display = 'none';
+            });
+            dropdownContent.style.display = 'block';
+        }
+    });
+});
     function generateResults() {
     const resultDisplay = document.getElementById('result-display');
     const tests = [
@@ -220,7 +218,6 @@
     document.getElementById('results').innerHTML = results;
     resultDisplay.style.display = 'block';
 }
-
     function downloadPDF() {
         const results = document.getElementById('results').innerHTML;
         const pdfWindow = window.open('', '_blank');
