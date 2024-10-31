@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação Biomecânica - MK-CARDIOSPORT</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        h1 {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 90%;
+            width: 800px;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .dropdown-btn, .generate-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .dropdown-btn:focus, .generate-btn:focus {
+            outline: none;
+        }
+        .dropdown-content {
+            display: none;
+            overflow-y: auto;
+            max-height: 200px;
+            margin-top: 10px;
+        }
+        .dropdown-content div {
+            margin-bottom: 15px;
+            padding: 15px;
+            background-color: #eaeaea;
+            border-radius: 5px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin: 8px 0 4px;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin: 4px 0;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        .result-display {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #e6f7ff;
+            border: 1px solid #007bff;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .logo {
+            margin-top: 20px;
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Avaliação Biomecânica - MK-CARDIOSPORT</h1>
+<p style="text-align: center;">www.mk-cardiosport.com</p>
+
+<div class="container">
+    <button class="dropdown-btn">Escolha um Teste</button>
+    <div class="dropdown-content">
+        <div>
+            <label for="membros">Comprimento dos Membros Inferiores</label>
+            <p>Meça o comprimento de cada perna da crista ilíaca até o maléolo medial.</p>
+            <input type="number" id="membros" placeholder="Insira a medida em cm">
+        </div>
+        <div>
+            <label for="panturrilha">Circunferência da Panturrilha</label>
+            <p>Meça o ponto mais largo da panturrilha.</p>
+            <input type="number" id="panturrilha" placeholder="Insira a medida em cm">
+        </div>
+        <div>
+            <label for="quadriceps">Circunferência do Quadríceps</label>
+            <p>Meça a circunferência da coxa cerca de 10-15 cm acima da patela.</p>
+            <input type="number" id="quadriceps" placeholder="Insira a medida em cm">
+        </div>
+        <div>
+            <label for="flexibilidade">Distância dos Dedos ao Solo</label>
+            <p>Com a paciente em pé, peça para ela tentar tocar o solo e meça a distância dos dedos ao chão.</p>
+            <input type="number" id="flexibilidade" placeholder="Insira a distância em cm">
+        </div>
+    </div>
+    <button class="generate-btn" onclick="generateResults()">Gerar Resultados</button>
+    <div class="result-display" id="result-display">
+        <h3>Resultados da Avaliação - MK-CARDIOSPORT</h3>
+        <p id="results"></p>
+        <button onclick="downloadPDF()">Baixar em PDF</button>
+        <img src="logo.png" alt="MK-CARDIOSPORT Logo" class="logo">
+    </div>
+</div>
+
+<script>
+    document.querySelector('.dropdown-btn').addEventListener('click', function() {
+        const dropdownContent = document.querySelector('.dropdown-content');
+        dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+    });
+
+    function generateResults() {
+        const membros = document.getElementById('membros').value;
+        const panturrilha = document.getElementById('panturrilha').value;
+        const quadriceps = document.getElementById('quadriceps').value;
+        const flexibilidade = document.getElementById('flexibilidade').value;
+
+        const resultDisplay = document.getElementById('result-display');
+        const results = `
+            Comprimento dos Membros Inferiores: ${membros} cm<br>
+            Circunferência da Panturrilha: ${panturrilha} cm<br>
+            Circunferência do Quadríceps: ${quadriceps} cm<br>
+            Distância dos Dedos ao Solo: ${flexibilidade} cm
+        `;
+
+        document.getElementById('results').innerHTML = results;
+        resultDisplay.style.display = 'block';
+    }
+
+    function downloadPDF() {
+        const results = document.getElementById('results').innerHTML;
+        const pdfWindow = window.open('', '_blank');
+        pdfWindow.document.write(`
+            <html>
+            <head><title>Resultados da Avaliação</title></head>
+            <body>
+                <h1>Resultados da Avaliação Biomecânica - MK-CARDIOSPORT</h1>
+                <p>${results}</p>
+                <p style="text-align: center;">www.mk-cardiosport.com</p>
+                <img src="logo.png" alt="MK-CARDIOSPORT Logo" style="display: block; margin: 20px auto; width: 100px;">
+            </body>
+            </html>
+        `);
+        pdfWindow.document.close();
+        pdfWindow.print();
+    }
+</script>
+
+</body>
+</html>
