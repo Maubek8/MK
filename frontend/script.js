@@ -3,7 +3,6 @@ import { areasAnaliseContent } from "./areasAnalise.js";
 import { esportesContent } from "./esportes.js";
 
 function showCategory(category) {
-    console.log(`Carregando categoria: ${category}`);
     const mainContent = document.getElementById("main-content");
     switch (category) {
         case 'todasAvaliacoes':
@@ -23,10 +22,16 @@ function showCategory(category) {
 
 function togglePatientModal() {
     const modal = document.getElementById("patientModal");
-    const isVisible = modal.style.display === "flex";
-    modal.style.display = isVisible ? "none" : "flex";
-    if (!isVisible) {
-        document.getElementById("patientName").focus();
+    modal.style.display = modal.style.display === "flex" ? "none" : "flex";
+
+    // Define a data automática ao abrir o modal
+    if (modal.style.display === "flex") {
+        const currentDate = new Date().toLocaleDateString("pt-BR", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+        });
+        document.getElementById("patientDate").value = currentDate;
     }
 }
 
@@ -34,6 +39,7 @@ function savePatient(event) {
     event.preventDefault();
     const patientName = document.getElementById("patientName").value.trim();
     const patientAge = document.getElementById("patientAge").value;
+    const patientDate = document.getElementById("patientDate").value;
 
     if (!patientName || !patientAge) {
         alert("Por favor, preencha todos os campos.");
@@ -46,6 +52,7 @@ function savePatient(event) {
     const formData = new FormData();
     formData.append("patientName", patientName);
     formData.append("patientAge", patientAge);
+    formData.append("patientDate", patientDate);
 
     fetch("salvar_paciente.php", {
         method: "POST",
