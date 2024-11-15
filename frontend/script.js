@@ -31,24 +31,32 @@ function savePatient(event) {
 }
 
 // Função para exibir categorias dinâmicas na área central
+import { todasAvaliacoesContent } from "./todasAvaliacoes.js";
+import { areasAnaliseContent } from "./areasAnalise.js";
+import { esportesContent } from "./esportes.js";
+
+// Função para exibir categorias dinâmicas na área central
 function showCategory(category) {
     const mainContent = document.getElementById("main-content");
 
     switch (category) {
         case 'todasAvaliacoes':
-            mainContent.innerHTML = `<h2>Todas as Avaliações</h2><p>Conteúdo para todas as avaliações...</p>`;
+            mainContent.innerHTML = todasAvaliacoesContent();
             break;
         case 'areasAnalise':
-            mainContent.innerHTML = `<h2>Áreas de Análise</h2><p>Conteúdo para áreas de análise...</p>`;
+            mainContent.innerHTML = areasAnaliseContent();
             break;
         case 'esportes':
-            mainContent.innerHTML = `<h2>Esportes</h2><p>Conteúdo para esportes...</p>`;
+            mainContent.innerHTML = esportesContent();
             break;
         default:
             mainContent.innerHTML = `<h2>Bem-vindo</h2><p>Selecione uma categoria.</p>`;
             break;
     }
 }
+
+// Expondo a função showCategory para o escopo global para ser chamada pelos botões
+window.showCategory = showCategory;
 
 // Fecha o modal ao clicar fora dele
 window.onclick = function(event) {
