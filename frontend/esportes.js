@@ -17,77 +17,28 @@ export function mostrarEsportes() {
     `;
 }
 
-// Função para carregar avaliações específicas com base no esporte selecionado
 window.carregarAvaliacaoEsporte = function (esporte) {
     const avaliacaoEsporte = document.getElementById("avaliacao-esporte");
     let conteudo = "";
 
     switch (esporte) {
         case "futebol":
-            conteudo = `
-                <h3>Avaliações para Futebol</h3>
-                <ul>
-                    <li>Resistência Aeróbica</li>
-                    <li>Velocidade</li>
-                    <li>Força Explosiva</li>
-                    <li>Flexibilidade dos Isquiotibiais</li>
-                    <li>Agilidade e Controle de Bola</li>
-                </ul>
-            `;
+            conteudo = "<p>Avaliações para Futebol...</p>";
             break;
         case "basquete":
-            conteudo = `
-                <h3>Avaliações para Basquete</h3>
-                <ul>
-                    <li>Salto Vertical</li>
-                    <li>Força de Membros Inferiores</li>
-                    <li>Coordenação Motora</li>
-                    <li>Resistência Anaeróbica</li>
-                    <li>Flexibilidade do Quadril</li>
-                </ul>
-            `;
+            conteudo = "<p>Avaliações para Basquete...</p>";
             break;
         case "volei":
-            conteudo = `
-                <h3>Avaliações para Vôlei</h3>
-                <ul>
-                    <li>Força de Preensão Manual</li>
-                    <li>Salto de Bloqueio</li>
-                    <li>Resistência Anaeróbica</li>
-                    <li>Estabilidade de Ombro</li>
-                    <li>Mobilidade do Tornozelo</li>
-                </ul>
-            `;
+            conteudo = "<p>Avaliações para Vôlei...</p>";
             break;
         case "luta":
-            conteudo = `
-                <h3>Avaliações para Luta</h3>
-                <ul>
-                    <li>Força Explosiva dos Braços</li>
-                    <li>Resistência Isométrica</li>
-                    <li>Agilidade e Movimentação</li>
-                    <li>Flexibilidade de Quadril</li>
-                    <li>Capacidade Cardiovascular</li>
-                </ul>
-            `;
+            conteudo = "<p>Avaliações para Luta...</p>";
             break;
         case "atletismo":
-            conteudo = `
-                <h3>Avaliações para Atletismo</h3>
-                <ul>
-                    <li>Velocidade Máxima</li>
-                    <li>Resistência Aeróbica</li>
-                    <li>Salto Horizontal</li>
-                    <li>Flexibilidade de Tornozelo</li>
-                    <li>Estabilidade de Joelho</li>
-                </ul>
-            `;
+            conteudo = "<p>Avaliações para Atletismo...</p>";
             break;
         default:
-            conteudo = `
-                <h3>Esporte não encontrado</h3>
-                <p>Selecione um esporte válido para exibir as avaliações.</p>
-            `;
+            conteudo = "<p>Selecione um esporte válido.</p>";
             break;
     }
 
