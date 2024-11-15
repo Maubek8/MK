@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação Biomecânica - MK-CARDIOSPORT</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Avaliação Biomecânica - MK-CARDIOSPORT</h1>
+        <p class="subtitle">www.mk-cardiosport.com</p>
+    </header>
+
+    <main>
+        <form id="formPaciente">
+            <h2>Cadastro do Paciente</h2>
+            <div class="form-group">
+                <label for="nome">Nome do Paciente</label>
+                <input type="text" name="nome" id="nome" placeholder="Nome completo">
+            </div>
+            <div class="form-group">
+                <label for="idade">Idade</label>
+                <input type="number" name="idade" id="idade" placeholder="Idade">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" placeholder="Email">
+            </div>
+            <h3>Avaliações</h3>
+            <div class="form-group">
+                <label for="mmss_data">Dados MMSS</label>
+                <input type="text" name="mmss_data" id="mmss_data" placeholder="Avaliação dos Membros Superiores">
+            </div>
+            <div class="form-group">
+                <label for="mmii_data">Dados MMII</label>
+                <input type="text" name="mmii_data" id="mmii_data" placeholder="Avaliação dos Membros Inferiores">
+            </div>
+            <div class="form-group">
+                <label for="core_data">Dados do Core</label>
+                <input type="text" name="core_data" id="core_data" placeholder="Avaliação do Core">
+            </div>
+            <button type="button" onclick="salvarPaciente()">Salvar</button>
+        </form>
+
+        <div class="result-display" id="result-display">
+            <h3>Resultados</h3>
+            <p id="results"></p>
+            <button onclick="downloadPDF()">Baixar em PDF</button>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
