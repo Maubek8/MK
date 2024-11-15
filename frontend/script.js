@@ -30,6 +30,26 @@ function savePatient(event) {
     .catch(error => console.error("Erro ao salvar paciente:", error));
 }
 
+// Função para exibir categorias dinâmicas na área central
+function showCategory(category) {
+    const mainContent = document.getElementById("main-content");
+
+    switch (category) {
+        case 'todasAvaliacoes':
+            mainContent.innerHTML = `<h2>Todas as Avaliações</h2><p>Conteúdo para todas as avaliações...</p>`;
+            break;
+        case 'areasAnalise':
+            mainContent.innerHTML = `<h2>Áreas de Análise</h2><p>Conteúdo para áreas de análise...</p>`;
+            break;
+        case 'esportes':
+            mainContent.innerHTML = `<h2>Esportes</h2><p>Conteúdo para esportes...</p>`;
+            break;
+        default:
+            mainContent.innerHTML = `<h2>Bem-vindo</h2><p>Selecione uma categoria.</p>`;
+            break;
+    }
+}
+
 // Fecha o modal ao clicar fora dele
 window.onclick = function(event) {
     const modal = document.getElementById("patientModal");
