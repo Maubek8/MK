@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avaliação Biomecânica - MK-CARDIOSPORT</title>
+    <meta name="description" content="Sistema de Avaliação Biomecânica - MK-CARDIOSPORT">
+    <meta name="keywords" content="Biomecânica, Avaliação, Esportes, Saúde">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,6 +15,7 @@
             <img src="assets/logo.png" alt="MK-CARDIOSPORT Logo" class="logo">
             <h1 class="title">Avaliação Biomecânica</h1>
         </div>
+        <span id="patientNameDisplay" class="patient-name"></span>
     </header>
 
     <nav class="navigation">
@@ -29,20 +32,24 @@
     <button class="floating-btn" onclick="togglePatientModal()">P</button>
 
     <!-- Modal para inserção de dados do paciente -->
-    <div id="patientModal" class="modal">
+    <div id="patientModal" class="modal" aria-hidden="true" role="dialog">
         <div class="modal-content">
-            <span class="close-btn" onclick="togglePatientModal()">&times;</span>
+            <span class="close-btn" onclick="togglePatientModal()" aria-label="Fechar">&times;</span>
             <h2>Dados do Paciente</h2>
             <form id="patientForm" onsubmit="savePatient(event)">
                 <label for="patientName">Nome:</label>
-                <input type="text" id="patientName" name="patientName" required>
+                <input type="text" id="patientName" name="patientName" required autofocus>
                 <label for="patientAge">Idade:</label>
                 <input type="number" id="patientAge" name="patientAge" required>
                 <button type="submit" class="save-btn">Salvar</button>
+                <button type="button" class="cancel-btn" onclick="togglePatientModal()">Cancelar</button>
             </form>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js" type="module"></script>
+    <script src="todasAvaliacoes.js" type="module"></script>
+    <script src="areasAnalise.js" type="module"></script>
+    <script src="esportes.js" type="module"></script>
 </body>
 </html>
