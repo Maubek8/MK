@@ -1,28 +1,23 @@
-// Importação dos arquivos de categoria
-import { mostrarTodasAvaliacoes } from "./todasAvaliacoes.js";
-import { mostrarAreasAnalise } from "./areasAnalise.js";
-import { mostrarEsportes } from "./esportes.js";
-
-// Função para exibir categorias
+// Função para alternar entre categorias
 function showCategory(category) {
     const mainContent = document.getElementById("main-content");
     switch (category) {
         case "todasAvaliacoes":
-            mostrarTodasAvaliacoes();
+            mainContent.innerHTML = "<h2>Todas as Avaliações</h2><p>Conteúdo aparece aqui.</p>";
             break;
         case "areasAnalise":
-            mostrarAreasAnalise();
+            mainContent.innerHTML = "<h2>Áreas de Análise</h2><p>Conteúdo aparece aqui.</p>";
             break;
         case "esportes":
-            mostrarEsportes();
+            mainContent.innerHTML = "<h2>Esportes</h2><p>Conteúdo aparece aqui.</p>";
             break;
         default:
-            mainContent.innerHTML = `<h2>Bem-vindo</h2><p>Selecione uma categoria.</p>`;
+            mainContent.innerHTML = "<h2>Bem-vindo</h2><p>Selecione uma categoria.</p>";
             break;
     }
 }
 
-// Função para abrir/fechar o modal de cadastro do paciente
+// Função para abrir e fechar o modal
 function togglePatientModal() {
     const modal = document.getElementById("patientModal");
     modal.style.display = modal.style.display === "flex" ? "none" : "flex";
@@ -61,23 +56,15 @@ function savePatient(event) {
         method: "POST",
         body: formData,
     })
-        .then((response) => response.text())
-        .then((data) => alert("Paciente salvo com sucesso!"))
-        .catch((error) => {
+        .then(response => response.text())
+        .then(data => alert("Paciente salvo com sucesso!"))
+        .catch(error => {
             console.error("Erro ao salvar paciente:", error);
             alert("Erro ao salvar o paciente. Por favor, tente novamente.");
         });
 }
 
-// Fecha o modal ao clicar fora dele
-window.onclick = function (event) {
-    const modal = document.getElementById("patientModal");
-    if (event.target === modal) {
-        modal.style.display = "none";
-    }
-};
-
-// Expondo funções no escopo global
+// Expor funções globalmente
 window.showCategory = showCategory;
 window.togglePatientModal = togglePatientModal;
 window.savePatient = savePatient;
