@@ -1,15 +1,20 @@
-// Função para alternar entre categorias
+// Importar as categorias
+import { mostrarTodasAvaliacoes } from "./todasAvaliacoes.js";
+import { mostrarAreasAnalise } from "./areasAnalise.js";
+import { mostrarEsportes } from "./esportes.js";
+
+// Função para alternar categorias
 function showCategory(category) {
     const mainContent = document.getElementById("main-content");
     switch (category) {
         case "todasAvaliacoes":
-            mainContent.innerHTML = "<h2>Todas as Avaliações</h2><p>Conteúdo aparece aqui.</p>";
+            mostrarTodasAvaliacoes();
             break;
         case "areasAnalise":
-            mainContent.innerHTML = "<h2>Áreas de Análise</h2><p>Conteúdo aparece aqui.</p>";
+            mostrarAreasAnalise();
             break;
         case "esportes":
-            mainContent.innerHTML = "<h2>Esportes</h2><p>Conteúdo aparece aqui.</p>";
+            mostrarEsportes();
             break;
         default:
             mainContent.innerHTML = "<h2>Bem-vindo</h2><p>Selecione uma categoria.</p>";
@@ -17,7 +22,7 @@ function showCategory(category) {
     }
 }
 
-// Função para abrir e fechar o modal
+// Função para abrir/fechar o modal de cadastro de paciente
 function togglePatientModal() {
     const modal = document.getElementById("patientModal");
     modal.style.display = modal.style.display === "flex" ? "none" : "flex";
