@@ -1,3 +1,70 @@
+/* Estilos gerais */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+header {
+    background-color: #007BFF;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header .header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header .logo {
+    width: 50px;
+    margin-right: 10px;
+}
+
+header .title {
+    font-size: 24px;
+}
+
+.patient-name {
+    display: block;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+/* Navegação */
+.navigation {
+    display: flex;
+    justify-content: center;
+    background-color: #0056b3;
+    padding: 10px;
+}
+
+.nav-btn {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.nav-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Conteúdo principal */
+.main-content {
+    padding: 20px;
+    text-align: center;
+}
+
 /* Botão flutuante */
 .floating-btn {
     position: fixed;
@@ -38,6 +105,7 @@
     border-radius: 10px;
     width: 300px;
     text-align: center;
+    position: relative;
 }
 
 .close-btn {
