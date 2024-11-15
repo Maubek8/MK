@@ -1,3 +1,22 @@
+function mostrarTodasAvaliacoes() {
+    const mainContent = document.getElementById("main-content");
+
+    mainContent.innerHTML = `
+        <h2>Todas as Avaliações</h2>
+        
+        <div class="filter-options">
+            <label><input type="checkbox" id="fitaMetrica" onchange="filtrarAvaliacoes()"> Fita Métrica</label>
+            <label><input type="checkbox" id="goniometro" onchange="filtrarAvaliacoes()"> Goniômetro</label>
+        </div>
+
+        <div id="avaliacoes-list">
+            ${gerarListaAvaliacoes()}
+        </div>
+
+        <button class="save-btn" onclick="salvarPaciente()">Salvar Seleção</button>
+    `;
+}
+
 function gerarListaAvaliacoes() {
     const avaliacoes = [
         // Membros Superiores (MMSS)
