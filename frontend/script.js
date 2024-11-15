@@ -1,9 +1,9 @@
-// Importar as categorias
+// Importar funções específicas de cada categoria
 import { mostrarTodasAvaliacoes } from "./todasAvaliacoes.js";
 import { mostrarAreasAnalise } from "./areasAnalise.js";
 import { mostrarEsportes } from "./esportes.js";
 
-// Função para alternar categorias
+// Função para alternar categorias na área principal
 function showCategory(category) {
     const mainContent = document.getElementById("main-content");
     switch (category) {
@@ -69,7 +69,7 @@ function savePatient(event) {
         });
 }
 
-// Expor funções globalmente
+// Tornar funções globais
 window.showCategory = showCategory;
 window.togglePatientModal = togglePatientModal;
 window.savePatient = savePatient;
