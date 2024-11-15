@@ -1,18 +1,20 @@
-import { todasAvaliacoesContent } from "./todasAvaliacoes.js";
-import { areasAnaliseContent } from "./areasAnalise.js";
-import { esportesContent } from "./esportes.js";
+// Importação dos arquivos de categoria
+import { mostrarTodasAvaliacoes } from "./todasAvaliacoes.js";
+import { mostrarAreasAnalise } from "./areasAnalise.js";
+import { mostrarEsportes } from "./esportes.js";
 
+// Função para exibir categorias
 function showCategory(category) {
     const mainContent = document.getElementById("main-content");
     switch (category) {
-        case 'todasAvaliacoes':
-            mainContent.innerHTML = todasAvaliacoesContent();
+        case "todasAvaliacoes":
+            mostrarTodasAvaliacoes();
             break;
-        case 'areasAnalise':
-            mainContent.innerHTML = areasAnaliseContent();
+        case "areasAnalise":
+            mostrarAreasAnalise();
             break;
-        case 'esportes':
-            mainContent.innerHTML = esportesContent();
+        case "esportes":
+            mostrarEsportes();
             break;
         default:
             mainContent.innerHTML = `<h2>Bem-vindo</h2><p>Selecione uma categoria.</p>`;
@@ -20,11 +22,11 @@ function showCategory(category) {
     }
 }
 
+// Função para abrir/fechar o modal de cadastro do paciente
 function togglePatientModal() {
     const modal = document.getElementById("patientModal");
     modal.style.display = modal.style.display === "flex" ? "none" : "flex";
 
-    // Define a data automática ao abrir o modal
     if (modal.style.display === "flex") {
         const currentDate = new Date().toLocaleDateString("pt-BR", {
             day: "2-digit",
@@ -35,6 +37,7 @@ function togglePatientModal() {
     }
 }
 
+// Função para salvar os dados do paciente
 function savePatient(event) {
     event.preventDefault();
     const patientName = document.getElementById("patientName").value.trim();
@@ -56,23 +59,25 @@ function savePatient(event) {
 
     fetch("salvar_paciente.php", {
         method: "POST",
-        body: formData
+        body: formData,
     })
-    .then(response => response.text())
-    .then(data => alert("Paciente salvo com sucesso!"))
-    .catch(error => {
-        console.error("Erro ao salvar paciente:", error);
-        alert("Erro ao salvar o paciente. Por favor, tente novamente.");
-    });
+        .then((response) => response.text())
+        .then((data) => alert("Paciente salvo com sucesso!"))
+        .catch((error) => {
+            console.error("Erro ao salvar paciente:", error);
+            alert("Erro ao salvar o paciente. Por favor, tente novamente.");
+        });
 }
 
-window.onclick = function(event) {
+// Fecha o modal ao clicar fora dele
+window.onclick = function (event) {
     const modal = document.getElementById("patientModal");
-    if (modal && event.target === modal) {
+    if (event.target === modal) {
         modal.style.display = "none";
     }
 };
 
+// Expondo funções no escopo global
 window.showCategory = showCategory;
 window.togglePatientModal = togglePatientModal;
 window.savePatient = savePatient;
