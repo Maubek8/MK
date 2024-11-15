@@ -7,7 +7,6 @@ function salvarPaciente() {
     })
     .then(response => response.text())
     .then(data => {
-        // Exibir os resultados na tela
         const resultDisplay = document.getElementById('result-display');
         const results = document.getElementById('results');
         results.textContent = data;
@@ -16,7 +15,6 @@ function salvarPaciente() {
     .catch(error => console.error('Erro:', error));
 }
 
-// Função para baixar os resultados em PDF (usando jsPDF)
 function downloadPDF() {
     const resultText = document.getElementById('results').textContent;
     const doc = new jsPDF();
