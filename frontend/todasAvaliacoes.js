@@ -69,26 +69,4 @@ function gerarListaAvaliacoes() {
         { id: "alongamentoQuadriceps", nome: "Alongamento de Quadríceps", descricao: "(Fita Métrica e Goniômetro)", instrumento: "fitaMetrica goniometro" },
         { id: "testeThomas", nome: "Teste de Thomas", descricao: "(Goniômetro)", instrumento: "goniometro" },
         { id: "testeOber", nome: "Teste de Ober", descricao: "(Goniômetro)", instrumento: "goniometro" },
-        { id: "testeEly", nome: "Teste de Ely", descricao: "(Goniômetro)", instrumento: "goniometro" },
-        { id: "alongamentoPeitoral", nome: "Alongamento de Peitoral", descricao: "(Fita Métrica)", instrumento: "fitaMetrica" },
-        { { id: "flexibilidadeTornozelo", nome: "Flexibilidade do Tornozelo", descricao: "(Goniômetro)", instrumento: "goniometro" },
-        { id: "testeSchober", nome: "Teste de Schober", descricao: "(Fita Métrica)", instrumento: "fitaMetrica" },
-
-        // Postura e Simetria Corporal
-        { id: "alturaOmbros", nome: "Altura dos Ombros", descricao: "(Fita Métrica)", instrumento: "fitaMetrica" },
-        { id: "simetriaCintura", nome: "Simetria da Cintura", descricao: "(Fita Métrica)", instrumento: "fitaMetrica" },
-        { id: "anguloQAngle", nome: "Ângulo Q (Joelho)", descricao: "(Goniômetro)", instrumento: "goniometro" },
-        { id: "distanciaEntreJoelhos", nome: "Distância Entre Joelhos (Valgo/Varo)", descricao: "(Fita Métrica)", instrumento: "fitaMetrica" },
-        { id: "avaliacaoArcoPlantar", nome: "Avaliação do Arco Plantar", descricao: "(Observação)", instrumento: "observacao" },
-        { id: "pronaçãoSupinacaoPes", nome: "Pronação/Supinação dos Pés", descricao: "(Observação)", instrumento: "observacao" }
-    ];
-
-    return avaliacoes.map(avaliacao => `
-        <div class="form-group avaliacao-item" data-instrumento="${avaliacao.instrumento}">
-            <label>
-                <input type="checkbox" name="avaliacoes" value="${avaliacao.id}"> 
-                ${avaliacao.nome} <span class="descricao">${avaliacao.descricao}</span>
-            </label>
-        </div>
-    `).join("");
-}
+        { id: "testeEly", nome: "Teste de Ely", descricao: "(Goniômetro)",
