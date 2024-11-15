@@ -18,6 +18,23 @@
         <button onclick="showCategory('esportes')">Esportes</button>
     </nav>
 
+    <section class="patient-section">
+        <h2>Dados do Paciente</h2>
+        <form id="patientForm" onsubmit="savePatient(event)">
+            <label for="patientName">Nome do Paciente:</label>
+            <input type="text" id="patientName" name="patientName" required>
+            <label for="patientAge">Idade:</label>
+            <input type="number" id="patientAge" name="patientAge" required>
+            <button type="submit">Salvar Paciente</button>
+        </form>
+
+        <form id="searchForm" onsubmit="searchPatient(event)">
+            <label for="searchName">Buscar Paciente:</label>
+            <input type="text" id="searchName" name="searchName">
+            <button type="submit">Buscar</button>
+        </form>
+    </section>
+
     <main id="main-content">
         <!-- Conteúdo dinâmico aparece aqui -->
     </main>
