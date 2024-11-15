@@ -3,6 +3,7 @@ import { areasAnaliseContent } from "./areasAnalise.js";
 import { esportesContent } from "./esportes.js";
 
 function showCategory(category) {
+    console.log(`Carregando categoria: ${category}`);
     const mainContent = document.getElementById("main-content");
     switch (category) {
         case 'todasAvaliacoes':
@@ -22,13 +23,22 @@ function showCategory(category) {
 
 function togglePatientModal() {
     const modal = document.getElementById("patientModal");
-    modal.style.display = (modal.style.display === "flex") ? "none" : "flex";
+    const isVisible = modal.style.display === "flex";
+    modal.style.display = isVisible ? "none" : "flex";
+    if (!isVisible) {
+        document.getElementById("patientName").focus();
+    }
 }
 
 function savePatient(event) {
     event.preventDefault();
-    const patientName = document.getElementById("patientName").value;
+    const patientName = document.getElementById("patientName").value.trim();
     const patientAge = document.getElementById("patientAge").value;
+
+    if (!patientName || !patientAge) {
+        alert("Por favor, preencha todos os campos.");
+        return;
+    }
 
     document.getElementById("patientNameDisplay").textContent = `Paciente: ${patientName}`;
     togglePatientModal();
@@ -43,15 +53,18 @@ function savePatient(event) {
     })
     .then(response => response.text())
     .then(data => alert("Paciente salvo com sucesso!"))
-    .catch(error => console.error("Erro ao salvar paciente:", error));
+    .catch(error => {
+        console.error("Erro ao salvar paciente:", error);
+        alert("Erro ao salvar o paciente. Por favor, tente novamente.");
+    });
 }
 
 window.onclick = function(event) {
     const modal = document.getElementById("patientModal");
-    if (event.target === modal) {
+    if (modal && event.target === modal) {
         modal.style.display = "none";
     }
-}
+};
 
 window.showCategory = showCategory;
 window.togglePatientModal = togglePatientModal;
