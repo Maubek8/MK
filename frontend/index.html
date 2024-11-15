@@ -8,10 +8,12 @@
 </head>
 <body>
     <header class="header">
-        <img src="assets/logo.png" alt="MK-CARDIOSPORT Logo" class="logo">
-        <h1 class="title">Avaliação Biomecânica</h1>
+        <div class="header-content">
+            <img src="assets/logo.png" alt="MK-CARDIOSPORT Logo" class="logo">
+            <h1 class="title">Avaliação Biomecânica</h1>
+        </div>
         <button class="patient-btn" onclick="togglePatientModal()">
-            <img src="assets/user-icon.png" alt="Icone de Paciente">
+            <img src="assets/user-icon.png" alt="Ícone de Paciente">
         </button>
         <span id="patientNameDisplay" class="patient-name"></span>
     </header>
@@ -26,7 +28,7 @@
         <!-- Conteúdo dinâmico aparece aqui -->
     </main>
 
-    <!-- Modal para entrada de dados do paciente -->
+    <!-- Modal oculto para inserção de dados do paciente -->
     <div id="patientModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="togglePatientModal()">&times;</span>
