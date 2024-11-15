@@ -19,24 +19,26 @@
 
     <!-- Navegação -->
     <nav class="navigation">
-        <button onclick="showCategory('todasAvaliacoes')">Todas as Avaliações</button>
-        <button onclick="showCategory('areasAnalise')">Áreas de Análise</button>
-        <button onclick="showCategory('esportes')">Esportes</button>
+        <button class="nav-btn" onclick="showCategory('todasAvaliacoes')">Todas as Avaliações</button>
+        <button class="nav-btn" onclick="showCategory('areasAnalise')">Áreas de Análise</button>
+        <button class="nav-btn" onclick="showCategory('esportes')">Esportes</button>
     </nav>
 
     <!-- Conteúdo Principal -->
-    <main id="main-content">
+    <main id="main-content" class="main-content">
         <!-- Conteúdo dinâmico será carregado aqui -->
+        <h2>Bem-vindo</h2>
+        <p>Selecione uma das opções acima para começar.</p>
     </main>
 
-    <!-- Botão flutuante redondo para cadastro de paciente -->
+    <!-- Botão flutuante redondo para abrir modal -->
     <button class="floating-btn" onclick="togglePatientModal()">P</button>
 
-    <!-- Modal para cadastro de paciente -->
+    <!-- Modal para cadastro do paciente -->
     <div id="patientModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="togglePatientModal()">&times;</span>
-            <h2>Dados do Paciente</h2>
+            <h2>Cadastro do Paciente</h2>
             <form id="patientForm" onsubmit="savePatient(event)">
                 <label for="patientName">Nome:</label>
                 <input type="text" id="patientName" name="patientName" placeholder="Digite o nome" required>
