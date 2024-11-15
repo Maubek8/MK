@@ -1,45 +1,39 @@
-function showCategory(category) {
-    const mainContent = document.getElementById("main-content");
-    mainContent.innerHTML = "";
-
-    switch (category) {
-        case 'todasAvaliacoes':
-            mostrarTodasAvaliacoes();
-            break;
-        case 'areasAnalise':
-            mostrarAreasAnalise();
-            break;
-        case 'esportes':
-            mostrarEsportes();
-            break;
-    }
+// Função para abrir e fechar o modal de paciente
+function togglePatientModal() {
+    const modal = document.getElementById("patientModal");
+    modal.style.display = (modal.style.display === "flex") ? "none" : "flex";
 }
 
-function salvarPaciente() {
-    const nome = document.querySelector('#nome')?.value;
-    const idade = document.querySelector('#idade')?.value;
-    const esporte = document.querySelector('#esporte')?.value;
-    const areas = Array.from(document.querySelectorAll('input[name="areas"]:checked')).map(el => el.value);
-    const avaliacoes = Array.from(document.querySelectorAll('input[name="avaliacoes"]:checked')).map(el => el.value);
+// Função para salvar os dados do paciente
+function savePatient(event) {
+    event.preventDefault();
+    const patientName = document.getElementById("patientName").value;
+    const patientAge = document.getElementById("patientAge").value;
 
-    const data = {
-        nome: nome,
-        idade: idade,
-        esporte: esporte,
-        areas: areas,
-        avaliacoes: avaliacoes,
-    };
+    // Exibe o nome do paciente na interface
+    document.getElementById("patientNameDisplay").textContent = `Paciente: ${patientName}`;
 
-    fetch('https://seu-backend-servidor.com/salvar_paciente.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
+    // Fecha o modal
+    togglePatientModal();
+
+    // Envia para o backend em PHP
+    const formData = new FormData();
+    formData.append("patientName", patientName);
+    formData.append("patientAge", patientAge);
+
+    fetch("salvar_paciente.php", {
+        method: "POST",
+        body: formData
     })
-    .then(response => response.json())
-    .then(result => {
-        alert("Dados salvos com sucesso!");
-    })
-    .catch(error => console.error('Erro:', error));
+    .then(response => response.text())
+    .then(data => alert("Paciente salvo com sucesso!"))
+    .catch(error => console.error("Erro ao salvar paciente:", error));
+}
+
+// Fecha o modal ao clicar fora dele
+window.onclick = function(event) {
+    const modal = document.getElementById("patientModal");
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
 }
