@@ -1,53 +1,937 @@
+MK-CARDIOSPORT - Me.Mauricio B. Kraemer, MD - Medicina do Esporte e do Exercício.
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avaliação Biomecânica - MK-CARDIOSPORT</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>O que está acontecendo no meu corpo? - Antônio Bittencourt</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --hipotalamo: #3b82f6;
+      --tireoide: #eab308;
+      --musculo: #6ee7b7;
+      --figado: #10b981;
+      --coracao: #f87171;
+      --pancreas: #14b8a6;
+      --primary: #7c3aed;
+      --secondary: #f43f5e;
+      --warning: #f59e0b;
+      --success: #10b981;
+    }
+    
+    body {
+      background-color: #f8fafc;
+      color: #1e293b;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+    
+    .header {
+      background: linear-gradient(135deg, #0f172a, #334155);
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      border-radius: 0 0 20px 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+    }
+    
+    h1 {
+      margin: 0;
+      font-size: 2.2rem;
+      font-weight: 600;
+    }
+    
+    .patient-name {
+      font-size: 1.4rem;
+      margin: 10px 0;
+      color: #e2e8f0;
+    }
+    
+    .objective {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+    
+    .objective h2 {
+      color: var(--primary);
+      margin-top: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .objective-list {
+      list-style-type: none;
+      padding: 0;
+    }
+    
+    .objective-list li {
+      padding: 8px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    
+    .objective-list li::before {
+      content: "•";
+      color: var(--primary);
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 20px;
+      padding: 0 20px;
+    }
+    
+    .main-content {
+      flex: 2;
+      min-width: 300px;
+    }
+    
+    .sidebar {
+      flex: 1;
+      min-width: 250px;
+    }
+    
+    .card {
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+    
+    .card-title {
+      color: var(--primary);
+      margin-top: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.3rem;
+    }
+    
+    .organ-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin: 20px 0;
+    }
+    
+    .organ {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .organ:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .organ i {
+      font-size: 2rem;
+      margin-bottom: 5px;
+    }
+    
+    .organ-name {
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-align: center;
+    }
+    
+    /* Cores dos órgãos */
+    .hipotalamo { background-color: var(--hipotalamo); color: white; }
+    .tireoide { background-color: var(--tireoide); color: white; }
+    .musculo { background-color: var(--musculo); color: #1e293b; }
+    .figado { background-color: var(--figado); color: white; }
+    .coracao { background-color: var(--coracao); color: white; }
+    .pancreas { background-color: var(--pancreas); color: white; }
+    
+    /* Painel de informações */
+    .info-panel {
+      margin-top: 20px;
+      padding: 15px;
+      background: #f1f5f9;
+      border-radius: 10px;
+      border-left: 4px solid var(--primary);
+    }
+    
+    .info-title {
+      font-weight: 600;
+      color: var(--primary);
+      margin-top: 0;
+    }
+    
+    /* Tabela de exames */
+    .exam-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+    }
+    
+    .exam-table th, .exam-table td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .exam-table th {
+      background-color: #f1f5f9;
+      color: #475569;
+      font-weight: 600;
+    }
+    
+    .exam-table tr:last-child td {
+      border-bottom: none;
+    }
+    
+    .highlight {
+      background-color: #fef2f2;
+      color: #b91c1c;
+      font-weight: 600;
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    
+    .normal {
+      background-color: #f0fdf4;
+      color: #15803d;
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    
+    .warning {
+      background-color: #fffbeb;
+      color: #b45309;
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    
+    /* Lista de soluções */
+    .solution-list {
+      list-style-type: none;
+      padding: 0;
+    }
+    
+    .solution-list li {
+      padding: 10px 0;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    
+    .solution-list li:last-child {
+      border-bottom: none;
+    }
+    
+    .solution-list li::before {
+      content: "✓";
+      color: var(--primary);
+      font-weight: bold;
+    }
+    
+    /* FAQ */
+    .faq-item {
+      margin-bottom: 15px;
+    }
+    
+    .faq-question {
+      font-weight: 600;
+      color: var(--primary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .faq-answer {
+      padding: 10px 0 10px 30px;
+      display: none;
+    }
+    
+    .faq-answer.show {
+      display: block;
+    }
+    
+    /* Tabs */
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid #e2e8f0;
+      margin-bottom: 20px;
+    }
+    
+    .tab {
+      padding: 10px 20px;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      font-weight: 600;
+      color: #64748b;
+    }
+    
+    .tab.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+    
+    .tab-content {
+      display: none;
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+    
+    /* Dieta */
+    .meal-card {
+      background: white;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      border-left: 4px solid var(--success);
+    }
+    
+    .meal-title {
+      font-weight: 600;
+      color: var(--primary);
+      margin-top: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .meal-info {
+      display: flex;
+      gap: 15px;
+      margin-top: 10px;
+    }
+    
+    .meal-info-item {
+      background: #f1f5f9;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 0.9rem;
+    }
+    
+    .substitution-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+      font-size: 0.9rem;
+    }
+    
+    .substitution-table th, .substitution-table td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .substitution-table th {
+      background-color: #f1f5f9;
+      color: #475569;
+    }
+    
+    /* Alertas */
+    .alert {
+      padding: 15px;
+      border-radius: 8px;
+      margin: 15px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    
+    .alert-warning {
+      background-color: #fffbeb;
+      border-left: 4px solid var(--warning);
+    }
+    
+    .alert-danger {
+      background-color: #fef2f2;
+      border-left: 4px solid var(--secondary);
+    }
+    
+    .alert-success {
+      background-color: #f0fdf4;
+      border-left: 4px solid var(--success);
+    }
+    
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      
+      .organ {
+        width: 80px;
+        height: 80px;
+      }
+      
+      .organ i {
+        font-size: 1.5rem;
+      }
+      
+      .meal-info {
+        flex-direction: column;
+        gap: 5px;
+      }
+    }
+    
+    /* Animações */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .fade-in {
+      animation: fadeIn 0.5s ease forwards;
+    }
+  </style>
 </head>
 <body>
-
-    <header class="header">
-        <div class="header-content">
-            <img src="assets/logo.png" alt="MK-CARDIOSPORT Logo" class="logo">
-            <h1 class="title">Avaliação Biomecânica</h1>
+  <div class="header">
+    <h1>O que está acontecendo no meu corpo?</h1>
+    <div class="patient-name">Antônio Ubiratan Davila Bittencourt Thomaz</div>
+  </div>
+  
+  <div class="objective">
+    <h2><i class="fas fa-bullseye"></i> Objetivo desta Explicação</h2>
+    <p>Entender por que você está sentindo esses sintomas e como podemos melhorar:</p>
+    <ul class="objective-list">
+      <li>Por que estou com cansaço e dificuldade para ganhar massa muscular?</li>
+      <li>Como a adaptação metabólica pós-bariátrica está afetando meu corpo?</li>
+      <li>Por que meus exames mostram alterações na tireoide, músculos e fígado?</li>
+      <li>O que está desequilibrado e como podemos corrigir?</li>
+      <li>Como ajustar a dieta para sair do catabolismo?</li>
+    </ul>
+  </div>
+  
+  <div class="container">
+    <div class="main-content">
+      <div class="tabs">
+        <div class="tab active" onclick="openTab('explicacoes')">Explicações</div>
+        <div class="tab" onclick="openTab('nutricao')">Reprogramação Alimentar</div>
+        <div class="tab" onclick="openTab('pendencias')">Pendências e Acompanhamento</div>
+      </div>
+      
+      <div id="explicacoes" class="tab-content active">
+        <div class="card">
+          <h2 class="card-title"><i class="fas fa-map"></i> Mapa dos seus sistemas em desequilíbrio</h2>
+          <p>Clique em cada sistema para entender como ele está funcionando no seu corpo:</p>
+          
+          <div class="organ-container">
+            <div class="organ hipotalamo" data-organ="hipotalamo">
+              <i class="fas fa-brain"></i>
+              <span class="organ-name">Hipotálamo</span>
+            </div>
+            
+            <div class="organ tireoide" data-organ="tireoide">
+              <i class="fas fa-butterfly"></i>
+              <span class="organ-name">Tireóide</span>
+            </div>
+            
+            <div class="organ musculo" data-organ="musculo">
+              <i class="fas fa-dumbbell"></i>
+              <span class="organ-name">Músculos</span>
+            </div>
+            
+            <div class="organ figado" data-organ="figado">
+              <i class="fas fa-leaf"></i>
+              <span class="organ-name">Fígado</span>
+            </div>
+            
+            <div class="organ coracao" data-organ="coracao">
+              <i class="fas fa-heart"></i>
+              <span class="organ-name">Coração</span>
+            </div>
+            
+            <div class="organ pancreas" data-organ="pancreas">
+              <i class="fas fa-stethoscope"></i>
+              <span class="organ-name">Pâncreas</span>
+            </div>
+          </div>
+          
+          <div id="organInfo" class="info-panel" style="display: none;">
+            <h3 class="info-title" id="infoOrganTitle">Hipotálamo</h3>
+            <div id="infoOrganContent">
+              <!-- Conteúdo será inserido aqui via JavaScript -->
+            </div>
+          </div>
         </div>
-        <span id="patientNameDisplay" class="patient-name"></span>
-    </header>
+        
+        <div class="card">
+          <h2 class="card-title"><i class="fas fa-heartbeat"></i> O que está acontecendo com você agora</h2>
+          <div class="info-panel">
+            <p>Seu corpo está em <strong>modo de defesa metabólica</strong> após a perda significativa de peso (150kg → 98kg):</p>
+            <ul>
+              <li>Seu metabolismo basal está <strong>5% abaixo do esperado</strong> (1942 kcal vs ~2050 kcal esperado)</li>
+              <li>Seus músculos estão sendo <strong>catabolizados para gerar energia</strong> (CPK elevada + baixa proteína)</li>
+              <li>Sua tireoide está com <strong>TSH elevado</strong>, indicando "travamento metabólico"</li>
+              <li>A perda de peso após a bariátrica iniciou o processo e a restrição de calorias intensa te colocou em modo de economia brutal</li>
+              <li>Perda de gordura leva à queda natural de T3 e ao aumento da resistência periférica ao hormônio tireoidiano e, se estiver em hipotireoidismo clínico, o teu corpo entra em "hibernação hormonal"</li>
 
-    <nav class="navigation">
-        <button onclick="showCategory('todasAvaliacoes')">Todas as Avaliações</button>
-        <button onclick="showCategory('areasAnalise')">Áreas de Análise</button>
-        <button onclick="showCategory('esportes')">Esportes</button>
-    </nav>
-
-    <main id="main-content">
-        <!-- Conteúdo dinâmico aparece aqui -->
-    </main>
-
-    <!-- Botão redondo fixo no canto superior direito -->
-    <button class="floating-btn" onclick="togglePatientModal()">P</button>
-
-    <!-- Modal para inserção de dados do paciente -->
-    <div id="patientModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="togglePatientModal()">&times;</span>
-            <h2>Dados do Paciente</h2>
-            <form id="patientForm" onsubmit="savePatient(event)">
-                <label for="patientName">Nome:</label>
-                <input type="text" id="patientName" name="patientName" required>
-                <label for="patientAge">Idade:</label>
-                <input type="number" id="patientAge" name="patientAge" required>
-                <label for="patientDate">Data:</label>
-                <input type="text" id="patientDate" name="patientDate" readonly>
-                <button type="submit" class="save-btn">Salvar</button>
-            </form>
+            </ul>
+            <p><strong>Resultado:</strong> Você sente cansaço, dificuldade para ganhar massa muscular e estagnação no peso, mesmo com dieta e treino.</p>
+          </div>
         </div>
+        
+        <div class="card">
+          <h2 class="card-title"><i class="fas fa-tools"></i> Como podemos resolver?</h2>
+          <ul class="solution-list">
+            <li>Ajustar a ingestão proteica para <strong>≥2g/kg/dia (~190g)</strong> distribuída ao longo do dia</li>
+            <li>Aumentar calorias para <strong>2400-2600 kcal/dia</strong> para sair do modo "sobrevivência"</li>
+            <li>Otimizar suplementação com <strong>creatina, eletrólitos e glutamina</strong></li>
+            <li>Reavaliar medicação para tireoide com base nos novos exames</li>
+            <li>Monitorar hidratação (≥3,0L/dia no mínimo) e qualidade do sono</li>
+            <li>Realizar exames complementares para avaliar inflamação e função hepática</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div id="nutricao" class="tab-content">
+        <div class="alert alert-warning">
+          <i class="fas fa-exclamation-triangle"></i>
+          <div>
+            <strong>Atenção:</strong> É fundamental manter a ingestão proteica e calórica. Se não conseguir em uma refeição, 
+            <strong>fracione em menores quantidades ao longo do dia</strong>. Pular refeições piora o catabolismo muscular.
+          </div>
+        </div>
+        
+        <div class="card">
+          <h2 class="card-title"><i class="fas fa-utensils"></i> Plano Alimentar Personalizado</h2>
+          
+          <div class="alert alert-success">
+            <i class="fas fa-info-circle"></i>
+            <div>
+              <strong>Meta diária:</strong> 2400 kcal | ~190g proteína | Distribuição ao longo do dia é fundamental
+            </div>
+          </div>
+          
+          <div class="meal-card">
+            <h3 class="meal-title"><i class="fas fa-coffee"></i> Café da Manhã (~450 kcal | 35g proteína)</h3>
+            <div class="meal-info">
+              <span class="meal-info-item">1 pote iogurte proteico (8g+)</span>
+              <span class="meal-info-item">2 col. sopa aveia + chia</span>
+              <span class="meal-info-item">1 ovo + 2 claras mexidas</span>
+              <span class="meal-info-item">1 col. sopa pasta de amendoim</span>
+            </div>
+            <p><i class="fas fa-lightbulb"></i> <em>Versão prática: misturar tudo como bowl funcional + caneca de leite vegetal aquecido com whey (15g)</em></p>
+          </div>
+          
+          <div class="meal-card">
+            <h3 class="meal-title"><i class="fas fa-apple-alt"></i> Lanche da Manhã (~250 kcal | 20g proteína)</h3>
+            <div class="meal-info">
+              <span class="meal-info-item">1 barra proteica (25g proteína)</span>
+              <span class="meal-info-item">ou 1 scoop whey com banana</span>
+              <span class="meal-info-item">5 castanhas</span>
+            </div>
+          </div>
+          
+          <div class="meal-card">
+            <h3 class="meal-title"><i class="fas fa-drumstick-bite"></i> Almoço (~600 kcal | 40g proteína)</h3>
+            <div class="meal-info">
+              <span class="meal-info-item">150g filé de frango/peixe/carne suína</span>
+              <span class="meal-info-item">3 col. sopa arroz ou batata-doce</span>
+              <span class="meal-info-item">Mix de salada crua com azeite</span>
+              <span class="meal-info-item">Vegetais grelhados</span>
+            </div>
+            <p><i class="fas fa-glass-whiskey"></i> <em>Bebida: suco de limão natural com hortelã ou água com gotas de vinagre de maçã</em></p>
+          </div>
+          
+          <div class="meal-card">
+            <h3 class="meal-title"><i class="fas fa-dumbbell"></i> Lanche da Tarde / Pré-Treino (~450 kcal | 35g proteína)</h3>
+            <div class="meal-info">
+              <span class="meal-info-item">1 fatia pão integral + pasta de amendoim</span>
+              <span class="meal-info-item">1 scoop whey protein com água</span>
+            </div>
+          </div>
+          
+          <div class="meal-card">
+            <h3 class="meal-title"><i class="fas fa-moon"></i> Jantar (~500 kcal | 40g proteína)</h3>
+            <div class="meal-info">
+              <span class="meal-info-item"><strong>Seg/Qua (plantão):</strong> Marmita com carne desfiada, ovos, castanhas, abacate</span>
+              <span class="meal-info-item"><strong>Dias regulares:</strong> Omelete com 2 ovos + frango + legumes</span>
+              <span class="meal-info-item">2 col. sopa arroz ou purê de batata-doce</span>
+            </div>
+          </div>
+          
+          <h3 class="card-title"><i class="fas fa-exchange-alt"></i> Tabela de Substituições</h3>
+          <table class="substitution-table">
+            <thead>
+              <tr>
+                <th>Categoria</th>
+                <th>Opção</th>
+                <th>Quantidade</th>
+                <th>Proteína (g)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td rowspan="6"><strong>Proteínas</strong></td>
+                <td>Whey</td>
+                <td>1 scoop (30g)</td>
+                <td>25g</td>
+              </tr>
+              <tr>
+                <td>Ovo + claras</td>
+                <td>1 ovo + 2 claras</td>
+                <td>13g</td>
+              </tr>
+              <tr>
+                <td>Frango grelhado</td>
+                <td>100g</td>
+                <td>26g</td>
+              </tr>
+              <tr>
+                <td>Peixe (tilápia, atum)</td>
+                <td>120g</td>
+                <td>25g</td>
+              </tr>
+              <tr>
+                <td>Porco magro</td>
+                <td>100g</td>
+                <td>24g</td>
+              </tr>
+              <tr>
+                <td>Iogurte proteico</td>
+                <td>1 pote</td>
+                <td>15g</td>
+              </tr>
+              <tr>
+                <td rowspan="4"><strong>Carboidratos</strong></td>
+                <td>Batata-doce</td>
+                <td>100g</td>
+                <td>20g</td>
+              </tr>
+              <tr>
+                <td>Arroz integral</td>
+                <td>3 col. sopa</td>
+                <td>20g</td>
+              </tr>
+              <tr>
+                <td>Banana</td>
+                <td>1 unid.</td>
+                <td>25g</td>
+              </tr>
+              <tr>
+                <td>Aveia</td>
+                <td>2 col. sopa</td>
+                <td>20g</td>
+              </tr>
+              <tr>
+                <td rowspan="4"><strong>Gorduras boas</strong></td>
+                <td>Pasta de amendoim</td>
+                <td>1 col. sopa</td>
+                <td>5g</td>
+              </tr>
+              <tr>
+                <td>Castanhas mistas</td>
+                <td>6 unid.</td>
+                <td>4g</td>
+              </tr>
+              <tr>
+                <td>Azeite de oliva</td>
+                <td>1 col. sopa</td>
+                <td>0g</td>
+              </tr>
+              <tr>
+                <td>Abacate</td>
+                <td>2 col. sopa</td>
+                <td>2g</td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <div class="alert alert-success">
+            <i class="fas fa-pills"></i>
+            <div>
+              <strong>Suplementação:</strong> Creatina: 21g/dia por 7 dias (saturação), depois 5g/dia. Dieta antioxidante (folhas escuras, frutas vermelhas, azeite, peixes, chá verde).
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div id="pendencias" class="tab-content">
+        <div class="card">
+          <h2 class="card-title"><i class="fas fa-clipboard-list"></i> Exames Pendentes</h2>
+          <ul class="solution-list">
+            <li>Exames laboratoriais completos (metabólicos, hormonais, inflamatórios, antioxidantes, SHBG, E1/E2 livres)</li>
+            <li>MAPA 24h, Holter 24h, Ecocardiograma com strain, Ergoespirometria</li>
+            <li>US de composição corporal (em andamento)</li>
+          </ul>
+        </div>
+        
+        <div class="card">
+          <h2 class="card-title"><i class="fas fa-chart-line"></i> Acompanhamento Necessário</h2>
+          <ul class="solution-list">
+            <li>Enviar frequência cardíaca alvo, gasto calórico por treino e por semana</li>
+            <li>Ajustar plano alimentar e treino com base nas respostas e sintomas</li>
+            <li>Monitorar pressão arterial e efeitos do carvedilol</li>
+            <li>Reavaliar função tireoidiana após ajustes</li>
+          </ul>
+        </div>
+        
+        <div class="card">
+          <h2 class="card-title"><i class="fas fa-question-circle"></i> Perguntas frequentes</h2>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(1)">
+              <i class="fas fa-chevron-right"></i> Por que preciso comer mais se quero perder gordura?
+            </div>
+            <div class="faq-answer" id="faq1">
+              Seu corpo está em modo de defesa metabólica. Comer muito pouco faz seu corpo queimar músculo e conservar gordura. Um leve aumento calórico (com proteína adequada) ajuda a "resetar" seu metabolismo.
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(2)">
+              <i class="fas fa-chevron-right"></i> O que a CPK alta significa?
+            </div>
+            <div class="faq-answer" id="faq2">
+              CPK elevada indica dano muscular. Pode ser por treino intenso sem recuperação adequada ou catabolismo por falta de nutrientes. Precisamos melhorar sua ingestão proteica e recuperação.
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(3)">
+              <i class="fas fa-chevron-right"></i> Por que me sinto cansado mesmo dormindo?
+            </div>
+            <div class="faq-answer" id="faq3">
+              Seu TSH elevado com possivel T3 baixo "freiam" o metabolismo, causando fadiga. Além disso, baixa ingestão calórica e possível má qualidade do sono (por estresse ou apneia) contribuem para o cansaço.
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+    
+    <div class="sidebar">
+      <div class="card">
+        <h2 class="card-title"><i class="fas fa-flask"></i> Seus exames mostram que...</h2>
+        <table class="exam-table">
+          <thead>
+            <tr>
+              <th>Exame</th>
+              <th>Valor</th>
+              <th>Interpretação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>TMB (Calorimetria)</td>
+              <td>1942 kcal</td>
+              <td>5% abaixo do esperado</td>
+            </tr>
+            <tr>
+              <td>TSH</td>
+              <td class="highlight">4.2 mUI/L</td>
+              <td>Elevado (hipotireoidismo)</td>
+            </tr>
+           
+            <tr>
+              <td>CPK</td>
+              <td class="highlight">350 U/L</td>
+              <td>Dano muscular</td>
+            </tr>
+            <tr>
+              <td>Ferritina</td>
+              <td class="warning">450 ng/mL</td>
+              <td>Elevada (inflamação?)</td>
+            </tr>
+            <tr>
+              <td>GGT</td>
+              <td class="warning">60 U/L</td>
+              <td>Elevada (fígado)</td>
+            </tr>
+            <tr>
+              <td>Ácido Úrico</td>
+              <td class="highlight">7.8 mg/dL</td>
+              <td>Limite alto</td>
+            </tr>
+            <tr>
+              <td>Proteína Total</td>
+              <td class="normal">6.8 g/dL</td>
+              <td>Normal</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="card">
+        <h2 class="card-title"><i class="fas fa-user-circle"></i> Seus Dados</h2>
+        <div class="info-panel">
+          <p><strong>Idade:</strong> 41 anos</p>
+          <p><strong>Peso:</strong> 98 kg (de 150 kg)</p>
+          <p><strong>Altura:</strong> 1,80 m</p>
+          <p><strong>Medicações:</strong> Carvedilol, AAS, Estatina</p>
+          <p><strong>TMB:</strong> 1942 kcal (calorimetria)</p>
+          <p><strong>GET:</strong> ~2950 kcal</p>
+        </div>
+      </div>
+      
+      <div class="card">
+        <h2 class="card-title"><i class="fas fa-bell"></i> Alertas Importantes</h2>
+        <div class="alert alert-danger">
+          <i class="fas fa-exclamation-circle"></i>
+          <div>
+            <strong>Não reduza proteínas!</strong> Mesmo sem fome, consuma pelo menos 30g a cada 3-4 horas para evitar catabolismo.
+          </div>
+        </div>
+        <div class="alert alert-warning">
+          <i class="fas fa-tint"></i>
+          <div>
+            <strong>Hidratação:</strong> Beba ≥3L de água/dia. Desidratação piora fadiga e recuperação muscular.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <script src="script.js" type="module"></script>
+  <script>
+  // Dados clínicos por órgão
+  const organData = {
+    hipotalamo: {
+      title: "Hipotálamo e Adaptação Metabólica",
+      content: `
+        <p>Após uma perda significativa de peso (150kg → 98kg), seu corpo ativou mecanismos de defesa para <strong>preservar energia</strong>:</p>
+        <ul>
+          <li>Redução da TMB para <strong>1942 kcal</strong> (5% abaixo do esperado)</li>
+          <li>Redução do <strong>TSH</strong> (18 ng/dL)</li>
+          <li>Leptina baixa e maior eficiência energética</li>
+        </ul>
+        <p><strong>Resultado:</strong> Corpo “travado” no gasto calórico mesmo com déficit.</p>
+        <div class="alert alert-warning"><strong>Nota:</strong> Teu corpo disse: “Chega!. Vou conservar tudo o que puder.”</div>
+      `
+    },
+    tireoide: {
+      title: "Tireóide - Travamento Metabólico",
+      content: `
+        <p>Sinais de <strong>disfunção adaptativa</strong>:</p>
+        <ul>
+          <li>TSH elevado (4.2 mUI/L)</li>
+          <li>Possivel T3 baixo e T3 reverso alto</li>
+          <li>Conversão prejudicada de T4 em T3</li>
+        </ul>
+        <p><strong>Sintomas:</strong> Cansaço, frio, queda de cabelo, pele seca.</p>
+      `
+    },
+    musculo: {
+      title: "Músculos - Catabolismo",
+      content: `
+        <p>Catabolismo muscular em curso:</p>
+        <ul>
+          <li>Proteína insuficiente (~1.2g/kg)</li>
+          <li>Dieta hipocalórica (~1700 kcal/dia)</li>
+          <li>CPK elevada (350 U/L)</li>
+        </ul>
+        <div class="alert alert-danger"><strong>Solução:</strong> Aumentar proteína para ≥2g/kg/dia e calorias para 2400-2600 kcal.</div>
+      `
+    },
+    figado: {
+      title: "Fígado - Estresse e Inflamação",
+      content: `
+        <p>Seu fígado está sob estresse:</p>
+        <ul>
+          <li>GGT elevada (60 U/L)</li>
+          <li>Ferritina alta (450 ng/mL)</li>
+        </ul>
+        <p><strong>Sinais:</strong> estufamento, digestão lenta, alteração de enzimas hepáticas.</p>
+      `
+    },
+    coracao: {
+      title: "Coração - Ajustes Pós-Bariátrica",
+      content: `
+        <p>Adaptação cardiovascular ao novo peso:</p>
+        <ul>
+          <li>FC de repouso elevada ou instável</li>
+          <li>Uso de Carvedilol</li>
+          <li>Importância de eletrólitos e sono</li>
+        </ul>
+      `
+    },
+    pancreas: {
+      title: "Pâncreas - Glicemia e Energia",
+      content: `
+        <p>Regulação glicêmica otimizada:</p>
+        <ul>
+          <li>Glicose e insulina normais/baixas</li>
+          <li>Evitar jejuns longos</li>
+          <li>Proteína + gordura para evitar hipoglicemia</li>
+        </ul>
+      `
+    }
+  };
+
+  // Evento para clique nos órgãos
+  document.querySelectorAll(".organ").forEach(organ => {
+    organ.addEventListener("click", function () {
+      const key = this.dataset.organ;
+      const data = organData[key];
+      document.getElementById("organInfo").style.display = "block";
+      document.getElementById("infoOrganTitle").innerText = data.title;
+      document.getElementById("infoOrganContent").innerHTML = data.content;
+    });
+  });
+
+  // Alternância de abas (Análise / Recomendações)
+  function openTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(btn => btn.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+</script>
+<script>
+  function toggleAnswer(id) {
+    const answer = document.getElementById(`faq${id}`);
+    const icon = document.querySelector(`#faq${id}`).previousElementSibling.querySelector('i');
+
+    answer.classList.toggle('show');
+
+    if (answer.classList.contains('show')) {
+      icon.classList.remove('fa-chevron-right');
+      icon.classList.add('fa-chevron-down');
+    } else {
+      icon.classList.remove('fa-chevron-down');
+      icon.classList.add('fa-chevron-right');
+    }
+  }
+</script>
+
+<style>
+  .faq-answer {
+    padding: 10px 0 10px 30px;
+    display: none;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .faq-answer.show {
+    display: block;
+  }
+</style>
+
 </body>
 </html>
-
 
