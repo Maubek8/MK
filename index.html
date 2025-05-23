@@ -8,6 +8,7 @@ MK-CARDIOSPORT - Me.Mauricio B. Kraemer, MD - Medicina do Esporte e do Exercíci
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>O que está acontecendo no meu corpo? - Antônio Bittencourt</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<meta name="color-scheme" content="light dark">
 <style>
     :root {
       --hipotalamo: #3b82f6;
@@ -46,7 +47,18 @@ MK-CARDIOSPORT - Me.Mauricio B. Kraemer, MD - Medicina do Esporte e do Exercíci
       font-size: 2.2rem;
       font-weight: 600;
     }
-    
+
+    @media (prefers-color-scheme: dark) {
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+  .card, .header, .info-panel {
+    background-color: white !important;
+    color: #1e293b !important;
+  }
+}
+
     .patient-name {
       font-size: 1.4rem;
       margin: 10px 0;
