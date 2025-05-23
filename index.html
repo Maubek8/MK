@@ -1,13 +1,14 @@
 MK-CARDIOSPORT - Me.Mauricio B. Kraemer, MD - Medicina do Esporte e do Exercício.
 
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>O que está acontecendo no meu corpo? - Antônio Bittencourt</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>O que está acontecendo no meu corpo? - Antônio Bittencourt</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
     :root {
       --hipotalamo: #3b82f6;
       --tireoide: #eab308;
@@ -410,432 +411,451 @@ MK-CARDIOSPORT - Me.Mauricio B. Kraemer, MD - Medicina do Esporte e do Exercíci
     .fade-in {
       animation: fadeIn 0.5s ease forwards;
     }
+  
 .logo-img {
-  max-width: 120px;
+  max-width: 100px;
   margin-bottom: 10px;
+  border-radius: 10px;
   animation: fadeIn 1s ease;
 }
-
-.brand-title {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin-bottom: 5px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+.brand-container {
+  margin-bottom: 15px;
 }
-
+.brand-name {
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: #facc15;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+}
 .brand-subtitle {
-  font-size: 1rem;
-  color: #cbd5e1;
-  margin-bottom: 20px;
+  font-size: 1.1rem;
+  color: #e2e8f0;
+  font-weight: 500;
 }
-
-    
-  </style>
+.brand-links a {
+  color: #fef08a;
+  text-decoration: none;
+  margin: 0 5px;
+  font-size: 0.9rem;
+}
+.brand-links a:hover {
+  text-decoration: underline;
+}
+.download-buttons {
+  text-align: right;
+  margin: 20px;
+}
+.download-buttons button {
+  background-color: #10b981;
+  border: none;
+  padding: 10px 15px;
+  margin-left: 10px;
+  color: white;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+}
+</style>
 </head>
 <body>
-  <div class="header">
-  <img src="logo.png" alt="Logo MK" class="logo-img">
-  <div class="brand-title">MK CARDIOSPORT</div>
-  <div class="brand-subtitle">Medicina do Esporte e Performance Metabólica</div>
-  <h1>O que está acontecendo no meu corpo?</h1>
-  <div class="patient-name">Antônio Ubiratan Davila Bittencourt Thomaz</div>
+<div class="header">
+<img alt="Logo MK CARDIOSPORT" class="logo-img" src="logo.png"/>
+<div class="brand-container">
+<div class="brand-name">MK CARDIOSPORT</div>
+<div class="brand-subtitle">Medicina do Esporte e do Exercício</div>
+<div class="brand-links">
+<a href="https://www.mk-cardiosport.com" target="_blank">www.mk-cardiosport.com</a> •
+    <a href="https://instagram.com/mk.cardiosport" target="_blank">@mk.cardiosport</a>
+</div>
+</div>
+<h1>O que está acontecendo no meu corpo?</h1>
+<div class="patient-name">Antônio Ubiratan Davila Bittencourt Thomaz</div>
+</div>
+<div class="objective">
+<h2><i class="fas fa-bullseye"></i> Objetivo desta Explicação</h2>
+<p>Entender por que você está sentindo esses sintomas e como podemos melhorar:</p>
+<ul class="objective-list">
+<li>Por que estou com cansaço e dificuldade para ganhar massa muscular?</li>
+<li>Como a adaptação metabólica pós-bariátrica está afetando meu corpo?</li>
+<li>Por que meus exames mostram alterações na tireoide, músculos e fígado?</li>
+<li>O que está desequilibrado e como podemos corrigir?</li>
+<li>Como ajustar a dieta para sair do catabolismo?</li>
+</ul>
+</div>
+<div class="container">
+<div class="main-content">
+<div class="download-buttons">
+<button onclick="window.print()">Baixar Tudo em PDF</button>
+<button onclick="printSection('explicacoes')">PDF Explicações</button>
+<button onclick="printSection('nutricao')">PDF Nutrição</button>
+<button onclick="printSection('pendencias')">PDF Pendências</button>
+</div>
+<div class="tabs">
+<div class="tab active" onclick="openTab('explicacoes')">Explicações</div>
+<div class="tab" onclick="openTab('nutricao')">Reprogramação Alimentar</div>
+<div class="tab" onclick="openTab('pendencias')">Pendências e Acompanhamento</div>
+</div>
+<div class="tab-content active" id="explicacoes">
+<div class="card">
+<h2 class="card-title"><i class="fas fa-map"></i> Mapa dos seus sistemas em desequilíbrio</h2>
+<p>Clique em cada sistema para entender como ele está funcionando no seu corpo:</p>
+<div class="organ-container">
+<div class="organ hipotalamo" data-organ="hipotalamo">
+<i class="fas fa-brain"></i>
+<span class="organ-name">Hipotálamo</span>
+</div>
+<div class="organ tireoide" data-organ="tireoide">
+<i class="fas fa-butterfly"></i>
+<span class="organ-name">Tireóide</span>
+</div>
+<div class="organ musculo" data-organ="musculo">
+<i class="fas fa-dumbbell"></i>
+<span class="organ-name">Músculos</span>
+</div>
+<div class="organ figado" data-organ="figado">
+<i class="fas fa-leaf"></i>
+<span class="organ-name">Fígado</span>
+</div>
+<div class="organ coracao" data-organ="coracao">
+<i class="fas fa-heart"></i>
+<span class="organ-name">Coração</span>
+</div>
+<div class="organ pancreas" data-organ="pancreas">
+<i class="fas fa-stethoscope"></i>
+<span class="organ-name">Pâncreas</span>
+</div>
+</div>
+<div class="info-panel" id="organInfo" style="display: none;">
+<h3 class="info-title" id="infoOrganTitle">Hipotálamo</h3>
+<div id="infoOrganContent">
+<!-- Conteúdo será inserido aqui via JavaScript -->
+</div>
+</div>
+</div>
+<div class="card">
+<h2 class="card-title"><i class="fas fa-heartbeat"></i> O que está acontecendo com você agora</h2>
+<div class="info-panel">
+<p>Seu corpo está em <strong>modo de defesa metabólica</strong> após a perda significativa de peso (150kg → 98kg):</p>
+<ul>
+<li>Seu metabolismo basal está <strong>5% abaixo do esperado</strong> (1942 kcal vs ~2050 kcal esperado)</li>
+<li>Seus músculos estão sendo <strong>catabolizados para gerar energia</strong> (CPK elevada + baixa proteína)</li>
+<li>Sua tireoide está com <strong>TSH elevado</strong>, indicando "travamento metabólico"</li>
+<li>A perda de peso após a bariátrica iniciou o processo e a restrição de calorias intensa te colocou em modo de economia brutal</li>
+<li>Perda de gordura leva à queda natural de T3 e ao aumento da resistência periférica ao hormônio tireoidiano e, se estiver em hipotireoidismo clínico, o teu corpo entra em "hibernação hormonal"</li>
+</ul>
+<p><strong>Resultado:</strong> Você sente cansaço, dificuldade para ganhar massa muscular e estagnação no peso, mesmo com dieta e treino.</p>
+</div>
+</div>
+<div class="card">
+<h2 class="card-title"><i class="fas fa-tools"></i> Como podemos resolver?</h2>
+<ul class="solution-list">
+<li>Ajustar a ingestão proteica para <strong>≥2g/kg/dia (~190g)</strong> distribuída ao longo do dia</li>
+<li>Aumentar calorias para <strong>2400-2600 kcal/dia</strong> para sair do modo "sobrevivência"</li>
+<li>Otimizar suplementação com <strong>creatina, eletrólitos e glutamina</strong></li>
+<li>Reavaliar medicação para tireoide com base nos novos exames</li>
+<li>Monitorar hidratação (≥3,0L/dia no mínimo) e qualidade do sono</li>
+<li>Realizar exames complementares para avaliar inflamação e função hepática</li>
+</ul>
 </div>
 
-  
-  <div class="objective">
-    <h2><i class="fas fa-bullseye"></i> Objetivo desta Explicação</h2>
-    <p>Entender por que você está sentindo esses sintomas e como podemos melhorar:</p>
-    <ul class="objective-list">
-      <li>Por que estou com cansaço e dificuldade para ganhar massa muscular?</li>
-      <li>Como a adaptação metabólica pós-bariátrica está afetando meu corpo?</li>
-      <li>Por que meus exames mostram alterações na tireoide, músculos e fígado?</li>
-      <li>O que está desequilibrado e como podemos corrigir?</li>
-      <li>Como ajustar a dieta para sair do catabolismo?</li>
-    </ul>
-  </div>
-  
-  <div class="container">
-    <div class="main-content">
-      <div class="tabs">
-        <div class="tab active" onclick="openTab('explicacoes')">Explicações</div>
-        <div class="tab" onclick="openTab('nutricao')">Reprogramação Alimentar</div>
-        <div class="tab" onclick="openTab('pendencias')">Pendências e Acompanhamento</div>
-      </div>
-      
-      <div id="explicacoes" class="tab-content active">
-        <div class="card">
-          <h2 class="card-title"><i class="fas fa-map"></i> Mapa dos seus sistemas em desequilíbrio</h2>
-          <p>Clique em cada sistema para entender como ele está funcionando no seu corpo:</p>
-          
-          <div class="organ-container">
-            <div class="organ hipotalamo" data-organ="hipotalamo">
-              <i class="fas fa-brain"></i>
-              <span class="organ-name">Hipotálamo</span>
-            </div>
-            
-            <div class="organ tireoide" data-organ="tireoide">
-              <i class="fas fa-butterfly"></i>
-              <span class="organ-name">Tireóide</span>
-            </div>
-            
-            <div class="organ musculo" data-organ="musculo">
-              <i class="fas fa-dumbbell"></i>
-              <span class="organ-name">Músculos</span>
-            </div>
-            
-            <div class="organ figado" data-organ="figado">
-              <i class="fas fa-leaf"></i>
-              <span class="organ-name">Fígado</span>
-            </div>
-            
-            <div class="organ coracao" data-organ="coracao">
-              <i class="fas fa-heart"></i>
-              <span class="organ-name">Coração</span>
-            </div>
-            
-            <div class="organ pancreas" data-organ="pancreas">
-              <i class="fas fa-stethoscope"></i>
-              <span class="organ-name">Pâncreas</span>
-            </div>
-          </div>
-          
-          <div id="organInfo" class="info-panel" style="display: none;">
-            <h3 class="info-title" id="infoOrganTitle">Hipotálamo</h3>
-            <div id="infoOrganContent">
-              <!-- Conteúdo será inserido aqui via JavaScript -->
-            </div>
-          </div>
-        </div>
-        
-        <div class="card">
-          <h2 class="card-title"><i class="fas fa-heartbeat"></i> O que está acontecendo com você agora</h2>
-          <div class="info-panel">
-            <p>Seu corpo está em <strong>modo de defesa metabólica</strong> após a perda significativa de peso (150kg → 98kg):</p>
-            <ul>
-              <li>Seu metabolismo basal está <strong>5% abaixo do esperado</strong> (1942 kcal vs ~2050 kcal esperado)</li>
-              <li>Seus músculos estão sendo <strong>catabolizados para gerar energia</strong> (CPK elevada + baixa proteína)</li>
-              <li>Sua tireoide está com <strong>TSH elevado</strong>, indicando "travamento metabólico"</li>
-              <li>A perda de peso após a bariátrica iniciou o processo e a restrição de calorias intensa te colocou em modo de economia brutal</li>
-              <li>Perda de gordura leva à queda natural de T3 e ao aumento da resistência periférica ao hormônio tireoidiano e, se estiver em hipotireoidismo clínico, o teu corpo entra em "hibernação hormonal"</li>
-
-            </ul>
-            <p><strong>Resultado:</strong> Você sente cansaço, dificuldade para ganhar massa muscular e estagnação no peso, mesmo com dieta e treino.</p>
-          </div>
-        </div>
-        
-        <div class="card">
-          <h2 class="card-title"><i class="fas fa-tools"></i> Como podemos resolver?</h2>
-          <ul class="solution-list">
-            <li>Ajustar a ingestão proteica para <strong>≥2g/kg/dia (~190g)</strong> distribuída ao longo do dia</li>
-            <li>Aumentar calorias para <strong>2400-2600 kcal/dia</strong> para sair do modo "sobrevivência"</li>
-            <li>Otimizar suplementação com <strong>creatina, eletrólitos e glutamina</strong></li>
-            <li>Reavaliar medicação para tireoide com base nos novos exames</li>
-            <li>Monitorar hidratação (≥3,0L/dia no mínimo) e qualidade do sono</li>
-            <li>Realizar exames complementares para avaliar inflamação e função hepática</li>
-          </ul>
-        </div>
-      </div>
-      
-      <div id="nutricao" class="tab-content">
-        <div class="alert alert-warning">
-          <i class="fas fa-exclamation-triangle"></i>
-          <div>
-            <strong>Atenção:</strong> É fundamental manter a ingestão proteica e calórica. Se não conseguir em uma refeição, 
+<div class="card">
+<h2 class="card-title"><i class="fas fa-chart-bar"></i> Evolução da Composição Corporal</h2>
+<p>A perda de peso foi significativa (de 150kg para 98kg), mas com impacto na massa muscular. Sem alimentação e treino adequados, o corpo entrou em modo de defesa e conservou gordura, catabolizando músculos.</p>
+<ul>
+<li>💥 Dieta restrita em calorias e proteínas → catabolismo muscular</li>
+<li>⚠️ Treino sem sobrecarga ideal → sem estímulo de hipertrofia</li>
+<li>🧠 Alterações hormonais não corrigidas → metabolismo travado</li>
+</ul>
+<div class="info-panel">
+<strong>Com estratégia adequada:</strong>
+<ul>
+<li>🔼 Aumento da massa magra (de 60kg para até 72kg)</li>
+<li>🔽 Redução real da gordura (de 38kg para 24kg)</li>
+<li>🔥 Metabolismo ativado com treino + proteína ≥2g/kg + sono + hormônios</li>
+</ul>
+</div>
+<canvas id="bodyCompChart" style="max-width: 100%; margin-top: 20px;"></canvas>
+</div>
+</div>
+<div class="tab-content" id="nutricao">
+<div class="alert alert-warning">
+<i class="fas fa-exclamation-triangle"></i>
+<div>
+<strong>Atenção:</strong> É fundamental manter a ingestão proteica e calórica. Se não conseguir em uma refeição, 
             <strong>fracione em menores quantidades ao longo do dia</strong>. Pular refeições piora o catabolismo muscular.
           </div>
-        </div>
-        
-        <div class="card">
-          <h2 class="card-title"><i class="fas fa-utensils"></i> Plano Alimentar Personalizado</h2>
-          
-          <div class="alert alert-success">
-            <i class="fas fa-info-circle"></i>
-            <div>
-              <strong>Meta diária:</strong> 2400 kcal | ~190g proteína | Distribuição ao longo do dia é fundamental
+</div>
+<div class="card">
+<h2 class="card-title"><i class="fas fa-utensils"></i> Plano Alimentar Personalizado</h2>
+<div class="alert alert-success">
+<i class="fas fa-info-circle"></i>
+<div>
+<strong>Meta diária:</strong> 2400 kcal | ~190g proteína | Distribuição ao longo do dia é fundamental
             </div>
-          </div>
-          
-          <div class="meal-card">
-            <h3 class="meal-title"><i class="fas fa-coffee"></i> Café da Manhã (~450 kcal | 35g proteína)</h3>
-            <div class="meal-info">
-              <span class="meal-info-item">1 pote iogurte proteico (8g+)</span>
-              <span class="meal-info-item">2 col. sopa aveia + chia</span>
-              <span class="meal-info-item">1 ovo + 2 claras mexidas</span>
-              <span class="meal-info-item">1 col. sopa pasta de amendoim</span>
+</div>
+<div class="meal-card">
+<h3 class="meal-title"><i class="fas fa-coffee"></i> Café da Manhã (~450 kcal | 35g proteína)</h3>
+<div class="meal-info">
+<span class="meal-info-item">1 pote iogurte proteico (8g+)</span>
+<span class="meal-info-item">2 col. sopa aveia + chia</span>
+<span class="meal-info-item">1 ovo + 2 claras mexidas</span>
+<span class="meal-info-item">1 col. sopa pasta de amendoim</span>
+</div>
+<p><i class="fas fa-lightbulb"></i> <em>Versão prática: misturar tudo como bowl funcional + caneca de leite vegetal aquecido com whey (15g)</em></p>
+</div>
+<div class="meal-card">
+<h3 class="meal-title"><i class="fas fa-apple-alt"></i> Lanche da Manhã (~250 kcal | 20g proteína)</h3>
+<div class="meal-info">
+<span class="meal-info-item">1 barra proteica (25g proteína)</span>
+<span class="meal-info-item">ou 1 scoop whey com banana</span>
+<span class="meal-info-item">5 castanhas</span>
+</div>
+</div>
+<div class="meal-card">
+<h3 class="meal-title"><i class="fas fa-drumstick-bite"></i> Almoço (~600 kcal | 40g proteína)</h3>
+<div class="meal-info">
+<span class="meal-info-item">150g filé de frango/peixe/carne suína</span>
+<span class="meal-info-item">3 col. sopa arroz ou batata-doce</span>
+<span class="meal-info-item">Mix de salada crua com azeite</span>
+<span class="meal-info-item">Vegetais grelhados</span>
+</div>
+<p><i class="fas fa-glass-whiskey"></i> <em>Bebida: suco de limão natural com hortelã ou água com gotas de vinagre de maçã</em></p>
+</div>
+<div class="meal-card">
+<h3 class="meal-title"><i class="fas fa-dumbbell"></i> Lanche da Tarde / Pré-Treino (~450 kcal | 35g proteína)</h3>
+<div class="meal-info">
+<span class="meal-info-item">1 fatia pão integral + pasta de amendoim</span>
+<span class="meal-info-item">1 scoop whey protein com água</span>
+</div>
+</div>
+<div class="meal-card">
+<h3 class="meal-title"><i class="fas fa-moon"></i> Jantar (~500 kcal | 40g proteína)</h3>
+<div class="meal-info">
+<span class="meal-info-item"><strong>Seg/Qua (plantão):</strong> Marmita com carne desfiada, ovos, castanhas, abacate</span>
+<span class="meal-info-item"><strong>Dias regulares:</strong> Omelete com 2 ovos + frango + legumes</span>
+<span class="meal-info-item">2 col. sopa arroz ou purê de batata-doce</span>
+</div>
+</div>
+<h3 class="card-title"><i class="fas fa-exchange-alt"></i> Tabela de Substituições</h3>
+<table class="substitution-table">
+<thead>
+<tr>
+<th>Categoria</th>
+<th>Opção</th>
+<th>Quantidade</th>
+<th>Proteína (g)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td rowspan="6"><strong>Proteínas</strong></td>
+<td>Whey</td>
+<td>1 scoop (30g)</td>
+<td>25g</td>
+</tr>
+<tr>
+<td>Ovo + claras</td>
+<td>1 ovo + 2 claras</td>
+<td>13g</td>
+</tr>
+<tr>
+<td>Frango grelhado</td>
+<td>100g</td>
+<td>26g</td>
+</tr>
+<tr>
+<td>Peixe (tilápia, atum)</td>
+<td>120g</td>
+<td>25g</td>
+</tr>
+<tr>
+<td>Porco magro</td>
+<td>100g</td>
+<td>24g</td>
+</tr>
+<tr>
+<td>Iogurte proteico</td>
+<td>1 pote</td>
+<td>15g</td>
+</tr>
+<tr>
+<td rowspan="4"><strong>Carboidratos</strong></td>
+<td>Batata-doce</td>
+<td>100g</td>
+<td>20g</td>
+</tr>
+<tr>
+<td>Arroz integral</td>
+<td>3 col. sopa</td>
+<td>20g</td>
+</tr>
+<tr>
+<td>Banana</td>
+<td>1 unid.</td>
+<td>25g</td>
+</tr>
+<tr>
+<td>Aveia</td>
+<td>2 col. sopa</td>
+<td>20g</td>
+</tr>
+<tr>
+<td rowspan="4"><strong>Gorduras boas</strong></td>
+<td>Pasta de amendoim</td>
+<td>1 col. sopa</td>
+<td>5g</td>
+</tr>
+<tr>
+<td>Castanhas mistas</td>
+<td>6 unid.</td>
+<td>4g</td>
+</tr>
+<tr>
+<td>Azeite de oliva</td>
+<td>1 col. sopa</td>
+<td>0g</td>
+</tr>
+<tr>
+<td>Abacate</td>
+<td>2 col. sopa</td>
+<td>2g</td>
+</tr>
+</tbody>
+</table>
+<div class="alert alert-success">
+<i class="fas fa-pills"></i>
+<div>
+<strong>Suplementação:</strong> Creatina: 21g/dia por 7 dias (saturação), depois 5g/dia. Dieta antioxidante (folhas escuras, frutas vermelhas, azeite, peixes, chá verde).
             </div>
-            <p><i class="fas fa-lightbulb"></i> <em>Versão prática: misturar tudo como bowl funcional + caneca de leite vegetal aquecido com whey (15g)</em></p>
-          </div>
-          
-          <div class="meal-card">
-            <h3 class="meal-title"><i class="fas fa-apple-alt"></i> Lanche da Manhã (~250 kcal | 20g proteína)</h3>
-            <div class="meal-info">
-              <span class="meal-info-item">1 barra proteica (25g proteína)</span>
-              <span class="meal-info-item">ou 1 scoop whey com banana</span>
-              <span class="meal-info-item">5 castanhas</span>
+</div>
+</div>
+</div>
+<div class="tab-content" id="pendencias">
+<div class="card">
+<h2 class="card-title"><i class="fas fa-clipboard-list"></i> Exames Pendentes</h2>
+<ul class="solution-list">
+<li>Exames laboratoriais completos (metabólicos, hormonais, inflamatórios, antioxidantes, SHBG, E1/E2 livres)</li>
+<li>MAPA 24h, Holter 24h, Ecocardiograma com strain, Ergoespirometria</li>
+<li>US de composição corporal (em andamento)</li>
+</ul>
+</div>
+<div class="card">
+<h2 class="card-title"><i class="fas fa-chart-line"></i> Acompanhamento Necessário</h2>
+<ul class="solution-list">
+<li>Enviar frequência cardíaca alvo, gasto calórico por treino e por semana</li>
+<li>Ajustar plano alimentar e treino com base nas respostas e sintomas</li>
+<li>Monitorar pressão arterial e efeitos do carvedilol</li>
+<li>Reavaliar função tireoidiana após ajustes</li>
+</ul>
+</div>
+<div class="card">
+<h2 class="card-title"><i class="fas fa-question-circle"></i> Perguntas frequentes</h2>
+<div class="faq-item">
+<div class="faq-question" onclick="toggleAnswer(1)">
+<i class="fas fa-chevron-right"></i> Por que preciso comer mais se quero perder gordura?
             </div>
-          </div>
-          
-          <div class="meal-card">
-            <h3 class="meal-title"><i class="fas fa-drumstick-bite"></i> Almoço (~600 kcal | 40g proteína)</h3>
-            <div class="meal-info">
-              <span class="meal-info-item">150g filé de frango/peixe/carne suína</span>
-              <span class="meal-info-item">3 col. sopa arroz ou batata-doce</span>
-              <span class="meal-info-item">Mix de salada crua com azeite</span>
-              <span class="meal-info-item">Vegetais grelhados</span>
-            </div>
-            <p><i class="fas fa-glass-whiskey"></i> <em>Bebida: suco de limão natural com hortelã ou água com gotas de vinagre de maçã</em></p>
-          </div>
-          
-          <div class="meal-card">
-            <h3 class="meal-title"><i class="fas fa-dumbbell"></i> Lanche da Tarde / Pré-Treino (~450 kcal | 35g proteína)</h3>
-            <div class="meal-info">
-              <span class="meal-info-item">1 fatia pão integral + pasta de amendoim</span>
-              <span class="meal-info-item">1 scoop whey protein com água</span>
-            </div>
-          </div>
-          
-          <div class="meal-card">
-            <h3 class="meal-title"><i class="fas fa-moon"></i> Jantar (~500 kcal | 40g proteína)</h3>
-            <div class="meal-info">
-              <span class="meal-info-item"><strong>Seg/Qua (plantão):</strong> Marmita com carne desfiada, ovos, castanhas, abacate</span>
-              <span class="meal-info-item"><strong>Dias regulares:</strong> Omelete com 2 ovos + frango + legumes</span>
-              <span class="meal-info-item">2 col. sopa arroz ou purê de batata-doce</span>
-            </div>
-          </div>
-          
-          <h3 class="card-title"><i class="fas fa-exchange-alt"></i> Tabela de Substituições</h3>
-          <table class="substitution-table">
-            <thead>
-              <tr>
-                <th>Categoria</th>
-                <th>Opção</th>
-                <th>Quantidade</th>
-                <th>Proteína (g)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td rowspan="6"><strong>Proteínas</strong></td>
-                <td>Whey</td>
-                <td>1 scoop (30g)</td>
-                <td>25g</td>
-              </tr>
-              <tr>
-                <td>Ovo + claras</td>
-                <td>1 ovo + 2 claras</td>
-                <td>13g</td>
-              </tr>
-              <tr>
-                <td>Frango grelhado</td>
-                <td>100g</td>
-                <td>26g</td>
-              </tr>
-              <tr>
-                <td>Peixe (tilápia, atum)</td>
-                <td>120g</td>
-                <td>25g</td>
-              </tr>
-              <tr>
-                <td>Porco magro</td>
-                <td>100g</td>
-                <td>24g</td>
-              </tr>
-              <tr>
-                <td>Iogurte proteico</td>
-                <td>1 pote</td>
-                <td>15g</td>
-              </tr>
-              <tr>
-                <td rowspan="4"><strong>Carboidratos</strong></td>
-                <td>Batata-doce</td>
-                <td>100g</td>
-                <td>20g</td>
-              </tr>
-              <tr>
-                <td>Arroz integral</td>
-                <td>3 col. sopa</td>
-                <td>20g</td>
-              </tr>
-              <tr>
-                <td>Banana</td>
-                <td>1 unid.</td>
-                <td>25g</td>
-              </tr>
-              <tr>
-                <td>Aveia</td>
-                <td>2 col. sopa</td>
-                <td>20g</td>
-              </tr>
-              <tr>
-                <td rowspan="4"><strong>Gorduras boas</strong></td>
-                <td>Pasta de amendoim</td>
-                <td>1 col. sopa</td>
-                <td>5g</td>
-              </tr>
-              <tr>
-                <td>Castanhas mistas</td>
-                <td>6 unid.</td>
-                <td>4g</td>
-              </tr>
-              <tr>
-                <td>Azeite de oliva</td>
-                <td>1 col. sopa</td>
-                <td>0g</td>
-              </tr>
-              <tr>
-                <td>Abacate</td>
-                <td>2 col. sopa</td>
-                <td>2g</td>
-              </tr>
-            </tbody>
-          </table>
-          
-          <div class="alert alert-success">
-            <i class="fas fa-pills"></i>
-            <div>
-              <strong>Suplementação:</strong> Creatina: 21g/dia por 7 dias (saturação), depois 5g/dia. Dieta antioxidante (folhas escuras, frutas vermelhas, azeite, peixes, chá verde).
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div id="pendencias" class="tab-content">
-        <div class="card">
-          <h2 class="card-title"><i class="fas fa-clipboard-list"></i> Exames Pendentes</h2>
-          <ul class="solution-list">
-            <li>Exames laboratoriais completos (metabólicos, hormonais, inflamatórios, antioxidantes, SHBG, E1/E2 livres)</li>
-            <li>MAPA 24h, Holter 24h, Ecocardiograma com strain, Ergoespirometria</li>
-            <li>US de composição corporal (em andamento)</li>
-          </ul>
-        </div>
-        
-        <div class="card">
-          <h2 class="card-title"><i class="fas fa-chart-line"></i> Acompanhamento Necessário</h2>
-          <ul class="solution-list">
-            <li>Enviar frequência cardíaca alvo, gasto calórico por treino e por semana</li>
-            <li>Ajustar plano alimentar e treino com base nas respostas e sintomas</li>
-            <li>Monitorar pressão arterial e efeitos do carvedilol</li>
-            <li>Reavaliar função tireoidiana após ajustes</li>
-          </ul>
-        </div>
-        
-        <div class="card">
-          <h2 class="card-title"><i class="fas fa-question-circle"></i> Perguntas frequentes</h2>
-          <div class="faq-item">
-            <div class="faq-question" onclick="toggleAnswer(1)">
-              <i class="fas fa-chevron-right"></i> Por que preciso comer mais se quero perder gordura?
-            </div>
-            <div class="faq-answer" id="faq1">
+<div class="faq-answer" id="faq1">
               Seu corpo está em modo de defesa metabólica. Comer muito pouco faz seu corpo queimar músculo e conservar gordura. Um leve aumento calórico (com proteína adequada) ajuda a "resetar" seu metabolismo.
             </div>
-          </div>
-          
-          <div class="faq-item">
-            <div class="faq-question" onclick="toggleAnswer(2)">
-              <i class="fas fa-chevron-right"></i> O que a CPK alta significa?
+</div>
+<div class="faq-item">
+<div class="faq-question" onclick="toggleAnswer(2)">
+<i class="fas fa-chevron-right"></i> O que a CPK alta significa?
             </div>
-            <div class="faq-answer" id="faq2">
+<div class="faq-answer" id="faq2">
               CPK elevada indica dano muscular. Pode ser por treino intenso sem recuperação adequada ou catabolismo por falta de nutrientes. Precisamos melhorar sua ingestão proteica e recuperação.
             </div>
-          </div>
-          
-          <div class="faq-item">
-            <div class="faq-question" onclick="toggleAnswer(3)">
-              <i class="fas fa-chevron-right"></i> Por que me sinto cansado mesmo dormindo?
+</div>
+<div class="faq-item">
+<div class="faq-question" onclick="toggleAnswer(3)">
+<i class="fas fa-chevron-right"></i> Por que me sinto cansado mesmo dormindo?
             </div>
-            <div class="faq-answer" id="faq3">
+<div class="faq-answer" id="faq3">
               Seu TSH elevado com possivel T3 baixo "freiam" o metabolismo, causando fadiga. Além disso, baixa ingestão calórica e possível má qualidade do sono (por estresse ou apneia) contribuem para o cansaço.
             </div>
+</div>
+</div>
+</div>
+</div>
+<div class="sidebar">
+<div class="card">
+<h2 class="card-title"><i class="fas fa-flask"></i> Seus exames mostram que...</h2>
+<table class="exam-table">
+<thead>
+<tr>
+<th>Exame</th>
+<th>Valor</th>
+<th>Interpretação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TMB (Calorimetria)</td>
+<td>1942 kcal</td>
+<td>5% abaixo do esperado</td>
+</tr>
+<tr>
+<td>TSH</td>
+<td class="highlight">4.2 mUI/L</td>
+<td>Elevado (hipotireoidismo)</td>
+</tr>
+<tr>
+<td>CPK</td>
+<td class="highlight">350 U/L</td>
+<td>Dano muscular</td>
+</tr>
+<tr>
+<td>Ferritina</td>
+<td class="warning">450 ng/mL</td>
+<td>Elevada (inflamação?)</td>
+</tr>
+<tr>
+<td>GGT</td>
+<td class="warning">60 U/L</td>
+<td>Elevada (fígado)</td>
+</tr>
+<tr>
+<td>Ácido Úrico</td>
+<td class="highlight">7.8 mg/dL</td>
+<td>Limite alto</td>
+</tr>
+<tr>
+<td>Proteína Total</td>
+<td class="normal">6.8 g/dL</td>
+<td>Normal</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="card">
+<h2 class="card-title"><i class="fas fa-user-circle"></i> Seus Dados</h2>
+<div class="info-panel">
+<p><strong>Idade:</strong> 41 anos</p>
+<p><strong>Peso:</strong> 98 kg (de 150 kg)</p>
+<p><strong>Altura:</strong> 1,80 m</p>
+<p><strong>Medicações:</strong> Carvedilol, AAS, Estatina</p>
+<p><strong>TMB:</strong> 1942 kcal (calorimetria)</p>
+<p><strong>GET:</strong> ~2950 kcal</p>
+</div>
+</div>
+<div class="card">
+<h2 class="card-title"><i class="fas fa-bell"></i> Alertas Importantes</h2>
+<div class="alert alert-danger">
+<i class="fas fa-exclamation-circle"></i>
+<div>
+<strong>Não reduza proteínas!</strong> Mesmo sem fome, consuma pelo menos 30g a cada 3-4 horas para evitar catabolismo.
           </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="sidebar">
-      <div class="card">
-        <h2 class="card-title"><i class="fas fa-flask"></i> Seus exames mostram que...</h2>
-        <table class="exam-table">
-          <thead>
-            <tr>
-              <th>Exame</th>
-              <th>Valor</th>
-              <th>Interpretação</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>TMB (Calorimetria)</td>
-              <td>1942 kcal</td>
-              <td>5% abaixo do esperado</td>
-            </tr>
-            <tr>
-              <td>TSH</td>
-              <td class="highlight">4.2 mUI/L</td>
-              <td>Elevado (hipotireoidismo)</td>
-            </tr>
-           
-            <tr>
-              <td>CPK</td>
-              <td class="highlight">350 U/L</td>
-              <td>Dano muscular</td>
-            </tr>
-            <tr>
-              <td>Ferritina</td>
-              <td class="warning">450 ng/mL</td>
-              <td>Elevada (inflamação?)</td>
-            </tr>
-            <tr>
-              <td>GGT</td>
-              <td class="warning">60 U/L</td>
-              <td>Elevada (fígado)</td>
-            </tr>
-            <tr>
-              <td>Ácido Úrico</td>
-              <td class="highlight">7.8 mg/dL</td>
-              <td>Limite alto</td>
-            </tr>
-            <tr>
-              <td>Proteína Total</td>
-              <td class="normal">6.8 g/dL</td>
-              <td>Normal</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      
-      <div class="card">
-        <h2 class="card-title"><i class="fas fa-user-circle"></i> Seus Dados</h2>
-        <div class="info-panel">
-          <p><strong>Idade:</strong> 41 anos</p>
-          <p><strong>Peso:</strong> 98 kg (de 150 kg)</p>
-          <p><strong>Altura:</strong> 1,80 m</p>
-          <p><strong>Medicações:</strong> Carvedilol, AAS, Estatina</p>
-          <p><strong>TMB:</strong> 1942 kcal (calorimetria)</p>
-          <p><strong>GET:</strong> ~2950 kcal</p>
-        </div>
-      </div>
-      
-      <div class="card">
-        <h2 class="card-title"><i class="fas fa-bell"></i> Alertas Importantes</h2>
-        <div class="alert alert-danger">
-          <i class="fas fa-exclamation-circle"></i>
-          <div>
-            <strong>Não reduza proteínas!</strong> Mesmo sem fome, consuma pelo menos 30g a cada 3-4 horas para evitar catabolismo.
+</div>
+<div class="alert alert-warning">
+<i class="fas fa-tint"></i>
+<div>
+<strong>Hidratação:</strong> Beba ≥3L de água/dia. Desidratação piora fadiga e recuperação muscular.
           </div>
-        </div>
-        <div class="alert alert-warning">
-          <i class="fas fa-tint"></i>
-          <div>
-            <strong>Hidratação:</strong> Beba ≥3L de água/dia. Desidratação piora fadiga e recuperação muscular.
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
+</div>
+</div>
+</div>
+</div>
+<script>
   // Dados clínicos por órgão
   const organData = {
     hipotalamo: {
@@ -944,8 +964,20 @@ MK-CARDIOSPORT - Me.Mauricio B. Kraemer, MD - Medicina do Esporte e do Exercíci
       icon.classList.add('fa-chevron-right');
     }
   }
-</script>
+<script>
+function printSection(sectionId) {
+  const all = document.querySelectorAll(".tab-content");
+  all.forEach(div => div.style.display = "none");
 
+  const section = document.getElementById(sectionId);
+  section.style.display = "block";
+
+  window.print();
+
+  all.forEach(div => div.classList.contains("active") ?
+    div.style.display = "block" : div.style.display = "none");
+}
+</script>
 <style>
   .faq-answer {
     padding: 10px 0 10px 30px;
@@ -958,6 +990,40 @@ MK-CARDIOSPORT - Me.Mauricio B. Kraemer, MD - Medicina do Esporte e do Exercíci
   }
 </style>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const ctx = document.getElementById('bodyCompChart');
+new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ['Antes (150kg)', 'Agora (98kg)', 'Ideal Otimizado'],
+    datasets: [
+      {
+        label: 'Gordura (kg)',
+        data: [70, 38, 24],
+        backgroundColor: '#facc15'
+      },
+      {
+        label: 'Massa Magra (kg)',
+        data: [80, 60, 72],
+        backgroundColor: '#10b981'
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'top' },
+      title: {
+        display: true,
+        text: 'Composição Corporal Estimada'
+      }
+    },
+    scales: {
+      y: { beginAtZero: true, title: { display: true, text: 'kg' } }
+    }
+  }
+});
+</script>
 </body>
 </html>
-
