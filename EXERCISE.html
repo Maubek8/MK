@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CardioSport - Exercício com Risco Calculado</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #fafafa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Header Hero */
+        .hero {
+            background: linear-gradient(145deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            opacity: 0.85;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .hero-cta:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Navigation */
+        .nav-bar {
+            background: white;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: center;
+            padding: 1rem 0;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: #4a5568;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #667eea;
+            background: #f7faff;
+        }
+
+        /* Sections */
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            color: #2d3748;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #718096;
+            line-height: 1.6;
+        }
+
+        /* Stats Cards */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.08);
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 35px rgba(0,0,0,0.12);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #a0aec0;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .stat-desc {
+            color: #4a5568;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        /* Quiz Section */
+        .quiz-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+        }
+
+        .quiz-intro {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .quiz-intro h3 {
+            color: #667eea;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .quiz-intro p {
+            color: #718096;
+            line-height: 1.6;
+        }
+
+        .question-section {
+            margin-bottom: 2rem;
+        }
+
+        .question-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 1rem;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .question-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.8rem;
+            padding: 1rem;
+            background: #f7faff;
+            border-radius: 12px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .question-item:hover {
+            border-color: #667eea;
+            background: #edf2ff;
+        }
+
+        .question-item input {
+            width: 18px;
+            height: 18px;
+            margin-right: 1rem;
+            margin-top: 2px;
+            accent-color: #667eea;
+            flex-shrink: 0;
+        }
+
+        .question-item label {
+            cursor: pointer;
+            line-height: 1.4;
+            color: #4a5568;
+            font-size: 0.95rem;
+        }
+
+        .question-item.checked {
+            background: #edf2ff;
+            border-color: #667eea;
+        }
+
+        .question-item.checked label {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        /* Quiz Actions */
+        .quiz-actions {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(145deg, #667eea, #764ba2);
+            color: white;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.5);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        /* Result buttons styling */
+        .results .btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .results .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Results */
+        .results {
+            margin-top: 2rem;
+            border-radius: 16px;
+            padding: 2rem;
+            display: none;
+        }
+
+        .results.low {
+            background: linear-gradient(145deg, #48bb78, #38a169);
+            color: white;
+        }
+
+        .results.medium {
+            background: linear-gradient(145deg, #ed8936, #dd6b20);
+            color: white;
+        }
+
+        .results.high {
+            background: linear-gradient(145deg, #f56565, #e53e3e);
+            color: white;
+        }
+
+        .result-score {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .result-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .recommendations {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+        }
+
+        .recommendations h4 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .recommendations ul {
+            margin-left: 1.5rem;
+        }
+
+        .recommendations li {
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(145deg, #2d3748, #4a5568);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .whatsapp-btn {
+            background: #25d366;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .whatsapp-btn:hover {
+            background: #1db954;
+            transform: translateY(-2px);
+        }
+
+        .whatsapp-btn:nth-child(2):hover {
+            background: #357abd !important;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a202c;
+            color: #a0aec0;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .doctor-info {
+            margin-bottom: 2rem;
+        }
+
+        .doctor-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(145deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .doctor-title {
+            color: #cbd5e0;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 2.5rem 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .nav {
+                gap: 0.5rem;
+                padding: 1rem;
+            }
+            
+            .nav-link {
+                font-size: 0.85rem;
+                padding: 0.4rem 0.8rem;
+            }
+
+            .section {
+                padding: 3rem 0;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .quiz-container {
+                margin: 0 1rem;
+                padding: 1.5rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn, .whatsapp-btn {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+                justify-content: center;
+            }
+            
+            .footer div[style*="grid-template-columns"] {
+                grid-template-columns: 1fr !important;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 0.75rem;
+            }
+            
+            .hero {
+                padding: 2rem 0;
+            }
+            
+            .hero h1 {
+                font-size: 1.9rem;
+            }
+            
+            .quiz-container {
+                margin: 0 0.5rem;
+                padding: 1rem;
+            }
+            
+            .nav {
+                gap: 0.25rem;
+            }
+            
+            .nav-link {
+                font-size: 0.8rem;
+                padding: 0.3rem 0.6rem;
+            }
+            
+            .results .btn {
+                width: 100%;
+                margin-bottom: 0.5rem !important;
+                margin-right: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div style="background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); padding: 0.5rem 1rem; border-radius: 25px; display: inline-block; margin-bottom: 1rem; font-size: 0.9rem; font-weight: 600;">
+                    👋 Bem-vindo do Instagram!
+                </div>
+                <h1>💊 Exercício. Risco Calculado!?</h1>
+                <p class="hero-subtitle">A Ciência por Trás da Atividade Física após os 35</p>
+                <p class="hero-description">
+                    <strong>Você pratica esporte?</strong> Exercício protege a vida, mas pode revelar doenças ocultas no esforço. 
+                    Descubra seu risco em 2 minutos com base em evidências científicas recentes.
+                </p>
+                <a href="#quiz" class="hero-cta">🔍 Fazer Screening Gratuito</a>
+                <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 1rem;">
+                    ✅ PAR-Q+ Adaptado • ✅ Estudos JAMA/Lancet 2024-25 • ✅ 100% Gratuito • ✅ Relatório PDF
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <div class="container">
+            <div class="nav">
+                <a href="#paradox" class="nav-link">O Paradoxo</a>
+                <a href="#data" class="nav-link">Dados Científicos</a>
+                <a href="#quiz" class="nav-link">Screening</a>
+                <a href="#differential" class="nav-link">Diferencial</a>
+                <a href="#references" class="nav-link">Referências</a>
+                <a href="#contact" class="nav-link">Agendar</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Paradox Section -->
+    <section id="paradox" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">⚡ O Paradoxo do Exercício</h2>
+                <p class="section-subtitle">
+                    <strong>Você sabe o que é?</strong> Exercício protege a vida... mas pode revelar doenças ocultas no esforço.
+                </p>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">💚</div>
+                    <h3 style="color: #48bb78; margin-bottom: 1rem;">Exercício Protege</h3>
+                    <p>Reduz risco cardiovascular, melhora qualidade de vida e aumenta longevidade</p>
+                </div>
+                
+                <div class="stat-card">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">⚠️</div>
+                    <h3 style="color: #ed8936; margin-bottom: 1rem;">Mas Pode Revelar</h3>
+                    <p>Doenças cardíacas ocultas que se manifestam durante o esforço físico intenso</p>
+                </div>
+                
+                <div class="stat-card">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">❤️</div>
+                    <h3 style="color: #f56565; margin-bottom: 1rem;">Principal Causa >35</h3>
+                    <p><strong>Infarto.</strong> Por isso, o check-up não é luxo — é segurança.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section id="data" class="section" style="background: white;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">📊 Dados Científicos Principais</h2>
+                <p class="section-subtitle">Principais achados dos estudos recentes sobre morte súbita no esporte >35 anos</p>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number">0.60</div>
+                    <div class="stat-label">por 100.000</div>
+                    <div class="stat-desc"><strong>RACER Study (JAMA 2025):</strong> Incidência de parada cardíaca durante maratonas - 29+ milhões de participantes</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number">-48%</div>
+                    <div class="stat-label">mortalidade</div>
+                    <div class="stat-desc"><strong>Sobrevida dobrou:</strong> RCP/AED mais rápidos salvam vidas (2010-2023)</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number">51.1</div>
+                    <div class="stat-label">anos</div>
+                    <div class="stat-desc"><strong>Marijon (Circulation):</strong> Idade média dos eventos - incidência 21.7/milhão/ano</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number">DAC</div>
+                    <div class="stat-label">causa #1</div>
+                    <div class="stat-desc"><strong>Masters >35:</strong> Doença Arterial Coronariana domina vs. miocardiopatias em jovens</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number">18x</div>
+                    <div class="stat-label">maior risco</div>
+                    <div class="stat-desc"><strong>Homens vs. Mulheres:</strong> RR 18.68 para parada cardíaca durante esporte</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number">AHA</div>
+                    <div class="stat-label">decisão compartilhada</div>
+                    <div class="stat-desc"><strong>2025 Guidelines:</strong> Nova abordagem inclui masters athletes + decisão médico-paciente</div>
+                </div>
+            </div>
+            
+            <!-- Key Insights -->
+            <div style="max-width: 800px; margin: 3rem auto; padding: 2rem; background: #f7faff; border-radius: 16px; border-left: 4px solid #667eea;">
+                <h3 style="color: #667eea; margin-bottom: 1rem;">🔍 Insights Principais:</h3>
+                <ul style="color: #4a5568; line-height: 1.8; margin-left: 1.5rem;">
+                    <li><strong>Risco absoluto é BAIXO:</strong> 0.6/100.000 participantes em maratonas</li>
+                    <li><strong>Mortalidade despencou:</strong> Melhor atendimento = mais sobreviventes</li>
+                    <li><strong>DAC domina >35:</strong> Diferente dos jovens (miocardiopatias)</li>
+                    <li><strong>Homens = maior risco:</strong> 18x mais eventos que mulheres</li>
+                    <li><strong>Decisão compartilhada:</strong> Novo padrão-ouro médico</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section id="quiz" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">🔍 CardioSport Screening</h2>
+                <p class="section-subtitle">
+                    <strong>PAR-Q+ Adaptado para Masters Athletes</strong><br>
+                    Screening cardiovascular específico para quem já pratica atividade física e quer continuar com segurança
+                </p>
+            </div>
+
+            <div class="quiz-container">
+                <div class="quiz-intro">
+                    <div style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+                        <div style="background: #edf2ff; padding: 0.5rem 1rem; border-radius: 25px; color: #667eea; font-weight: 600; font-size: 0.9rem;">
+                            ⏱️ 2 minutos
+                        </div>
+                        <div style="background: #edf2ff; padding: 0.5rem 1rem; border-radius: 25px; color: #667eea; font-weight: 600; font-size: 0.9rem;">
+                            📚 Base científica
+                        </div>
+                        <div style="background: #edf2ff; padding: 0.5rem 1rem; border-radius: 25px; color: #667eea; font-weight: 600; font-size: 0.9rem;">
+                            📄 Relatório PDF
+                        </div>
+                    </div>
+                    
+                    <h3>🎯 Para quem é este teste?</h3>
+                    <div style="text-align: left; max-width: 500px; margin: 1rem auto;">
+                        <p style="color: #718096; line-height: 1.6; margin-bottom: 1rem;">
+                            ✅ Pessoas que <strong>já praticam</strong> atividade física<br>
+                            ✅ Querem saber se precisam de avaliação médica<br>
+                            ✅ Têm 35+ anos ou fatores de risco<br>
+                            ✅ Planejam intensificar os treinos
+                        </p>
+                    </div>
+                    
+                    <p style="color: #a0aec0; font-size: 0.9rem; font-style: italic;">
+                        Baseado nas diretrizes AHA/ACSM + Masters Athletes Guidelines
+                    </p>
+                </div>
+
+                <form id="risk-assessment">
+                    <!-- Grupo 1: Perfil -->
+                    <div class="question-section">
+                        <h4 class="question-title">1. 👤 Perfil Pessoal</h4>
+                        
+                        <div class="question-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="risk" value="3" id="q1">
+                            <label for="q1">Tenho 35 anos ou mais</label>
+                        </div>
+                        
+                        <div class="question-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="risk" value="2" id="q2">
+                            <label for="q2">Sou homem (risco 18x maior segundo estudos)</label>
+                        </div>
+                        
+                        <div class="question-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="risk" value="3" id="q3">
+                            <label for="q3">Estava sedentário e comecei atividade recentemente</label>
+                        </div>
+                    </div>
+
+                    <!-- Grupo 2: Sintomas -->
+                    <div class="question-section">
+                        <h4 class="question-title">2. ⚠️ Sintomas Durante/Após Exercício</h4>
+                        
+                        <div class="question-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="risk" value="5" id="q4">
+                            <label for="q4">Dor no peito durante ou após exercício</label>
+                        </div>
+                        
+                        <div class="question-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="risk" value="5" id="q5">
+                            <label for="q5">Falta de ar desproporcional ao esforço</label>
+                        </div>
+                        
+                        <div class="question-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="risk" value="5" id="q6">
+                            <label for="q6">Tontura, desmaio ou quase desmaio</label>
+                        </div>
+                        
+                        <div class="question-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="risk" value="2" id="q7">
+                            <label for="q7">Palpitações ou batimentos irregulares</label>
+                        </div>
+                    </div>
+
+                    <!-- Grupo 3: Histórico -->
+                    <div class="question-section">
+                        <h4 class="question-title">3. 🏥 Histórico Médico</h4>
+                        
+                        <div class="question-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="risk" value="5" id="q8">
+                            <label for="q8">Doença cardíaca conhecida</label>
+                        </div>
+                        
+                        <div class="question-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="risk" value="2" id="q9">
+                            <label for="q9">Pressão alta</label>
+                        </div>
+                        
+                        <div class="question-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="risk" value="2" id="q10">
+                            <label for="q10">Diabetes</label>
+                        </div>
+                        
+                        <div class="question-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="risk" value="2" id="q11">
+                            <label for="q11">Fumo atual ou recente (últimos 6 meses)</label>
+                        </div>
+                    </div>
+
+                    <!-- Grupo 4: Família -->
+                    <div class="question-section">
+                        <h4 class="question-title">4. 👨‍👩‍👧‍👦 Histórico Familiar</h4>
+                        
+                        <div class="question-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="risk" value="4" id="q12">
+                            <label for="q12">Morte súbita cardíaca em parente <50 anos</label>
+                        </div>
+                        
+                        <div class="question-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="risk" value="3" id="q13">
+                            <label for="q13">Doença cardíaca prematura na família</label>
+                        </div>
+                    </div>
+
+                    <!-- Grupo 5: Atividade -->
+                    <div class="question-section">
+                        <h4 class="question-title">5. 🏃‍♂️ Tipo de Atividade</h4>
+                        
+                        <div class="question-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="risk" value="2" id="q14">
+                            <label for="q14">Pratico maratonas/meias-maratonas</label>
+                        </div>
+                        
+                        <div class="question-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="risk" value="2" id="q15">
+                            <label for="q15">Esportes de alta intensidade/competitivos</label>
+                        </div>
+                        
+                        <div class="question-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="risk" value="2" id="q16">
+                            <label for="q16">Nunca fiz avaliação cardiológica</label>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="quiz-actions">
+                    <button type="button" class="btn btn-primary" onclick="calculateRisk()" id="calculate-btn">
+                        🔬 Gerar Relatório CardioSport
+                    </button>
+                </div>
+
+                <div id="results" class="results">
+                    <!-- Results will be populated here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Sports Medicine Section -->
+    <section id="differential" class="section" style="background: linear-gradient(145deg, #f7faff, #edf2ff);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">🎯 Por Que Medicina do Esporte?</h2>
+                <p class="section-subtitle">
+                    <strong>Nem todo cardiologista entende de esporte.</strong> A diferença está na abordagem.
+                </p>
+            </div>
+            
+            <div style="max-width: 1000px; margin: 0 auto;">
+                <div class="stats" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                    
+                    <div class="stat-card" style="text-align: left; padding: 2rem; border-left: 4px solid #f56565;">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">⛔</div>
+                        <h3 style="color: #f56565; margin-bottom: 1rem; font-size: 1.2rem;">Médico Tradicional</h3>
+                        <ul style="color: #4a5568; line-height: 1.8; margin-left: 1rem;">
+                            <li>❌ "Pare de correr"</li>
+                            <li>❌ "Exercício é perigoso pra você"</li>
+                            <li>❌ Foco apenas na doença</li>
+                            <li>❌ Abordagem conservadora excessiva</li>
+                            <li>❌ Não prescreve exercício como medicina</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="stat-card" style="text-align: left; padding: 2rem; border-left: 4px solid #48bb78;">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">✅</div>
+                        <h3 style="color: #48bb78; margin-bottom: 1rem; font-size: 1.2rem;">Médico do Esporte • Expertise Cardiovascular</h3>
+                        <ul style="color: #4a5568; line-height: 1.8; margin-left: 1rem;">
+                            <li>✅ "Como manter você ativo com segurança"</li>
+                            <li>✅ Exercício prescrito como tratamento</li>
+                            <li>✅ Entende a mentalidade do atleta</li>
+                            <li>✅ Decisão compartilhada REAL</li>
+                            <li>✅ Protocolos específicos para esportistas</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+                
+                <div style="background: white; padding: 2rem; border-radius: 16px; margin-top: 2rem; box-shadow: 0 8px 25px rgba(0,0,0,0.1); border: 1px solid #e2e8f0;">
+                    <div style="text-align: center; margin-bottom: 2rem;">
+                        <h3 style="color: #667eea; margin-bottom: 1rem; font-size: 1.4rem;">🏆 O Diferencial CardioSport</h3>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 2.5rem; margin-bottom: 1rem;">🧠</div>
+                            <h4 style="color: #2d3748; margin-bottom: 0.5rem;">Expertise Cardiovascular</h4>
+                            <p style="color: #718096; font-size: 0.95rem;">Medicina do Esporte + Saúde Cardiovascular = visão completa do atleta</p>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <div style="font-size: 2.5rem; margin-bottom: 1rem;">🤝</div>
+                            <h4 style="color: #2d3748; margin-bottom: 0.5rem;">Parceria Real</h4>
+                            <p style="color: #718096; font-size: 0.95rem;">Não dita regras. Constrói soluções junto com você</p>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <div style="font-size: 2.5rem; margin-bottom: 1rem;">💊</div>
+                            <h4 style="color: #2d3748; margin-bottom: 0.5rem;">Exercício como Remédio</h4>
+                            <p style="color: #718096; font-size: 0.95rem;">Prescreve atividade física como tratamento, não apenas proíbe</p>
+                        </div>
+                    </div>
+                    
+                    <div style="background: #f7faff; padding: 1.5rem; border-radius: 12px; margin-top: 2rem; border: 1px solid #c6d4ff;">
+                        <p style="color: #4a5568; text-align: center; line-height: 1.6; margin: 0;">
+                            <strong style="color: #667eea;">💡 A diferença:</strong> Enquanto outros dizem "pare", nós perguntamos <strong>"como podemos manter você ativo com segurança?"</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- References Section -->
+    <section id="references" class="section" style="background: white;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">📚 Referências Científicas</h2>
+                <p class="section-subtitle">Estudos que fundamentam este questionário e recomendações</p>
+            </div>
+            
+            <div style="max-width: 1000px; margin: 0 auto;">
+                <div class="stats" style="grid-template-columns: 1fr; gap: 1rem;">
+                    
+                    <div class="stat-card" style="text-align: left; padding: 1.5rem;">
+                        <div style="color: #667eea; font-weight: 700; margin-bottom: 0.5rem;">📍 Base Metodológica</div>
+                        <div style="font-weight: 600; margin-bottom: 0.5rem; color: #2d3748;">PAR-Q+ (Physical Activity Readiness Questionnaire)</div>
+                        <div style="font-style: italic; margin-bottom: 0.5rem;">Warburton DER, et al. Evidence-based risk assessment and recommendations for physical activity clearance: an update. Appl Physiol Nutr Metab. 2011.</div>
+                        <div style="color: #718096; font-size: 0.9rem;">Questionário padrão-ouro internacional adaptado para Masters Athletes</div>
+                    </div>
+                    
+                    <div class="stat-card" style="text-align: left; padding: 1.5rem;">
+                        <div style="color: #667eea; font-weight: 700; margin-bottom: 0.5rem;">🔥 JAMA 2025</div>
+                        <div style="font-weight: 600; margin-bottom: 0.5rem; color: #2d3748;">Kim JH, Rim AJ, Miller JT, et al.</div>
+                        <div style="font-style: italic; margin-bottom: 0.5rem;">Cardiac Arrest During Long-Distance Running Races. JAMA. 2025;333(19):1699-1707.</div>
+                        <div style="color: #718096; font-size: 0.9rem;">RACER Study: 29+ milhões de participantes, incidência estável, mortalidade -48%</div>
+                    </div>
+                    
+                    <div class="stat-card" style="text-align: left; padding: 1.5rem;">
+                        <div style="color: #667eea; font-weight: 700; margin-bottom: 0.5rem;">🔥 The Lancet 2024</div>
+                        <div style="font-weight: 600; margin-bottom: 0.5rem; color: #2d3748;">Kim JH, Martinez MW, Guseh JS, et al.</div>
+                        <div style="font-style: italic; margin-bottom: 0.5rem;">A contemporary review of sudden cardiac arrest and death in competitive and recreational athletes. Lancet. 2024;404(10468):2209-2222.</div>
+                        <div style="color: #718096; font-size: 0.9rem;">Revisão abrangente incluindo masters athletes, DAC como causa dominante >35</div>
+                    </div>
+                    
+                    <div class="stat-card" style="text-align: left; padding: 1.5rem;">
+                        <div style="color: #667eea; font-weight: 700; margin-bottom: 0.5rem;">🔥 AHA/ACC 2025</div>
+                        <div style="font-weight: 600; margin-bottom: 0.5rem; color: #2d3748;">Kim JH, Baggish AL, Levine BD, et al.</div>
+                        <div style="font-style: italic; margin-bottom: 0.5rem;">Eligibility and Disqualification Recommendations for Competitive Athletes With Cardiovascular Abnormalities: Scientific Statement From the AHA and ACC.</div>
+                        <div style="color: #718096; font-size: 0.9rem;">Nova diretriz: decisão compartilhada + masters athletes incluídos explicitamente</div>
+                    </div>
+                    
+                    <div class="stat-card" style="text-align: left; padding: 1.5rem;">
+                        <div style="color: #667eea; font-weight: 700; margin-bottom: 0.5rem;">📍 Circulation 2015</div>
+                        <div style="font-weight: 600; margin-bottom: 0.5rem; color: #2d3748;">Marijon E, Uy-Evanado A, Reinier K, et al.</div>
+                        <div style="font-style: italic; margin-bottom: 0.5rem;">Sudden cardiac arrest during sports activity in middle age. Circulation. 2015;131(16):1384-91.</div>
+                        <div style="color: #718096; font-size: 0.9rem;">Idade média 51.1 anos, incidência 21.7/milhão/ano, sobrevida maior no esporte</div>
+                    </div>
+                    
+                    <div class="stat-card" style="text-align: left; padding: 1.5rem;">
+                        <div style="color: #667eea; font-weight: 700; margin-bottom: 0.5rem;">📍 ACC Guidelines 2024</div>
+                        <div style="font-weight: 600; margin-bottom: 0.5rem; color: #2d3748;">American College of Cardiology</div>
+                        <div style="font-style: italic; margin-bottom: 0.5rem;">Sudden Cardiac Arrest and Death in Athletes: Key Points. ACC Clinical Guidelines.</div>
+                        <div style="color: #718096; font-size: 0.9rem;">Panorama atual SCA/SCD em atletas competitivos, recreativos e masters</div>
+                    </div>
+                    
+                    <div class="stat-card" style="text-align: left; padding: 1.5rem;">
+                        <div style="color: #667eea; font-weight: 700; margin-bottom: 0.5rem;">📍 AHA/ACSM Guidelines</div>
+                        <div style="font-weight: 600; margin-bottom: 0.5rem; color: #2d3748;">Maron BJ, Thompson PD, et al.</div>
+                        <div style="font-style: italic; margin-bottom: 0.5rem;">AHA/ACSM Pre-Participation Questionnaire + Masters Athletes Recommendations.</div>
+                        <div style="color: #718096; font-size: 0.9rem;">Base metodológica para questionário de triagem cardiovascular</div>
+                    </div>
+                    
+                </div>
+                
+                <div style="background: #edf2ff; padding: 2rem; border-radius: 16px; margin-top: 2rem; border: 1px solid #c6d4ff;">
+                    <h3 style="color: #667eea; margin-bottom: 1rem; text-align: center;">⚖️ Metodologia Científica</h3>
+                    <div style="color: #4a5568; line-height: 1.6;">
+                        <p style="margin-bottom: 1rem;">
+                            <strong>CardioSport Screening é baseado em:</strong>
+                        </p>
+                        <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+                            <li><strong>PAR-Q+</strong> (Physical Activity Readiness Questionnaire) - padrão internacional</li>
+                            <li>Adaptações específicas para <strong>Masters Athletes ≥35 anos</strong></li>
+                            <li>Evidências do <strong>RACER Study (JAMA 2025)</strong> + <strong>AHA/ACC 2025</strong></li>
+                            <li>Guidelines de Medicina do Esporte para triagem cardiovascular</li>
+                            <li>Sistema de pontuação baseado em fatores de risco validados</li>
+                        </ul>
+                        <p style="font-style: italic; text-align: center; color: #718096; background: white; padding: 1rem; border-radius: 8px;">
+                            <strong>Diferencial:</strong> Não é só PAR-Q genérico. É adaptado para atletas masters com foco cardiovascular e evidências 2024-2025.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 style="color: white; margin-bottom: 1rem;">🤝 Decisão Compartilhada</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 1rem;">
+                    "Exercício é remédio, mas não é imunidade."
+                </p>
+                <p style="opacity: 0.9; margin-bottom: 2rem;">
+                    Após os 35 anos, vale a regra do <strong>risco calculado</strong>: prevenção, avaliação médica e decisão compartilhada.<br>
+                    Assim, o treino vira aliado sem virar ameaça.
+                </p>
+                
+                <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 16px; margin-bottom: 2rem;">
+                    <h3 style="color: white; margin-bottom: 1rem; font-size: 1.3rem;">💬 Consulta com Médico do Esporte</h3>
+                    <p style="opacity: 0.9; margin-bottom: 1rem; font-size: 1.05rem;">
+                        <strong>Medicina do Esporte • Expertise Cardiovascular</strong><br>
+                        Não vamos simplesmente "proibir" seu esporte. Vamos encontrar formas seguras de mantê-lo ativo.
+                    </p>
+                    <p style="opacity: 0.8; margin-bottom: 1.5rem; font-size: 0.95rem;">
+                        Escolha a modalidade que melhor atende você:
+                    </p>
+                    
+                    <div class="cta-buttons">
+                        <a href="https://wa.me/5511932308095?text=Ol%C3%A1%21%20Gostaria%20de%20agendar%20uma%20CONSULTA%20PRESENCIAL%20de%20Medicina%20do%20Esporte%20ap%C3%B3s%20fazer%20o%20teste%20no%20CardioSport.%20Consulte%20valores." 
+                           class="whatsapp-btn" target="_blank" rel="noopener">
+                            <span>🏥</span> Consulta Presencial
+                        </a>
+                        <a href="https://wa.me/5511932308095?text=Ol%C3%A1%21%20Gostaria%20de%20agendar%20uma%20TELECONSULTA%20de%20Medicina%20do%20Esporte%20ap%C3%B3s%20fazer%20o%20teste%20no%20CardioSport.%20Consulte%20valores." 
+                           class="whatsapp-btn" target="_blank" rel="noopener"
+                           style="background: #4a90e2;">
+                            <span>💻</span> Teleconsulta Online
+                        </a>
+                    </div>
+                    
+                    <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 1rem;">
+                        📋 <strong>Consulte valores</strong> • Pagamento facilitado • Agendamento rápido
+                    </p>
+                </div>
+                
+                <div class="cta-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="scrollToScreening()">
+                        🔍 Fazer Screening Primeiro
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="doctor-info">
+                <div class="doctor-name">Dr. Mauricio Beitia Kraemer, MSc.</div>
+                <div class="doctor-title">Medicina do Esporte e Cardiologia Clínica</div>
+                <div class="doctor-title" style="color: #667eea; font-weight: 600;">CardioSport</div>
+                <div style="margin: 1rem 0; color: #cbd5e0;">
+                    📱 WhatsApp: (11) 93230-8095<br>
+                    🏥 Consultas: Presencial e Online<br>
+                    📋 Avaliação Médico-Esportiva Cardiovascular
+                </div>
+            </div>
+            
+            <div style="border-top: 1px solid #4a5568; padding-top: 2rem; margin-top: 2rem;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem; text-align: left;">
+                    <div>
+                        <h4 style="color: #cbd5e0; margin-bottom: 1rem;">📚 Base Científica</h4>
+                        <ul style="color: #a0aec0; font-size: 0.9rem; line-height: 1.6;">
+                            <li>RACER Study (JAMA 2025)</li>
+                            <li>AHA/ACC Guidelines 2025</li>
+                            <li>Lancet Review 2024</li>
+                            <li>Masters Athletes Guidelines</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: #cbd5e0; margin-bottom: 1rem;">⚖️ Importante</h4>
+                        <ul style="color: #a0aec0; font-size: 0.9rem; line-height: 1.6;">
+                            <li>Finalidade educativa</li>
+                            <li>Não substitui consulta médica</li>
+                            <li>Baseado em evidências</li>
+                            <li>Decisão compartilhada</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <p style="font-size: 0.9rem; opacity: 0.7; text-align: center; border-top: 1px solid #4a5568; padding-top: 2rem;">
+                © 2025 CardioSport. Todos os direitos reservados.<br>
+                <strong>Instagram:</strong> Compartilhe este teste com seus amigos atletas! 🏃‍♀️🚴‍♂️⚽
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        let assessmentData = {
+            score: 0,
+            riskLevel: 'low',
+            answers: []
+        };
+
+        function toggleCheck(element) {
+            const checkbox = element.querySelector('input[type="checkbox"]');
+            if (checkbox) {
+                checkbox.checked = !checkbox.checked;
+                
+                if (checkbox.checked) {
+                    element.classList.add('checked');
+                } else {
+                    element.classList.remove('checked');
+                }
+            }
+        }
+
+        function calculateRisk() {
+            const checkboxes = document.querySelectorAll('#risk-assessment input[type="checkbox"]:checked');
+            let totalScore = 0;
+            let answers = [];
+
+            checkboxes.forEach(checkbox => {
+                totalScore += parseInt(checkbox.value);
+                answers.push(checkbox.nextElementSibling.textContent.trim());
+            });
+
+            assessmentData.score = totalScore;
+            assessmentData.answers = answers;
+
+            // Determine risk level
+            let riskLevel, riskText, recommendations, riskColor;
+
+            if (totalScore >= 10 || hasHighRiskSymptoms()) {
+                riskLevel = 'high';
+                riskText = 'ALTO RISCO';
+                riskColor = 'high';
+                recommendations = [
+                    'PARE exercícios intensos IMEDIATAMENTE',
+                    'Consulta médica URGENTE recomendada',
+                    'ECG de repouso e teste ergométrico necessários', 
+                    'Possível ecocardiograma conforme avaliação',
+                    'Não retome atividade sem liberação médica'
+                ];
+            } else if (totalScore >= 5) {
+                riskLevel = 'medium';
+                riskText = 'RISCO MODERADO';
+                riskColor = 'medium';
+                recommendations = [
+                    'Avaliação médica pré-participação recomendada',
+                    'ECG de repouso sugerido',
+                    'Considerar teste ergométrico',
+                    'Decisão compartilhada sobre intensidade',
+                    'Acompanhamento médico-esportivo regular'
+                ];
+            } else {
+                riskLevel = 'low';
+                riskText = 'BAIXO RISCO';
+                riskColor = 'low';
+                recommendations = [
+                    'Continue sua atividade física regular',
+                    'Mantenha check-ups de rotina',
+                    'Fique atento a novos sintomas',
+                    'Reavalie se aumentar intensidade significativamente',
+                    'Consulta preventiva anual após os 35'
+                ];
+            }
+
+            assessmentData.riskLevel = riskLevel;
+            displayResults(riskText, riskColor, recommendations, totalScore);
+        }
+
+        function hasHighRiskSymptoms() {
+            const highRiskIds = ['q4', 'q5', 'q6', 'q8']; // Chest pain, dyspnea, syncope, heart disease
+            return highRiskIds.some(id => {
+                const element = document.getElementById(id);
+                return element && element.checked;
+            });
+        }
+
+        function displayResults(riskText, riskColor, recommendations, score) {
+            const resultsDiv = document.getElementById('results');
+            
+            if (resultsDiv) {
+                resultsDiv.innerHTML = `
+                    <div class="result-score">Pontuação: ${score} pontos</div>
+                    <div class="result-title">${getEmojiForRisk(riskColor)} ${riskText}</div>
+                    <p style="margin-bottom: 1.5rem; font-size: 1rem;">
+                        ${getDescriptionForRisk(riskColor)}
+                    </p>
+                    
+                    <div class="recommendations">
+                        <h4>📋 Recomendações Baseadas em Evidências (PAR-Q+ Adaptado):</h4>
+                        <ul>
+                            ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    ${assessmentData.answers.length > 0 ? `
+                        <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.3);">
+                            <h4>✅ Fatores Identificados (${assessmentData.answers.length}):</h4>
+                            <ul style="font-size: 0.9rem; margin-top: 0.5rem;">
+                                ${assessmentData.answers.map(answer => `<li>${answer}</li>`).join('')}
+                            </ul>
+                        </div>
+                    ` : ''}
+                    
+                    <div style="text-align: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.3);">
+                        <button onclick="downloadReport()" class="btn" style="background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.4); margin-right: 1rem; margin-bottom: 1rem;">
+                            📄 Baixar Relatório PDF
+                        </button>
+                        <a href="https://wa.me/5511932308095?text=${getWhatsAppMessage(riskLevel)}" 
+                           target="_blank" 
+                           class="btn" 
+                           style="background: #25d366; color: white; text-decoration: none; display: inline-block; margin-bottom: 1rem;">
+                            💬 Consultar Médico
+                        </a>
+                        <p style="font-size: 0.85rem; opacity: 0.8; margin-top: 1rem; line-height: 1.4;">
+                            <strong>Dr. Mauricio Beitia Kraemer, MSc.</strong><br>
+                            Medicina do Esporte • Expertise Cardiovascular<br>
+                            CardioSport • WhatsApp: (11) 93230-8095
+                        </p>
+                    </div>
+                `;
+                
+                resultsDiv.className = `results ${riskColor}`;
+                resultsDiv.style.display = 'block';
+                
+                // Scroll to results
+                setTimeout(() => {
+                    resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 100);
+                
+                // Update button text
+                const calcBtn = document.getElementById('calculate-btn');
+                if (calcBtn) {
+                    calcBtn.textContent = '🔄 Refazer Screening';
+                }
+            }
+        }
+
+        function getEmojiForRisk(level) {
+            const emojis = {
+                'low': '✅',
+                'medium': '⚠️',
+                'high': '🚨'
+            };
+            return emojis[level];
+        }
+
+        function getDescriptionForRisk(level) {
+            const descriptions = {
+                'low': 'Parabéns! Você apresenta baixo risco para eventos cardiovasculares durante exercício.',
+                'medium': 'Atenção! Alguns fatores indicam necessidade de avaliação médica antes de prosseguir.',
+                'high': 'URGENTE! Fatores de alto risco identificados. Consulta médica necessária antes de continuar exercícios.'
+            };
+            return descriptions[level];
+        }
+
+        function downloadReport() {
+            if (assessmentData.score === 0 && assessmentData.answers.length === 0) {
+                alert('Por favor, complete a avaliação primeiro.');
+                document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+
+            const reportContent = `
+RELATÓRIO CARDIOSPORT - AVALIAÇÃO DE RISCO CARDIOVASCULAR
+========================================================
+
+Data: ${new Date().toLocaleDateString('pt-BR')}
+Hora: ${new Date().toLocaleTimeString('pt-BR')}
+
+RESULTADO DA AVALIAÇÃO:
+Pontuação Total: ${assessmentData.score} pontos
+Nível de Risco: ${assessmentData.riskLevel.toUpperCase()}
+
+FATORES DE RISCO IDENTIFICADOS (${assessmentData.answers.length}):
+${assessmentData.answers.length > 0 ? 
+  assessmentData.answers.map((answer, index) => `${index + 1}. ${answer}`).join('\n') : 
+  'Nenhum fator de risco específico identificado'}
+
+RECOMENDAÇÕES BASEADAS EM EVIDÊNCIAS CIENTÍFICAS:
+${getRecommendationsForReport(assessmentData.riskLevel).map((rec, index) => `${index + 1}. ${rec}`).join('\n')}
+
+REFERÊNCIAS CIENTÍFICAS:
+- PAR-Q+ (Physical Activity Readiness Questionnaire) - Base metodológica
+- RACER Study (JAMA 2025): Cardiac Arrest During Long-Distance Running Races
+- AHA/ACC Scientific Statement (2025): Eligibility and Disqualification for Athletes
+- Marijon et al. (Circulation 2015): Sudden Cardiac Arrest During Sports Activity in Middle Age
+- Masters Athlete Guidelines: AHA/ACSM Pre-Participation Questionnaire
+
+IMPORTANTE:
+⚠️  Este questionário é baseado no PAR-Q+ adaptado para Masters Athletes
+⚠️  Incorpora evidências científicas recentes (2024-2025)
+⚠️  NÃO substitui consulta médica profissional
+⚠️  Para decisão compartilhada adequada, consulte médico especialista
+⚠️  Em caso de sintomas agudos, procure atendimento médico imediato
+
+PRÓXIMOS PASSOS:
+${getNextStepsForReport(assessmentData.riskLevel)}
+
+Dr. Mauricio Beitia Kraemer, MSc.
+Medicina do Esporte • Saúde Cardiovascular
+CardioSport
+WhatsApp: (11) 93230-8095
+
+© 2025 CardioSport. Todos os direitos reservados.
+Este relatório é confidencial e destinado exclusivamente ao usuário.
+            `.trim();
+
+            const blob = new Blob([reportContent], { type: 'text/plain;charset=utf-8' });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `CardioSport_Relatorio_${new Date().toISOString().split('T')[0]}.txt`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+        }
+
+        function getRecommendationsForReport(riskLevel) {
+            const recommendations = {
+                'high': [
+                    'INTERROMPA exercícios intensos IMEDIATAMENTE',
+                    'Consulta médica URGENTE (dentro de 48h se possível)',
+                    'ECG de repouso e teste ergométrico obrigatórios',
+                    'Considerar ecocardiograma conforme avaliação médica',
+                    'NÃO retomar atividade física sem liberação médica por escrito'
+                ],
+                'medium': [
+                    'Agendar avaliação médica pré-participação',
+                    'Realizar ECG de repouso antes de continuar',
+                    'Considerar teste ergométrico conforme perfil de risco',
+                    'Discussão médico-paciente sobre intensidade segura',
+                    'Estabelecer rotina de acompanhamento médico-esportivo'
+                ],
+                'low': [
+                    'Manter atividade física regular dentro dos limites atuais',
+                    'Realizar check-ups médicos de rotina anuais',
+                    'Permanecer atento ao surgimento de novos sintomas',
+                    'Reavaliar antes de aumentos significativos de intensidade',
+                    'Considerar consulta preventiva especializada após os 35 anos'
+                ]
+            };
+            return recommendations[riskLevel];
+        }
+
+        function getNextStepsForReport(riskLevel) {
+            const nextSteps = {
+                'high': '1. Agende consulta médica URGENTE\n2. Leve este relatório para o médico\n3. Não faça exercícios intensos até liberação\n4. Em caso de sintomas, procure emergência',
+                'medium': '1. Agende consulta médica em 1-2 semanas\n2. Apresente este relatório ao médico\n3. Mantenha atividade leve até avaliação\n4. Monitore sintomas durante exercício',
+                'low': '1. Continue exercícios regulares\n2. Mantenha acompanhamento médico anual\n3. Reavalie em caso de mudanças\n4. Considere consulta preventiva'
+            };
+            return nextSteps[riskLevel];
+        }
+
+        // Smooth scrolling for navigation - Fixed version
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for all navigation links
+            const navLinks = document.querySelectorAll('a[href^="#"]');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    
+                    if (targetElement) {
+                        const headerOffset = 80; // Account for sticky nav
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                    
+                    return false;
+                });
+            });
+
+            // Active navigation highlighting
+            const updateActiveNav = () => {
+                const sections = document.querySelectorAll('section[id]');
+                const navLinks = document.querySelectorAll('.nav-link');
+                
+                let currentSection = '';
+                const scrollPosition = window.scrollY + 100;
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        currentSection = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    const href = link.getAttribute('href');
+                    if (href && href === `#${currentSection}`) {
+                        link.classList.add('active');
+                    }
+                });
+            };
+
+            // Update active nav on scroll
+            window.addEventListener('scroll', updateActiveNav);
+            
+            // Update active nav on page load
+            updateActiveNav();
+        });
+    </script>
+</body>
+</html>
