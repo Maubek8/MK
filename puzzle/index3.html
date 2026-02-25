@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏝️ A Ilha do Perigo 3</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Patrick+Hand&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Fredoka',sans-serif;background:#f4e8c1;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:16px}
+h1{font-weight:700;font-size:1.8rem;color:#5d4037;text-align:center}
+.sub{font-family:'Patrick Hand',cursive;color:#8d6e63;font-size:1rem;margin-top:2px;text-align:center}
+.diff{display:inline-block;background:linear-gradient(135deg,#ff6f00,#e65100);color:#fff;font-family:'Fredoka';font-size:.65rem;font-weight:700;padding:2px 10px;border-radius:20px;margin-left:6px}
+.tb{display:flex;gap:6px;margin:10px 0;flex-wrap:wrap;justify-content:center}
+.lb{width:44px;height:44px;border:3px solid #ccc;border-radius:12px;font-family:'Fredoka';font-weight:700;font-size:1.2rem;cursor:pointer;color:#fff;text-shadow:1px 1px 3px rgba(0,0,0,.4);transition:.2s}
+.lb:hover{transform:scale(1.1)}.lb.on{border-color:#333;transform:scale(1.15);box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.lb[data-l="A"]{background:#e53935}.lb[data-l="B"]{background:#1e88e5}.lb[data-l="C"]{background:#43a047}.lb[data-l="D"]{background:#fb8c00}.lb[data-l="E"]{background:#8e24aa}.lb[data-l="F"]{background:#00acc1}.lb[data-l="G"]{background:#d81b60}
+.ab{height:44px;padding:0 12px;border:2px solid #ccc;border-radius:12px;font-family:'Fredoka';font-weight:600;font-size:.8rem;cursor:pointer;background:#fff;color:#555;transition:.2s}
+.ab:hover{transform:scale(1.05)}
+.ab.resp{background:linear-gradient(135deg,#ff6f00,#e65100);color:#fff;border-color:#bf360c}
+.eb{width:44px;height:44px;border:2px solid #ccc;border-radius:12px;font-size:1.2rem;cursor:pointer;background:#fff;transition:.2s}
+.eb.on{border-color:#333;transform:scale(1.15);box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.gw{background:linear-gradient(135deg,#5ba3c9,#2a7a9f);border-radius:16px;padding:10px;box-shadow:0 8px 25px rgba(0,0,0,.2)}
+.gr{display:grid;grid-template-columns:repeat(10,40px);grid-template-rows:repeat(10,40px);gap:2px;background:#90a4ae;border-radius:6px;overflow:hidden}
+.c{width:40px;height:40px;background:#fff;display:flex;align-items:center;justify-content:center;font-family:'Fredoka';font-weight:700;font-size:1.05rem;cursor:pointer;user-select:none;position:relative;color:#fff;text-shadow:1px 1px 2px rgba(0,0,0,.2);transition:background .15s}
+.c:hover:not(.fx){background:#eee}
+.c.fx{cursor:default;border:2px solid rgba(0,0,0,.3);border-radius:4px}
+.c.fx::after{content:'🏠';position:absolute;top:-1px;right:0;font-size:.45rem}
+.c[data-v="A"]{background:#e53935}.c[data-v="B"]{background:#1e88e5}.c[data-v="C"]{background:#43a047}.c[data-v="D"]{background:#fb8c00}.c[data-v="E"]{background:#8e24aa}.c[data-v="F"]{background:#00acc1}.c[data-v="G"]{background:#d81b60}
+.c[data-v=""]{background:#fff;color:transparent}
+.st{margin-top:10px;font-family:'Patrick Hand',cursive;font-size:1.1rem;color:#5d4037;text-align:center;min-height:26px}
+.st.ok{color:#2e7d32;font-weight:600;font-size:1.3rem}
+.st.err{color:#ff5252}
+.info{max-width:440px;margin-top:10px;padding:8px 12px;background:rgba(255,255,255,.7);border-radius:12px;font-family:'Patrick Hand',cursive;font-size:.9rem;color:#6d4c41;line-height:1.3}
+@media(max-width:500px){.gr{grid-template-columns:repeat(10,32px);grid-template-rows:repeat(10,32px)}.c{width:32px;height:32px;font-size:.85rem}}
+</style>
+</head>
+<body>
+<h1>🏝️ A Ilha do Perigo 3</h1>
+<p class="sub">Preencha os caminhos sem cruzar! <span class="diff">⚡ Difícil</span></p>
+<div class="tb">
+  <button class="lb" data-l="A">A</button>
+  <button class="lb" data-l="B">B</button>
+  <button class="lb" data-l="C">C</button>
+  <button class="lb" data-l="D">D</button>
+  <button class="lb" data-l="E">E</button>
+  <button class="lb" data-l="F">F</button>
+  <button class="lb" data-l="G">G</button>
+  <button class="eb" data-l="">🧹</button>
+  <button class="ab" onclick="clearAll()">Limpar</button>
+  <button class="ab" onclick="validate()">Verificar ✅</button>
+  <button class="ab resp" onclick="showAnswer()">Resposta 💡</button>
+</div>
+<div class="gw"><div class="gr" id="grid"></div></div>
+<div class="st" id="status"></div>
+<div class="info">📌 Conecte cada par de aldeias 🏠. Preencha TODAS as células. Caminhos não podem se cruzar!</div>
+<script>
+const RW=10,CL=10;
+const FX={
+  A:[[9,0],[8,4]],
+  B:[[8,3],[7,9]],
+  C:[[6,9],[5,4]],
+  D:[[5,5],[3,0]],
+  E:[[3,1],[2,5]],
+  F:[[2,4],[1,7]],
+  G:[[1,8],[0,0]],
+};
+const SOL=["GGGGGGGGGG","FFFFFFFFGG","FFFFFEEEEE","DEEEEEEEEE","DDDDDDDDDD","CCCCCDDDDD","CCCCCCCCCC","BBBBBBBBBB","BBBBAAAAAA","AAAAAAAAAA"];
+const LETTERS="ABCDEFG";
+let g=Array.from({length:RW},()=>Array(CL).fill(''));
+let cur=LETTERS[0],drawing=false;
+for(const[L,ps]of Object.entries(FX))for(const[r,c]of ps)g[r][c]=L;
+function isFx(r,c){for(const ps of Object.values(FX))for(const[a,b]of ps)if(a===r&&b===c)return true;return false}
+function render(){const el=document.getElementById('grid');el.innerHTML='';for(let r=0;r<RW;r++)for(let c=0;c<CL;c++){const d=document.createElement('div');d.className='c'+(isFx(r,c)?' fx':'');d.dataset.r=r;d.dataset.c=c;d.dataset.v=g[r][c];d.textContent=g[r][c];d.addEventListener('mousedown',e=>{e.preventDefault();drawing=true;paint(r,c)});d.addEventListener('mouseenter',()=>{if(drawing)paint(r,c)});d.addEventListener('touchstart',e=>{e.preventDefault();drawing=true;paint(r,c)},{passive:false});d.addEventListener('touchmove',tm,{passive:false});el.appendChild(d)}}
+function paint(r,c){if(isFx(r,c))return;g[r][c]=cur;const d=document.querySelector('[data-r="'+r+'"][data-c="'+c+'"]');if(d){d.dataset.v=g[r][c];d.textContent=g[r][c]}}
+function tm(e){e.preventDefault();const t=e.touches[0],el=document.elementFromPoint(t.clientX,t.clientY);if(el&&el.dataset.r!==undefined)paint(+el.dataset.r,+el.dataset.c)}
+document.addEventListener('mouseup',()=>drawing=false);
+document.addEventListener('touchend',()=>drawing=false);
+document.querySelectorAll('.lb,.eb').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.lb,.eb').forEach(x=>x.classList.remove('on'));b.classList.add('on');cur=b.dataset.l}));
+document.querySelector('.lb').classList.add('on');
+function clearAll(){for(let r=0;r<RW;r++)for(let c=0;c<CL;c++)if(!isFx(r,c))g[r][c]='';render();document.getElementById('status').textContent='';document.getElementById('status').className='st'}
+function validate(){const s=document.getElementById('status');let err=[];let empty=0;for(let r=0;r<RW;r++)for(let c=0;c<CL;c++)if(g[r][c]==='')empty++;if(empty>0)err.push(empty+' células vazias');for(const L of LETTERS){const[a,b]=FX[L];if(!bfs(L,a,b))err.push(L+': não conecta');const cells=[];for(let r=0;r<RW;r++)for(let c=0;c<CL;c++)if(g[r][c]===L)cells.push([r,c]);if(!contig(cells))err.push(L+': não contínuo')}if(!err.length){s.textContent='🎉 Parabéns!';s.className='st ok'}else{s.textContent='❌ '+err.join(' | ');s.className='st err'}}
+function bfs(L,s,e){const v=new Set();v.add(s[0]+','+s[1]);const q=[s];while(q.length){const[r,c]=q.shift();if(r===e[0]&&c===e[1])return true;for(const[dr,dc]of[[0,1],[0,-1],[1,0],[-1,0]]){const nr=r+dr,nc=c+dc,k=nr+','+nc;if(nr>=0&&nr<RW&&nc>=0&&nc<CL&&!v.has(k)&&g[nr][nc]===L){v.add(k);q.push([nr,nc])}}}return false}
+function contig(cells){if(cells.length<=1)return true;const set=new Set(cells.map(([r,c])=>r+','+c));const v=new Set();v.add(cells[0][0]+','+cells[0][1]);const q=[cells[0]];while(q.length){const[r,c]=q.shift();for(const[dr,dc]of[[0,1],[0,-1],[1,0],[-1,0]]){const k=(r+dr)+','+(c+dc);if(set.has(k)&&!v.has(k)){v.add(k);q.push([r+dr,c+dc])}}}return v.size===cells.length}
+function showAnswer(){for(let r=0;r<RW;r++)for(let c=0;c<CL;c++)g[r][c]=SOL[r][c];render();document.getElementById('status').textContent='✨ Resposta!';document.getElementById('status').className='st ok'}
+render();
+</script>
+</body>
+</html>
