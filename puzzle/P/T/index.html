@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🐯 Fortune Tiger — Simulador</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&display=swap');
+:root{
+--gold:#f6a623;--gold2:#d4890a;--red:#c0272d;--red2:#8b1a1f;--darkred:#2a0a0b;
+--bg:#120506;--panel:#1c0a0b;--border:rgba(246,166,35,.2);--glow:rgba(246,166,35,.15);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:#fff;min-height:100vh;display:flex;flex-direction:column;align-items:center;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 50% 0%,#3a0f10 0%,var(--bg) 60%);z-index:-1}
+
+.machine{width:100%;max-width:420px;margin:16px auto;padding:0 12px}
+
+/* HEADER */
+.header{text-align:center;padding:16px 0 8px}
+.header h1{font-size:2rem;font-weight:900;color:var(--gold);text-shadow:0 0 30px rgba(246,166,35,.4),0 2px 0 var(--gold2);letter-spacing:2px}
+.header .tiger{font-size:2.8rem;display:block;margin-bottom:-4px;filter:drop-shadow(0 0 12px rgba(246,166,35,.5))}
+.header .tag{font-size:.7rem;color:var(--gold2);letter-spacing:3px;text-transform:uppercase;margin-top:2px}
+.badge{display:inline-block;background:linear-gradient(135deg,var(--red),var(--red2));font-size:.55rem;padding:2px 8px;border-radius:10px;color:#ffcba4;margin-top:4px;letter-spacing:1px}
+
+/* CREDIT BAR */
+.credits-bar{display:flex;justify-content:space-between;align-items:center;background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:8px 14px;margin:10px 0}
+.credits-bar .label{font-size:.65rem;color:var(--gold2);text-transform:uppercase;letter-spacing:1px}
+.credits-bar .val{font-size:1.3rem;font-weight:800;color:var(--gold);text-shadow:0 0 10px var(--glow)}
+.credits-bar .small{font-size:.85rem}
+
+/* SLOT WINDOW */
+.slot-frame{background:linear-gradient(180deg,#2a0f10,#1a0708);border:2px solid var(--gold2);border-radius:14px;padding:4px;box-shadow:0 0 40px rgba(246,166,35,.1),inset 0 0 30px rgba(0,0,0,.5);margin:10px 0}
+.slot-window{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;background:#0a0304;border-radius:10px;overflow:hidden;padding:3px}
+.reel{display:flex;flex-direction:column;gap:3px}
+.cell{height:72px;display:flex;align-items:center;justify-content:center;font-size:2.4rem;background:linear-gradient(180deg,#1f0b0c,#150607);border-radius:6px;position:relative;transition:background .3s}
+.cell.win{background:linear-gradient(180deg,#3a1a0a,#2a0f05);box-shadow:inset 0 0 20px rgba(246,166,35,.3);animation:winPulse .5s ease infinite alternate}
+@keyframes winPulse{from{box-shadow:inset 0 0 20px rgba(246,166,35,.2)}to{box-shadow:inset 0 0 30px rgba(246,166,35,.5)}}
+.cell.spinning{animation:slotBlur .08s linear infinite}
+@keyframes slotBlur{0%{filter:blur(0)}50%{filter:blur(2px)}100%{filter:blur(0)}}
+
+/* PAYLINES INDICATOR */
+.paylines{display:flex;justify-content:center;gap:6px;margin:6px 0}
+.payline{width:8px;height:8px;border-radius:50%;background:#333;transition:.3s}
+.payline.active{background:var(--gold);box-shadow:0 0 8px var(--gold)}
+
+/* CONTROLS */
+.controls{display:flex;gap:8px;margin:10px 0;align-items:stretch}
+.bet-area{flex:1;display:flex;flex-direction:column;gap:4px}
+.bet-row{display:flex;gap:4px;align-items:center}
+.bet-btn{width:36px;height:36px;border:1px solid var(--border);border-radius:8px;background:var(--panel);color:var(--gold);font-family:'Outfit';font-weight:800;font-size:.9rem;cursor:pointer;transition:.2s}
+.bet-btn:hover{background:#2a1010;border-color:var(--gold)}
+.bet-display{flex:1;text-align:center;font-size:1rem;font-weight:800;color:var(--gold);line-height:36px;background:var(--panel);border:1px solid var(--border);border-radius:8px}
+.bet-label{font-size:.6rem;color:var(--gold2);text-align:center;letter-spacing:1px;text-transform:uppercase}
+.spin-btn{width:110px;height:80px;border:2px solid var(--gold);border-radius:14px;background:linear-gradient(180deg,var(--red),var(--red2));color:var(--gold);font-family:'Outfit';font-weight:900;font-size:1rem;cursor:pointer;transition:.2s;text-shadow:0 1px 3px rgba(0,0,0,.5);letter-spacing:2px;box-shadow:0 4px 20px rgba(192,39,45,.4)}
+.spin-btn:hover{transform:scale(1.03);box-shadow:0 4px 30px rgba(192,39,45,.6)}
+.spin-btn:active{transform:scale(.97)}
+.spin-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.spin-btn.free{background:linear-gradient(180deg,#1a7a3a,#0f5525);border-color:#22c55e;box-shadow:0 4px 20px rgba(34,197,94,.4)}
+
+/* MESSAGE */
+.msg-area{text-align:center;min-height:32px;margin:6px 0}
+.msg{font-weight:800;font-size:1rem;animation:msgPop .3s ease}
+@keyframes msgPop{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
+.msg.win{color:var(--gold);text-shadow:0 0 20px var(--glow)}
+.msg.lose{color:#665;font-weight:600;font-size:.85rem}
+.msg.free{color:#22c55e;text-shadow:0 0 15px rgba(34,197,94,.3)}
+.msg.big{font-size:1.4rem;color:#fff;text-shadow:0 0 30px var(--gold)}
+
+/* STATS PANEL */
+.stats-toggle{width:100%;padding:8px;background:var(--panel);border:1px solid var(--border);border-radius:8px;color:var(--gold2);font-family:'Outfit';font-size:.75rem;cursor:pointer;text-align:center;margin-top:8px;transition:.2s;letter-spacing:1px}
+.stats-toggle:hover{background:#2a1010;color:var(--gold)}
+.stats{display:none;background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:12px;margin-top:6px}
+.stats.show{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.stats h3{font-size:.75rem;color:var(--gold);margin-bottom:8px;letter-spacing:2px;text-transform:uppercase}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.stat{background:rgba(255,255,255,.03);border-radius:6px;padding:6px 8px}
+.stat .sl{font-size:.6rem;color:var(--gold2);text-transform:uppercase;letter-spacing:1px}
+.stat .sv{font-size:1rem;font-weight:800;color:var(--gold)}
+.stat .sv.neg{color:var(--red)}
+.stat .sv.pos{color:#22c55e}
+.insight{margin-top:8px;padding:8px;background:rgba(246,166,35,.05);border:1px solid rgba(246,166,35,.1);border-radius:6px;font-size:.7rem;color:#aa8855;line-height:1.4}
+.insight b{color:var(--gold)}
+
+/* PAYTABLE */
+.paytable{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:12px;margin-top:6px;display:none}
+.paytable.show{display:block}
+.paytable h3{font-size:.75rem;color:var(--gold);margin-bottom:8px;letter-spacing:2px;text-transform:uppercase}
+.pay-row{display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.03);font-size:.8rem}
+.pay-row .syms{font-size:1.2rem;min-width:80px}
+.pay-row .mult{color:var(--gold);font-weight:800}
+.pay-row .desc{color:var(--gold2);font-size:.7rem}
+
+/* RESET */
+.reset-btn{width:100%;padding:6px;background:transparent;border:1px solid #333;border-radius:6px;color:#555;font-family:'Outfit';font-size:.65rem;cursor:pointer;margin-top:8px;letter-spacing:1px}
+.reset-btn:hover{border-color:var(--red);color:var(--red)}
+</style>
+</head>
+<body>
+
+<div class="machine">
+  <div class="header">
+    <span class="tiger">🐯</span>
+    <h1>FORTUNE TIGER</h1>
+    <div class="tag">Simulador Educativo</div>
+    <div class="badge">🎮 SEM DINHEIRO REAL — APENAS DIVERSÃO</div>
+  </div>
+
+  <div class="credits-bar">
+    <div><div class="label">Créditos</div><div class="val" id="credits">1000</div></div>
+    <div><div class="label">Ganho</div><div class="val small" id="lastWin">0</div></div>
+    <div><div class="label">Free Spins</div><div class="val small" id="freeCount">0</div></div>
+  </div>
+
+  <div class="slot-frame">
+    <div class="slot-window" id="reels">
+      <div class="reel"><div class="cell" id="c00">🐯</div><div class="cell" id="c10">🐯</div><div class="cell" id="c20">🐯</div></div>
+      <div class="reel"><div class="cell" id="c01">🐯</div><div class="cell" id="c11">🐯</div><div class="cell" id="c21">🐯</div></div>
+      <div class="reel"><div class="cell" id="c02">🐯</div><div class="cell" id="c12">🐯</div><div class="cell" id="c22">🐯</div></div>
+    </div>
+  </div>
+
+  <div class="paylines">
+    <div class="payline" id="pl0"></div>
+    <div class="payline" id="pl1"></div>
+    <div class="payline" id="pl2"></div>
+    <div class="payline" id="pl3"></div>
+    <div class="payline" id="pl4"></div>
+  </div>
+
+  <div class="msg-area"><div class="msg" id="msg">Aperte SPIN para jogar!</div></div>
+
+  <div class="controls">
+    <div class="bet-area">
+      <div class="bet-label">Aposta</div>
+      <div class="bet-row">
+        <button class="bet-btn" onclick="changeBet(-5)">−</button>
+        <div class="bet-display" id="betDisplay">10</div>
+        <button class="bet-btn" onclick="changeBet(5)">+</button>
+      </div>
+    </div>
+    <button class="spin-btn" id="spinBtn" onclick="spin()">SPIN</button>
+  </div>
+
+  <button class="stats-toggle" onclick="toggleStats()">📊 Estatísticas (veja a verdade)</button>
+  <div class="stats" id="statsPanel">
+    <h3>📊 Suas estatísticas</h3>
+    <div class="stat-grid">
+      <div class="stat"><div class="sl">Spins totais</div><div class="sv" id="stSpins">0</div></div>
+      <div class="stat"><div class="sl">Total apostado</div><div class="sv" id="stBet">0</div></div>
+      <div class="stat"><div class="sl">Total ganho</div><div class="sv" id="stWon">0</div></div>
+      <div class="stat"><div class="sl">Lucro / Prejuízo</div><div class="sv" id="stProfit">0</div></div>
+      <div class="stat"><div class="sl">Maior ganho</div><div class="sv" id="stBigWin">0</div></div>
+      <div class="stat"><div class="sl">Sequência sem ganhar</div><div class="sv" id="stDrought">0</div></div>
+      <div class="stat"><div class="sl">RTP real</div><div class="sv" id="stRTP">—</div></div>
+      <div class="stat"><div class="sl">Free Spins ganhos</div><div class="sv" id="stFree">0</div></div>
+    </div>
+    <div class="insight" id="insight">
+      Jogue algumas rodadas para ver as estatísticas. <b>Spoiler:</b> a casa sempre ganha a longo prazo. O RTP (Return To Player) típico de slots é ~95%, ou seja, a cada R$100 apostados, você recebe ~R$95 de volta em média.
+    </div>
+  </div>
+
+  <button class="stats-toggle" onclick="togglePaytable()" style="margin-top:4px">🏆 Tabela de Pagamento</button>
+  <div class="paytable" id="paytable">
+    <h3>🏆 Pagamentos</h3>
+    <div class="pay-row"><span class="syms">🐯🐯🐯</span><span class="mult">×50</span><span class="desc">Jackpot Tiger!</span></div>
+    <div class="pay-row"><span class="syms">💎💎💎</span><span class="mult">×25</span><span class="desc">Diamantes</span></div>
+    <div class="pay-row"><span class="syms">🏮🏮🏮</span><span class="mult">×15</span><span class="desc">Lanternas</span></div>
+    <div class="pay-row"><span class="syms">🐉🐉🐉</span><span class="mult">×10</span><span class="desc">Dragão</span></div>
+    <div class="pay-row"><span class="syms">🎋🎋🎋</span><span class="mult">×5</span><span class="desc">Bambu</span></div>
+    <div class="pay-row"><span class="syms">🪙🪙🪙</span><span class="mult">×3</span><span class="desc">Moedas</span></div>
+    <div class="pay-row"><span class="syms">⭐⭐⭐</span><span class="mult">FREE</span><span class="desc">10 Free Spins!</span></div>
+    <div class="pay-row"><span class="syms">2 iguais</span><span class="mult">×1</span><span class="desc">Recupera aposta</span></div>
+  </div>
+
+  <button class="reset-btn" onclick="resetGame()">🔄 Resetar (voltar a 1000 créditos)</button>
+</div>
+
+<script>
+const SYMS=['🐯','💎','🏮','🐉','🎋','🪙','⭐'];
+const WEIGHTS=[4,6,10,14,20,30,6]; // lower = rarer
+const TOTAL_W=WEIGHTS.reduce((a,b)=>a+b,0);
+
+// Payouts: [symbol, multiplier] for 3-of-a-kind on any row
+const PAY3={'🐯':50,'💎':25,'🏮':15,'🐉':10,'🎋':5,'🪙':3};
+const PAY2_MULT=1; // 2 matching = get bet back
+
+let credits=1000,bet=10,freeSpins=0,spinning=false;
+let stats={spins:0,totalBet:0,totalWon:0,bigWin:0,drought:0,maxDrought:0,freeWon:0};
+let grid=[[0,0,0],[0,0,0],[0,0,0]]; // 3x3: [row][col]
+
+function weightedRandom(){
+  let r=Math.random()*TOTAL_W,acc=0;
+  for(let i=0;i<SYMS.length;i++){acc+=WEIGHTS[i];if(r<acc)return SYMS[i]}
+  return SYMS[SYMS.length-1];
+}
+
+function changeBet(d){
+  if(spinning)return;
+  bet=Math.max(5,Math.min(100,bet+d));
+  document.getElementById('betDisplay').textContent=bet;
+}
+
+function spin(){
+  if(spinning)return;
+  const isFree=freeSpins>0;
+  if(!isFree&&credits<bet){
+    showMsg('Créditos insuficientes!','lose');return;
+  }
+  spinning=true;
+  document.getElementById('spinBtn').disabled=true;
+
+  if(!isFree){credits-=bet;stats.totalBet+=bet}
+  else{freeSpins--;updateUI()}
+  stats.spins++;
+
+  // Clear wins
+  document.querySelectorAll('.cell').forEach(c=>c.classList.remove('win'));
+  document.querySelectorAll('.payline').forEach(p=>p.classList.remove('active'));
+
+  // Generate results
+  const result=[[],[],[]];
+  for(let r=0;r<3;r++)for(let c=0;c<3;c++)result[r][c]=weightedRandom();
+
+  // Animate: blur then reveal
+  const cells=[];
+  for(let r=0;r<3;r++)for(let c=0;c<3;c++)cells.push(document.getElementById('c'+r+c));
+  cells.forEach(c=>c.classList.add('spinning'));
+
+  // Fast random symbols during spin
+  let tick=0;
+  const spinAnim=setInterval(()=>{
+    cells.forEach(c=>{c.textContent=SYMS[Math.floor(Math.random()*SYMS.length)]});
+    tick++;
+  },60);
+
+  // Stop reels sequentially
+  const stopTimes=[400,650,900];
+  for(let col=0;col<3;col++){
+    setTimeout(()=>{
+      for(let row=0;row<3;row++){
+        const c=document.getElementById('c'+row+col);
+        c.classList.remove('spinning');
+        c.textContent=result[row][col];
+      }
+    },stopTimes[col]);
+  }
+
+  // Evaluate after all stop
+  setTimeout(()=>{
+    clearInterval(spinAnim);
+    grid=result;
+    const winResult=evaluate();
+    spinning=false;
+    document.getElementById('spinBtn').disabled=false;
+
+    if(isFree){
+      document.getElementById('spinBtn').classList.toggle('free',freeSpins>0);
+      document.getElementById('spinBtn').textContent=freeSpins>0?'FREE':'SPIN';
+    }
+    updateStats(winResult);
+    updateUI();
+  },1000);
+}
+
+function evaluate(){
+  let totalWin=0;
+  const winCells=new Set();
+  const winLines=[];
+
+  // 5 paylines on 3x3:
+  // 0: middle row [1,0],[1,1],[1,2]
+  // 1: top row [0,0],[0,1],[0,2]
+  // 2: bottom row [2,0],[2,1],[2,2]
+  // 3: diagonal [\] [0,0],[1,1],[2,2]
+  // 4: diagonal [/] [2,0],[1,1],[0,2]
+  const lines=[
+    [[1,0],[1,1],[1,2]],
+    [[0,0],[0,1],[0,2]],
+    [[2,0],[2,1],[2,2]],
+    [[0,0],[1,1],[2,2]],
+    [[2,0],[1,1],[0,2]]
+  ];
+
+  for(let li=0;li<lines.length;li++){
+    const line=lines[li];
+    const s=line.map(([r,c])=>grid[r][c]);
+
+    // 3 of a kind
+    if(s[0]===s[1]&&s[1]===s[2]){
+      const sym=s[0];
+      if(sym==='⭐'){
+        // Free spins!
+        freeSpins+=10;stats.freeWon+=10;
+        showMsg('⭐ 10 FREE SPINS! ⭐','free');
+        document.getElementById('spinBtn').classList.add('free');
+        document.getElementById('spinBtn').textContent='FREE';
+      }else{
+        const mult=PAY3[sym]||3;
+        totalWin+=bet*mult;
+      }
+      line.forEach(([r,c])=>winCells.add(r+','+c));
+      winLines.push(li);
+    }
+    // 2 of a kind (first 2 or last 2)
+    else if(s[0]===s[1]&&s[0]!=='⭐'){
+      totalWin+=Math.floor(bet*0.5);
+      winLines.push(li);
+    }
+  }
+
+  // Apply wins
+  if(totalWin>0){
+    credits+=totalWin;
+    document.getElementById('lastWin').textContent='+'+totalWin;
+    if(totalWin>=bet*10)showMsg('🔥 MEGA WIN +'+totalWin+'! 🔥','big');
+    else if(totalWin>=bet*3)showMsg('🎉 Grande! +'+totalWin,'win');
+    else showMsg('+'+totalWin,'win');
+  }else if(freeSpins===0||!winLines.length){
+    document.getElementById('lastWin').textContent='0';
+    showMsg('Tente novamente...','lose');
+  }
+
+  // Highlight winning cells
+  winCells.forEach(k=>{
+    const[r,c]=k.split(',');
+    document.getElementById('c'+r+c).classList.add('win');
+  });
+  winLines.forEach(li=>document.getElementById('pl'+li).classList.add('active'));
+
+  return totalWin;
+}
+
+function showMsg(text,cls){
+  const m=document.getElementById('msg');
+  m.textContent=text;m.className='msg '+cls;
+}
+
+function updateUI(){
+  document.getElementById('credits').textContent=credits;
+  document.getElementById('freeCount').textContent=freeSpins;
+}
+
+function updateStats(winAmount){
+  if(winAmount>0){
+    stats.totalWon+=winAmount;
+    if(winAmount>stats.bigWin)stats.bigWin=winAmount;
+    stats.drought=0;
+  }else{
+    stats.drought++;
+    if(stats.drought>stats.maxDrought)stats.maxDrought=stats.drought;
+  }
+
+  document.getElementById('stSpins').textContent=stats.spins;
+  document.getElementById('stBet').textContent=stats.totalBet;
+  document.getElementById('stWon').textContent=stats.totalWon;
+
+  const profit=stats.totalWon-stats.totalBet;
+  const pe=document.getElementById('stProfit');
+  pe.textContent=(profit>=0?'+':'')+profit;
+  pe.className='sv '+(profit>=0?'pos':'neg');
+
+  document.getElementById('stBigWin').textContent=stats.bigWin;
+  document.getElementById('stDrought').textContent=stats.maxDrought;
+  document.getElementById('stFree').textContent=stats.freeWon;
+
+  const rtp=stats.totalBet>0?((stats.totalWon/stats.totalBet)*100).toFixed(1):'—';
+  document.getElementById('stRTP').textContent=rtp+(rtp!=='—'?'%':'');
+
+  // Educational insight
+  const ins=document.getElementById('insight');
+  if(stats.spins>=10){
+    if(profit>0)ins.innerHTML='Você está no lucro por enquanto! <b>Mas atenção:</b> isso é variância de curto prazo. Com mais spins, a tendência é convergir para ~93% RTP. A casa SEMPRE vence no longo prazo.';
+    else if(stats.spins>=50)ins.innerHTML='<b>'+stats.spins+' spins e prejuízo de '+Math.abs(profit)+'.</b> Isso é o normal. Slots são projetados para devolver ~93% do apostado. Os outros 7% são o lucro da casa. Quanto mais joga, mais perde.';
+    else ins.innerHTML='Prejuízo de <b>'+Math.abs(profit)+'</b> em '+stats.spins+' spins. Normal — a matemática favorece a casa. Continue jogando para ver o padrão.';
+  }
+  if(stats.spins>=100)ins.innerHTML+=' <br><br>🎓 <b>Conclusão após '+stats.spins+' spins:</b> seu RTP real é '+rtp+'%. Slots comerciais ficam entre 88-96%. A emoção dos "big wins" mascara as perdas constantes pequenas.';
+}
+
+function toggleStats(){document.getElementById('statsPanel').classList.toggle('show')}
+function togglePaytable(){document.getElementById('paytable').classList.toggle('show')}
+function resetGame(){
+  credits=1000;bet=10;freeSpins=0;spinning=false;
+  stats={spins:0,totalBet:0,totalWon:0,bigWin:0,drought:0,maxDrought:0,freeWon:0};
+  document.getElementById('spinBtn').disabled=false;
+  document.getElementById('spinBtn').classList.remove('free');
+  document.getElementById('spinBtn').textContent='SPIN';
+  document.getElementById('betDisplay').textContent=bet;
+  document.getElementById('lastWin').textContent='0';
+  document.getElementById('msg').textContent='Resetado! Aperte SPIN.';
+  document.getElementById('msg').className='msg';
+  document.querySelectorAll('.cell').forEach(c=>{c.classList.remove('win','spinning');c.textContent='🐯'});
+  document.querySelectorAll('.payline').forEach(p=>p.classList.remove('active'));
+  updateUI();updateStats(0);
+  document.getElementById('insight').innerHTML='Jogue algumas rodadas para ver as estatísticas. <b>Spoiler:</b> a casa sempre ganha a longo prazo.';
+}
+</script>
+</body>
+</html>
