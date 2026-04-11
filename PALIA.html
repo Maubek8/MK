@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PALIA+ Pitch</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --verde: #1B6E4F;
+  --verde-claro: #2D9E74;
+  --verde-suave: #E8F5EE;
+  --amarelo: #F5A623;
+  --amarelo-suave: #FEF3DC;
+  --vermelho: #D64444;
+  --cinza: #F7F6F3;
+  --texto: #1A1A1A;
+  --texto-suave: #6B6B6B;
+  --branco: #FFFFFF;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--texto);
+  color: var(--branco);
+  overflow-x: hidden;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 40px;
+  background: rgba(26,26,26,0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.logo {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  color: var(--verde-claro);
+  letter-spacing: -0.5px;
+}
+
+.nav-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.nav-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.nav-dot.active { background: var(--verde-claro); transform: scale(1.3); }
+
+/* SECTIONS */
+section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 100px 60px 60px;
+  position: relative;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* S1 — HERO */
+#s1 {
+  background: var(--texto);
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 6px 16px;
+  border: 1px solid rgba(45,158,116,0.4);
+  border-radius: 20px;
+  font-size: 12px;
+  color: var(--verde-claro);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  animation: pulse-border 2s infinite;
+}
+
+@keyframes pulse-border {
+  0%,100% { border-color: rgba(45,158,116,0.4); }
+  50% { border-color: rgba(45,158,116,0.9); }
+}
+
+.hero-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(52px, 8vw, 96px);
+  line-height: 0.95;
+  letter-spacing: -3px;
+  margin-bottom: 24px;
+}
+
+.hero-title .plus {
+  color: var(--verde-claro);
+  font-style: italic;
+}
+
+.hero-sub {
+  font-size: 18px;
+  color: rgba(255,255,255,0.55);
+  max-width: 560px;
+  line-height: 1.6;
+  margin-bottom: 48px;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 48px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 42px;
+  color: var(--verde-claro);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  margin-top: 4px;
+  max-width: 120px;
+  line-height: 1.4;
+}
+
+/* S2 — DONA GRAÇAS */
+#s2 { background: #0F0F0F; }
+
+.story-header {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--verde-claro);
+  margin-bottom: 48px;
+}
+
+.story-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+  max-width: 1000px;
+}
+
+.persona-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 20px;
+  padding: 36px;
+}
+
+.persona-avatar {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2D9E74, #1B6E4F);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.persona-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 28px;
+  margin-bottom: 4px;
+}
+
+.persona-role {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 24px;
+}
+
+.persona-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.tag {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.6);
+}
+
+.tag.danger { background: rgba(214,68,68,0.15); color: #F08080; }
+
+.story-text {
+  font-size: 16px;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.7);
+}
+
+.story-text strong { color: var(--branco); }
+
+.story-impact {
+  margin-top: 32px;
+  padding: 20px 24px;
+  background: rgba(214,68,68,0.08);
+  border-left: 3px solid var(--vermelho);
+  border-radius: 4px;
+}
+
+.story-impact p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.6;
+}
+
+/* S3 — INTERFACES */
+#s3 { background: #0A0A0A; }
+
+.section-label {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--verde-claro);
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(32px, 5vw, 52px);
+  line-height: 1.1;
+  margin-bottom: 48px;
+  max-width: 600px;
+}
+
+.interfaces-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1100px;
+}
+
+/* PHONE MOCKUP */
+.phone-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.phone-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+}
+
+.phone {
+  width: 220px;
+  background: #1A1A1A;
+  border-radius: 36px;
+  border: 2px solid rgba(255,255,255,0.1);
+  overflow: hidden;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+  position: relative;
+}
+
+.phone-notch {
+  width: 80px; height: 24px;
+  background: #0A0A0A;
+  border-radius: 0 0 16px 16px;
+  margin: 0 auto;
+}
+
+.phone-screen {
+  padding: 16px;
+  min-height: 420px;
+}
+
+/* ACS SCREEN */
+.acs-header {
+  background: var(--verde);
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+}
+
+.acs-header-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.acs-avatar {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+.acs-name { font-size: 11px; font-weight: 600; color: white; }
+.acs-sub { font-size: 9px; color: rgba(255,255,255,0.6); }
+
+.acs-patient-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 2px;
+}
+
+.acs-patient-info { font-size: 10px; color: rgba(255,255,255,0.7); }
+
+.pergunta-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px 10px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 10px;
+  margin-bottom: 6px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.pergunta-text { font-size: 9px; color: rgba(255,255,255,0.75); line-height: 1.4; flex: 1; }
+
+.btn-sim {
+  padding: 3px 8px;
+  background: var(--verde-claro);
+  border-radius: 6px;
+  font-size: 9px;
+  font-weight: 600;
+  color: white;
+  white-space: nowrap;
+}
+
+.btn-nao {
+  padding: 3px 8px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 6px;
+  font-size: 9px;
+  color: rgba(255,255,255,0.5);
+  white-space: nowrap;
+}
+
+.alerta-box {
+  margin-top: 10px;
+  padding: 8px 10px;
+  background: rgba(245,166,35,0.15);
+  border: 1px solid rgba(245,166,35,0.3);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.alerta-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--amarelo);
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.alerta-text { font-size: 9px; color: rgba(255,255,255,0.8); line-height: 1.3; }
+
+/* MEDICO SCREEN */
+.medico-header {
+  background: rgba(255,255,255,0.04);
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.medico-title { font-size: 10px; font-weight: 600; color: white; margin-bottom: 2px; }
+.medico-sub { font-size: 8px; color: rgba(255,255,255,0.4); }
+
+.escore-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 10px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 8px;
+  margin-bottom: 5px;
+}
+
+.escore-label { font-size: 9px; color: rgba(255,255,255,0.5); }
+.escore-val { font-size: 10px; font-weight: 600; color: var(--amarelo); }
+
+.ia-box {
+  margin: 10px 0;
+  padding: 8px 10px;
+  background: rgba(27,110,79,0.2);
+  border: 1px solid rgba(45,158,116,0.3);
+  border-radius: 10px;
+}
+
+.ia-label { font-size: 8px; color: var(--verde-claro); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 3px; }
+.ia-result { font-size: 10px; color: white; font-weight: 600; }
+
+.chat-bubble {
+  padding: 8px 10px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px 10px 10px 2px;
+  margin-bottom: 6px;
+  font-size: 9px;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.4;
+}
+
+.chat-bubble.ia {
+  background: rgba(27,110,79,0.15);
+  border-radius: 10px 10px 2px 10px;
+  color: rgba(255,255,255,0.8);
+}
+
+.chat-input {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.chat-input-field {
+  flex: 1;
+  background: rgba(255,255,255,0.06);
+  border-radius: 20px;
+  padding: 6px 10px;
+  font-size: 8px;
+  color: rgba(255,255,255,0.4);
+}
+
+.chat-send {
+  width: 24px; height: 24px;
+  background: var(--verde-claro);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+}
+
+/* WHATSAPP SCREEN */
+.wa-header {
+  background: #075E54;
+  padding: 10px 12px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wa-avatar {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: #25D366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+.wa-name { font-size: 10px; font-weight: 600; color: white; }
+.wa-status { font-size: 8px; color: rgba(255,255,255,0.6); }
+
+.wa-msg {
+  padding: 8px 10px;
+  background: #1F2C34;
+  border-radius: 8px 8px 8px 2px;
+  margin-bottom: 6px;
+  font-size: 9px;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.5;
+  max-width: 85%;
+}
+
+.wa-msg-time { font-size: 7px; color: rgba(255,255,255,0.3); margin-top: 3px; text-align: right; }
+
+.wa-reply {
+  padding: 8px 10px;
+  background: #005C4B;
+  border-radius: 8px 8px 2px 8px;
+  margin-bottom: 6px;
+  font-size: 9px;
+  color: rgba(255,255,255,0.85);
+  max-width: 60%;
+  margin-left: auto;
+}
+
+.wa-reply-time { font-size: 7px; color: rgba(255,255,255,0.3); margin-top: 3px; text-align: right; }
+
+.wa-audio {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  background: #1F2C34;
+  border-radius: 20px;
+  margin-bottom: 6px;
+  max-width: 85%;
+}
+
+.wa-play {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: #25D366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+}
+
+.wa-wave {
+  flex: 1;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.wave-bar {
+  width: 2px;
+  background: rgba(255,255,255,0.4);
+  border-radius: 1px;
+  animation: wave 1.2s ease-in-out infinite;
+}
+
+.wave-bar:nth-child(1) { height: 6px; animation-delay: 0s; }
+.wave-bar:nth-child(2) { height: 12px; animation-delay: 0.1s; }
+.wave-bar:nth-child(3) { height: 8px; animation-delay: 0.2s; }
+.wave-bar:nth-child(4) { height: 16px; animation-delay: 0.3s; }
+.wave-bar:nth-child(5) { height: 10px; animation-delay: 0.4s; }
+.wave-bar:nth-child(6) { height: 14px; animation-delay: 0.5s; }
+.wave-bar:nth-child(7) { height: 8px; animation-delay: 0.6s; }
+.wave-bar:nth-child(8) { height: 12px; animation-delay: 0.7s; }
+
+@keyframes wave {
+  0%,100% { opacity: 0.4; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.5); }
+}
+
+.wa-status-msg {
+  text-align: center;
+  font-size: 8px;
+  color: rgba(255,255,255,0.3);
+  margin: 4px 0;
+}
+
+.elegivel-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.badge-amarelo { background: rgba(245,166,35,0.2); color: var(--amarelo); border: 1px solid rgba(245,166,35,0.3); }
+.badge-verde { background: rgba(45,158,116,0.2); color: var(--verde-claro); border: 1px solid rgba(45,158,116,0.3); }
+
+.confirmar-btn {
+  width: 100%;
+  padding: 8px;
+  background: var(--verde-claro);
+  border-radius: 10px;
+  text-align: center;
+  font-size: 9px;
+  font-weight: 600;
+  color: white;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+/* S4 — FLUXO */
+#s4 { background: #0D0D0D; }
+
+.fluxo-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  max-width: 1000px;
+  overflow-x: auto;
+  padding-bottom: 20px;
+}
+
+.fluxo-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 160px;
+  position: relative;
+}
+
+.fluxo-step:not(:last-child)::after {
+  content: '→';
+  position: absolute;
+  right: -16px;
+  top: 28px;
+  color: rgba(255,255,255,0.2);
+  font-size: 20px;
+}
+
+.step-circle {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-bottom: 12px;
+  border: 2px solid;
+}
+
+.step-circle.acs { background: rgba(27,110,79,0.15); border-color: var(--verde); }
+.step-circle.enf { background: rgba(245,166,35,0.15); border-color: var(--amarelo); }
+.step-circle.med { background: rgba(45,158,116,0.15); border-color: var(--verde-claro); }
+.step-circle.pac { background: rgba(107,107,107,0.15); border-color: rgba(255,255,255,0.2); }
+.step-circle.ges { background: rgba(45,158,116,0.1); border-color: rgba(45,158,116,0.3); }
+
+.step-title { font-size: 12px; font-weight: 600; color: white; margin-bottom: 4px; text-align: center; }
+.step-desc { font-size: 10px; color: rgba(255,255,255,0.4); text-align: center; line-height: 1.4; max-width: 120px; }
+
+/* S5 — IMPACTO */
+#s5 { background: var(--verde); }
+
+.impacto-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  max-width: 800px;
+}
+
+.impacto-card {
+  background: rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 28px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.impacto-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 48px;
+  color: white;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.impacto-label {
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.5;
+}
+
+.impacto-fonte {
+  font-size: 10px;
+  color: rgba(255,255,255,0.4);
+  margin-top: 8px;
+}
+
+/* S6 — FECHAMENTO */
+#s6 {
+  background: var(--texto);
+  align-items: center;
+  text-align: center;
+}
+
+.fechamento-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(36px, 6vw, 72px);
+  line-height: 1.1;
+  letter-spacing: -2px;
+  max-width: 800px;
+  margin-bottom: 32px;
+}
+
+.fechamento-title em {
+  font-style: italic;
+  color: var(--verde-claro);
+}
+
+.dona-gracas-quote {
+  font-size: 18px;
+  color: rgba(255,255,255,0.5);
+  max-width: 560px;
+  line-height: 1.7;
+  margin-bottom: 48px;
+}
+
+.cta-pill {
+  display: inline-block;
+  padding: 14px 36px;
+  background: var(--verde-claro);
+  border-radius: 40px;
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+  letter-spacing: 0.5px;
+}
+
+/* PROGRESS BAR */
+.progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  background: var(--verde-claro);
+  z-index: 200;
+  transition: width 0.3s;
+}
+
+/* SCROLL HINT */
+.scroll-hint {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  opacity: 0.4;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%,100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(6px); }
+}
+
+.scroll-hint span { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  section { padding: 80px 24px 40px; }
+  .story-grid { grid-template-columns: 1fr; gap: 24px; }
+  .interfaces-grid { grid-template-columns: 1fr; }
+  .phone { width: 100%; max-width: 280px; }
+  .fluxo-container { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .fluxo-step::after { display: none; }
+  .impacto-grid { grid-template-columns: 1fr; }
+  nav { padding: 12px 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<nav>
+  <div class="logo">PALIA+</div>
+  <div class="nav-dots">
+    <div class="nav-dot active" onclick="scrollToSection(0)"></div>
+    <div class="nav-dot" onclick="scrollToSection(1)"></div>
+    <div class="nav-dot" onclick="scrollToSection(2)"></div>
+    <div class="nav-dot" onclick="scrollToSection(3)"></div>
+    <div class="nav-dot" onclick="scrollToSection(4)"></div>
+    <div class="nav-dot" onclick="scrollToSection(5)"></div>
+  </div>
+</nav>
+
+<!-- S1: HERO -->
+<section id="s1">
+  <div class="hero-badge">HSIL Hackathon 2026 · Desafio 3</div>
+  <h1 class="hero-title">PALIA<span class="plus">+</span></h1>
+  <p class="hero-sub">Quebrando as barreiras de comunicação entre a APS e os pacientes paliativos invisíveis do SUS</p>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">625mil</div>
+      <div class="stat-label">brasileiros sem cuidado paliativo</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">14%</div>
+      <div class="stat-label">dos que precisam têm acesso global</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">R$887M</div>
+      <div class="stat-label">investidos pelo MS em 2024</div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div style="font-size:18px">↓</div>
+  </div>
+</section>
+
+<!-- S2: DONA GRAÇAS -->
+<section id="s2">
+  <div class="story-header">A história que explica o problema</div>
+  <div class="story-grid">
+    <div>
+      <div class="persona-card">
+        <div class="persona-avatar">👵</div>
+        <div class="persona-name">Dona Graças</div>
+        <div class="persona-role">71 anos · Recife · Viúva</div>
+        <div class="persona-tags">
+          <span class="tag danger">ICC avançada</span>
+          <span class="tag danger">Demência leve</span>
+          <span class="tag">Analfabeta funcional</span>
+          <span class="tag">Sem smartphone</span>
+        </div>
+        <p class="story-text">
+          Vive com a filha <strong>Cida</strong>, 45 anos, diarista. O agente comunitário <strong>João</strong> visita todo mês. Vê que ela está piorando. <strong>Não sabe o que fazer.</strong> Anota "paciente estável" e vai embora.
+        </p>
+      </div>
+    </div>
+    <div>
+      <p class="story-text" style="margin-bottom:20px">
+        Dona Graças passa a noite com dor. Não fala para ninguém — acha que é <strong>normal da idade</strong>.
+      </p>
+      <p class="story-text" style="margin-bottom:20px">
+        A Cida não sabe reconhecer os sinais. Quando a dor fica insuportável às 2h da manhã, ela <strong>chama o SAMU</strong>.
+      </p>
+      <p class="story-text" style="margin-bottom:20px">
+        Dona Graças vai para a UPA. Fica internada 4 dias. Recebe tratamento que não muda nada. Volta para casa ainda com dor — <strong>sem orientação, sem plano</strong>.
+      </p>
+      <div class="story-impact">
+        <p>Isso acontece <strong>3 vezes em 6 meses</strong>. Custo evitável para o SUS. Sofrimento evitável para ela.</p>
+      </div>
+      <div style="margin-top:20px; padding:16px 20px; background:rgba(45,158,116,0.08); border-left:3px solid var(--verde-claro); border-radius:4px;">
+        <p class="story-text">O sistema <strong>não sabe quem ela é</strong>. Ela <strong>não sabe que tem direito</strong> a cuidado. A Cida <strong>não sabe o que fazer</strong>. Essa é a barreira de comunicação.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S3: INTERFACES -->
+<section id="s3">
+  <div class="section-label">A solução — módulo novo no SUS Digital Profissional</div>
+  <h2 class="section-title">Três interfaces. Uma comunicação.</h2>
+  <div class="interfaces-grid">
+
+    <!-- ACS -->
+    <div class="phone-wrap">
+      <div class="phone-label">ACS · João</div>
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="acs-header">
+            <div class="acs-header-top">
+              <div class="acs-avatar">👨</div>
+              <div>
+                <div class="acs-name">SUS Digital Profissional</div>
+                <div class="acs-sub">Agente Comunitário · Microárea 04</div>
+              </div>
+            </div>
+            <div style="margin-top:8px; padding-top:8px; border-top:1px solid rgba(255,255,255,0.15);">
+              <div class="acs-patient-name">Dona Maria das Graças</div>
+              <div class="acs-patient-info">71 anos · Rua das Flores, 42</div>
+            </div>
+          </div>
+
+          <div style="font-size:9px; color:rgba(255,255,255,0.4); margin-bottom:8px; letter-spacing:1px; text-transform:uppercase;">Triagem paliativa</div>
+
+          <div class="pergunta-item">
+            <div class="pergunta-text">Fica na cama mais da metade do dia?</div>
+            <div class="btn-sim">Sim</div>
+          </div>
+          <div class="pergunta-item">
+            <div class="pergunta-text">Depende de outros para se cuidar?</div>
+            <div class="btn-sim">Sim</div>
+          </div>
+          <div class="pergunta-item">
+            <div class="pergunta-text">Teve internação não planejada nos últimos 3 meses?</div>
+            <div class="btn-sim">Sim</div>
+          </div>
+          <div class="pergunta-item">
+            <div class="pergunta-text">Tem doença avançada (ICC, câncer, demência)?</div>
+            <div class="btn-sim">Sim</div>
+          </div>
+          <div class="pergunta-item">
+            <div class="pergunta-text">Você ficaria surpreso se ela morresse em 12 meses?</div>
+            <div class="btn-nao">Não</div>
+          </div>
+
+          <div class="alerta-box">
+            <div class="alerta-dot"></div>
+            <div class="alerta-text"><strong>Potencial paliativo identificado.</strong> Encaminhado para a enfermeira Renata.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MÉDICO/ENFERMEIRO -->
+    <div class="phone-wrap">
+      <div class="phone-label">Enfermeira Renata · Dr. Silva</div>
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="medico-header">
+            <div class="medico-title">Dona Maria das Graças · Alerta ACS</div>
+            <div class="medico-sub">Recebido há 2h · Visita domiciliar agendada</div>
+          </div>
+
+          <div style="font-size:9px; color:rgba(255,255,255,0.4); margin-bottom:6px; letter-spacing:1px; text-transform:uppercase;">Escalas aplicadas</div>
+
+          <div class="escore-row">
+            <span class="escore-label">KPS</span>
+            <span class="escore-val">40 pts</span>
+          </div>
+          <div class="escore-row">
+            <span class="escore-label">ECOG</span>
+            <span class="escore-val">3</span>
+          </div>
+          <div class="escore-row">
+            <span class="escore-label">PPS</span>
+            <span class="escore-val">40%</span>
+          </div>
+
+          <div class="ia-box">
+            <div class="ia-label">IA · Análise integrada</div>
+            <div class="ia-result">Elegível para CP Geral na APS</div>
+            <div style="font-size:8px; color:rgba(255,255,255,0.4); margin-top:3px;">Baseado em SPICT-BR + NECPAL + PACK</div>
+          </div>
+
+          <div style="display:flex; gap:6px; align-items:center; margin-bottom:10px;">
+            <span class="elegivel-badge badge-amarelo">● Elegível</span>
+            <span style="font-size:8px; color:rgba(255,255,255,0.3);">aguarda confirmação médica</span>
+          </div>
+
+          <div style="font-size:9px; color:rgba(255,255,255,0.4); margin-bottom:6px; letter-spacing:1px; text-transform:uppercase;">Chat IA — Dr. Silva</div>
+
+          <div class="chat-bubble">Como abordo DAV com a família dela? Filha é resistente.</div>
+          <div class="chat-bubble ia">Recomendo iniciar validando o que a família já sabe. Use linguagem de cuidado, não de abandono: "queremos garantir que ela não sofra". PNCP orienta abertura gradual com 3 encontros...</div>
+
+          <div class="confirmar-btn">✓ Confirmar elegível · Inserir CID Z51.5</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WHATSAPP / PACIENTE -->
+    <div class="phone-wrap">
+      <div class="phone-label">Cida · Família · WhatsApp</div>
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen" style="padding:0;">
+          <div class="wa-header">
+            <div class="wa-avatar">💚</div>
+            <div>
+              <div class="wa-name">PALIA+ · SUS Recife</div>
+              <div class="wa-status">Programa de Cuidado Domiciliar</div>
+            </div>
+          </div>
+          <div style="padding:12px;">
+            <div class="wa-status-msg">Hoje · 09:14</div>
+
+            <div class="wa-msg">
+              Olá Cida 👋 Sua mãe foi cadastrada no programa de cuidados paliativos da UBS. Isso significa que ela terá acompanhamento especial em casa.
+              <div class="wa-msg-time">09:14 ✓✓</div>
+            </div>
+
+            <div class="wa-audio">
+              <div class="wa-play">▶</div>
+              <div class="wa-wave">
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+              </div>
+              <span style="font-size:8px; color:rgba(255,255,255,0.4)">0:42</span>
+            </div>
+            <div style="font-size:8px; color:rgba(255,255,255,0.3); margin-bottom:8px;">🔊 O que é cuidado paliativo</div>
+
+            <div class="wa-status-msg">Hoje · 21:30</div>
+
+            <div class="wa-msg">
+              Dona Graças está com dor agora?<br><br>
+              Responde <strong>1</strong> para sim<br>
+              Responde <strong>2</strong> para não
+              <div class="wa-msg-time">21:30 ✓✓</div>
+            </div>
+
+            <div class="wa-reply">
+              1
+              <div class="wa-reply-time">21:31 ✓✓</div>
+            </div>
+
+            <div class="wa-msg">
+              Ela tomou o remédio para dor que o Dr. Silva receitou?<br><br>
+              <strong>1</strong> · Sim tomou<br>
+              <strong>2</strong> · Acabou o remédio<br>
+              <strong>3</strong> · Não tinha em casa
+              <div class="wa-msg-time">21:31 ✓✓</div>
+            </div>
+
+            <div class="wa-reply">
+              2 · Acabou
+              <div class="wa-reply-time">21:32 ✓✓</div>
+            </div>
+
+            <div class="wa-msg" style="background:rgba(45,158,116,0.2); border:1px solid rgba(45,158,116,0.3);">
+              ✅ Entendido. A enfermeira Renata já foi avisada. Ela vai providenciar o remédio amanhã cedo. Você não precisa ir à UPA.
+              <div class="wa-msg-time">21:32 ✓✓</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- S4: FLUXO -->
+<section id="s4">
+  <div class="section-label">Como funciona</div>
+  <h2 class="section-title">Do invisível ao cuidado — em um fluxo</h2>
+  <div class="fluxo-container">
+    <div class="fluxo-step">
+      <div class="step-circle acs">🏘️</div>
+      <div class="step-title">ACS visita</div>
+      <div class="step-desc">10 perguntas no SUS Digital Profissional. Sinaliza potencial paliativo.</div>
+    </div>
+    <div class="fluxo-step">
+      <div class="step-circle enf">🏥</div>
+      <div class="step-title">Enfermeira avalia</div>
+      <div class="step-desc">Aplica KPS, ECOG, PPS. IA analisa e classifica automaticamente.</div>
+    </div>
+    <div class="fluxo-step">
+      <div class="step-circle med">👨‍⚕️</div>
+      <div class="step-title">Médico confirma</div>
+      <div class="step-desc">Chat IA apoia. Um clique insere CID Z51.5. Paciente entra no sistema.</div>
+    </div>
+    <div class="fluxo-step">
+      <div class="step-circle pac">📱</div>
+      <div class="step-title">Família recebe</div>
+      <div class="step-desc">WhatsApp com orientações em áudio, monitoramento de dor, canal direto.</div>
+    </div>
+    <div class="fluxo-step">
+      <div class="step-circle ges">📊</div>
+      <div class="step-title">Gestor enxerga</div>
+      <div class="step-desc">Meu SUS Digital com base territorial de paliativos. Dado que não existe hoje.</div>
+    </div>
+  </div>
+</section>
+
+<!-- S5: IMPACTO -->
+<section id="s5">
+  <div class="section-label" style="color:rgba(255,255,255,0.6)">Por que isso importa</div>
+  <h2 class="section-title" style="color:white">O custo do silêncio</h2>
+  <div class="impacto-grid">
+    <div class="impacto-card">
+      <div class="impacto-num">73M</div>
+      <div class="impacto-label">pessoas precisam de CP no mundo. Apenas 14% têm acesso.</div>
+      <div class="impacto-fonte">WHPCA, 2025</div>
+    </div>
+    <div class="impacto-card">
+      <div class="impacto-num">20M</div>
+      <div class="impacto-label">morrem em sofrimento evitável por ano.</div>
+      <div class="impacto-fonte">WHPCA, 2025</div>
+    </div>
+    <div class="impacto-card">
+      <div class="impacto-num">US$4M</div>
+      <div class="impacto-label">economizados por ano em um único hospital com CP precoce.</div>
+      <div class="impacto-fonte">Johns Hopkins Medicine</div>
+    </div>
+    <div class="impacto-card">
+      <div class="impacto-num">0</div>
+      <div class="impacto-label">apps de CP integrados ao SUS Digital, desenhados para o ACS, com WhatsApp sem instalação.</div>
+      <div class="impacto-fonte">Literatura científica, 2025</div>
+    </div>
+  </div>
+</section>
+
+<!-- S6: FECHAMENTO -->
+<section id="s6">
+  <h2 class="fechamento-title">
+    O Brasil tem a política.<br>
+    Tem os recursos.<br>
+    <em>Faltava a comunicação.</em>
+  </h2>
+  <p class="dona-gracas-quote">
+    Dona Graças vai continuar existindo. Com o PALIA+, o sistema vai saber quem ela é, o que ela sente e o que ela precisa — antes da crise, em casa, com dignidade.
+  </p>
+  <div class="cta-pill">PALIA+ · HSIL Hackathon 2026</div>
+</section>
+
+<script>
+const sections = document.querySelectorAll('section');
+const dots = document.querySelectorAll('.nav-dot');
+const progressBar = document.getElementById('progressBar');
+
+function scrollToSection(i) {
+  sections[i].scrollIntoView({ behavior: 'smooth' });
+}
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      const idx = Array.from(sections).indexOf(entry.target);
+      dots.forEach((d,i) => d.classList.toggle('active', i === idx));
+    }
+  });
+}, { threshold: 0.2 });
+
+sections.forEach(s => observer.observe(s));
+
+window.addEventListener('scroll', () => {
+  const scrolled = window.scrollY;
+  const total = document.body.scrollHeight - window.innerHeight;
+  progressBar.style.width = (scrolled / total * 100) + '%';
+});
+</script>
+</body>
+</html>
